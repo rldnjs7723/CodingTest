@@ -27,3 +27,10 @@
    ```
    System.out.printf("%.12f", A / B);
    ```
+
+# 알고리즘
+
+## Two Pointers (투포인터 알고리즘)
+
+1. index 값을 가지는 i, j를 사용하여, 일정 조건에 따라 i와 j를 이동시켜 불필요한 경우의 수를 제거하는 알고리즘. [(16472)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/16000/Main_16472.java)
+2. 슬라이딩 윈도우와 비슷하지만, 구간의 너비가 가변적이라는 차이점이 존재. [(Two Pointers)](https://butter-shower.tistory.com/226)
