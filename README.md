@@ -18,4 +18,5 @@
 
 ## 자바 기본
 
-1. 입력의 크기가 작을 때, Scanner를 사용하면 정수, 실수, 문자열 등의 입력을 간단하게 받을 수 있다. 정수: [(1000)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/1000/Main_1000.java)
+1. 입력의 크기가 작을 때, Scanner를 사용하면 정수, 실수, 문자열 등의 입력을 간단하게 받을 수 있다.  
+   정수: [(1000)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/1000/Main_1000.java)
