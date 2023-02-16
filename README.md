@@ -1,2 +1,15 @@
-# CodingTest
-Baekjoon Online Judge / Samsung Software Expert Academy / Programmers Problem Solutions
+# 문제풀이 교훈 정리
+
+## 사이트별 Java 8 (OpenJDK) 기준
+
+1. 백준: 클래스 명 Main. 시간 제한 x2 + 1초, 메모리 제한 x2 + 16MB
+2. SWEA: 클래스 명 Solution
+
+## 이클립스 사용법
+
+1. Ctrl + F11: 실행
+2. Ctrl + Space: 자동완성
+
+## 자바 기본
+
+1. 입력의 크기가 작을 때, Scanner를 사용하면 정수, 실수, 문자열 등의 입력을 간단하게 받을 수 있다.
