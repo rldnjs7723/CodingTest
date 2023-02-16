@@ -1,5 +1,10 @@
 import java.util.Scanner;
 
+/**
+ * 백준 1008번 A/B
+ * @author Giwon
+ *
+ */
 public class Main_1008 {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);

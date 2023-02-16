@@ -42,5 +42,5 @@ else
     cd $directory
 
     javac -J-Xms1024m -J-Xmx1920m -J-Xss512m -encoding UTF-8 $file
-    java -Xms1024m -Xmx1920m -Xss512m $executeFile
+    java -Xms1024m -Xmx1920m -Xss512m -Dfile.encoding=UTF-8 $executeFile
 fi
