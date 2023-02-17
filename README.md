@@ -62,5 +62,39 @@
 ## Next Permutation [(Next Permutation)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/NextPermutation.md)
 
 1. 현 순열을 기준으로 사전 순으로 다음 순열 생성해주는 알고리즘
-2. 방문 체크를 수행하는 기존 순열보다 빠르지만, nPn 문제에만 적용 가능
-3. 조합의 경우 nCr을 계산하는 문제에서 활용 가능. [(20366)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/20000/Main_20366.java)
+2. 방문 체크를 수행하는 기존 순열보다 빠르지만, `nPn 문제에만 적용 가능`
+3. 조합의 경우 `nCr을 계산하는 문제에서 활용 가능.` [(20366)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/20000/Main_20366.java)
+4. 알고리즘 구현 방법  
+   4-1. 배열을 오름차순으로 정렬한 후 시작 (가장 작은 순열)
+   4-2. 뒤쪽부터 탐색하며 교환 위치 탐색 (i – 1), 꼭대기(i)의 앞이 교환 자리
+   4-3. 뒤쪽부터 탐색하며 교환 위치와 교환할 큰 값 위치 탐색 (j)
+   4-4. 두 위치 i - 1, j의 값 교환
+   4-5. 꼭대기 위치 i부터 맨 뒤까지 오름차순 정렬
+
+   ```
+   public static boolean nextPermutation(int[] arr) {
+   	int n = arr.length;
+
+   	// i 탐색
+   	int i = n - 1;
+   	for(i = n - 1; i >= 1; i--) {
+   		if(arr[i - 1] < arr[i]) break;
+   	}
+   	if(i == 0) return false;
+
+   	// 바꿀 위치 탐색
+   	int temp = arr[i - 1];
+   	int j = n - 1;
+   	for(j = n - 1; j >= 0; j--) {
+   		if(temp < arr[j]) break;
+   	}
+
+   	// 위치 교환
+   	arr[i - 1] = arr[j];
+   	arr[j] = temp;
+
+   	// i부터 정렬
+   	Arrays.sort(arr, i, n);
+   	return true;
+   }
+   ```
