@@ -31,7 +31,7 @@
    1-1. 탐욕적 선택이 최적해로 갈 수 있음이 증명된 경우에만 사용  
    1-2. 최적 부분 구조: 탐욕적 선택 이후 동일한 하위 문제를 해결해야 하는 구조에 사용
 2. `한 번 선택한 것을 번복하지 않음`
-3. 규칙을 찾지 못하고 너무 복잡하게 해결하는 경우 일정 조건을 제한하고 그리디로 접근하는 방식도 좋음 [(2138)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/2000/Main_2138.java)
+3. 규칙을 찾지 못하고 너무 복잡하게 해결하는 경우 일정 조건을 완전 탐색으로 제한하고 그리디로 접근하는 방식도 좋음 [(2138)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/2000/Main_2138.java)
 
 ## Two Pointers [(투포인터 알고리즘)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/TwoPointers.md)
 
