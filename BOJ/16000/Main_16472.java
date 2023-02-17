@@ -5,8 +5,8 @@ import java.util.HashMap;
 
 /**
  * 백준 16472번 고냥이
+ * 문제 분류: 투 포인터
  * @author Giwon
- *
  */
 public class Main_16472 {
 	public static void main(String[] args) throws IOException {
