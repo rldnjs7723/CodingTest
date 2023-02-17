@@ -34,10 +34,10 @@
 
 1. 여러 경우 중 하나를 선택할 때 그 순간에 최적이라고 생각되는 것을 선택하는 알고리즘.  
    지역적으로는 최적이지만 최종적으로 최적이라는 보장이 있는 문제에만 적용해야 함
-2. <span style='background-color: #f6f8'>한 번 선택한 것을 번복하지 않음</span>
+2. <mark>한 번 선택한 것을 번복하지 않음</mark>
 3. 규칙을 찾지 못하고 너무 복잡하게 해결하는 경우 일정 조건을 제한하고 그리디로 접근하는 방식도 좋음 [(2138)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/2000/Main_2138.java)
 
 ## Two Pointers [(투포인터 알고리즘)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/TwoPointers.md)
 
-1. index 값을 가지는 i, j를 사용하여, 일정 조건에 따라 <span style='background-color: #f6f8'>i와 j를 증감 연산자로</span> 이동시켜 불필요한 경우의 수를 제거하는 알고리즘. [(16472)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/16000/Main_16472.java)
+1. index 값을 가지는 i, j를 사용하여, 일정 조건에 따라 <mark>i와 j를 증감 연산자로</mark> 이동시켜 불필요한 경우의 수를 제거하는 알고리즘. [(16472)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/16000/Main_16472.java)
 2. 슬라이딩 윈도우와 비슷하지만, 구간의 너비가 가변적이라는 차이점이 존재. [(Two Pointers)](https://butter-shower.tistory.com/226)
