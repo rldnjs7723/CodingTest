@@ -6,6 +6,9 @@
 
 # 자바 코딩테스트 팁
 
+1. 입력 / 출력 값이 Overflow가 발생하는지 항상 수학적으로 계산하여 int 대신 long을 사용할 필요가 있는지 고려해야 함
+2. 시간 복잡도는 1억 번의 연산을 1초로 넉넉하게 두고 풀기
+
 ## 이클립스 사용법
 
 1. Ctrl + F11: 실행
@@ -23,6 +26,20 @@
    System.out.printf("%.12f", A / B);
    ```
 
+## 알면 도움되는 메서드 / 클래스 변수
+
+### Integer
+
+1. Integer.MAX_VALUE / MIN_VALUE : 정수의 최대, 최소 값
+2. Integer.toBinaryString() : 정수를 이진수로 변환. 비트마스킹 디버깅에 유용
+3. Integer.compare() : compareTo 메서드 Override 할 때 유용 [(20366)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/20000/Main_20366.java)
+
+### Arrays
+
+1. Arrays.fill()
+2. Arrays.sort(). 배열을 정렬. 새로 정의한 클래스에 적용하려면 Comparable 인터페이스 구현 필요.  
+   정렬할 배열의 범위를 지정할 수도 있음 sort(배열, 시작 idx, 끝 idx); (끝 idx 미포함) [(20366)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/20000/Main_20366.java)
+
 # 알고리즘
 
 ## Greedy Algorithm [(그리디 알고리즘)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/Greedy.md)
@@ -33,7 +50,17 @@
 2. `한 번 선택한 것을 번복하지 않음`
 3. 규칙을 찾지 못하고 너무 복잡하게 해결하는 경우 일정 조건을 완전 탐색으로 제한하고 그리디로 접근하는 방식도 좋음 [(2138)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/2000/Main_2138.java)
 
+## Sliding Window [(슬라이딩 윈도우)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/SlidingWindow.md)
+
+1. 고정 사이즈의 윈도우가 이동하면서 윈도우 내에 있는 데이터로 문제를 푸는 방식
+
 ## Two Pointers [(투포인터 알고리즘)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/TwoPointers.md)
 
 1. index 값을 가지는 i, j를 사용하여, 일정 조건에 따라 `i와 j를 증감 연산자로` 이동시켜 불필요한 경우의 수를 제거하는 알고리즘. [(16472)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/16000/Main_16472.java)
 2. 슬라이딩 윈도우와 비슷하지만, 구간의 너비가 가변적이라는 차이점이 존재. [(Two Pointers)](https://butter-shower.tistory.com/226)
+
+## Next Permutation [(Next Permutation)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/NextPermutation.md)
+
+1. 현 순열을 기준으로 사전 순으로 다음 순열 생성해주는 알고리즘
+2. 방문 체크를 수행하는 기존 순열보다 빠르지만, nPn 문제에만 적용 가능
+3. 조합의 경우 nCr을 계산하는 문제에서 활용 가능. [(20366)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/20000/Main_20366.java)
