@@ -1,6 +1,6 @@
 /**
  * 백준 2558번 Hello World
- * @author Giwon
+ * @author GIWON
  *
  */
 public class Main_2558 {

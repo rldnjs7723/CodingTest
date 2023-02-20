@@ -6,7 +6,7 @@ import java.util.StringTokenizer;
 
 /**
  * 백준 1799번 비숍
- * 문제 분류: DFS, 비트마스킹, 백트래킹
+ * 문제 분류: DFS, 비트마스킹, 백트래킹, 분할 정복
  * @author Giwon
  */
 public class Main_1799 {

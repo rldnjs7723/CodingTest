@@ -42,6 +42,10 @@
 
 # 알고리즘
 
+## Bitmasking (비트마스킹)
+
+1. 비트 선언할 때 0b0000과 같이 이진수로 숫자를 입력할 수 있다.
+
 ## Greedy Algorithm [(그리디 알고리즘)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/Greedy.md)
 
 1. 여러 경우 중 하나를 선택할 때 그 순간에 최적이라고 생각되는 것을 선택하는 알고리즘.  
