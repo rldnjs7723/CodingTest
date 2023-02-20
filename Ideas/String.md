@@ -12,4 +12,4 @@
 
 ### 풀이 아이디어
 
-LCS 알고리즘이 기억나지 않아 다시 공부하고 풀었던 문제. [(정리)]
+LCS 알고리즘이 기억나지 않아 다시 공부하고 풀었던 문제. [(정리)](https://github.com/rldnjs7723/CodingTest/blob/main/README.md#1-longest-common-subsequence-lcs-9252)

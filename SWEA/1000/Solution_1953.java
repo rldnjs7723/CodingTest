@@ -12,7 +12,7 @@ import java.util.StringTokenizer;
  * 문제 분류: BFS, 사방 탐색, 구현
  * @author GIWON
  */
-public class Solution_1953_남기원 {
+public class Solution_1953 {
 	public static final int LEFT = 0, RIGHT = 1, UP = 2, DOWN = 3;
 	public static final int[] dRow = {0, 0, -1, 1};
 	public static final int[] dCol = {-1, 1, 0, 0};

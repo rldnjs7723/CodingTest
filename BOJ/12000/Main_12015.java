@@ -23,7 +23,6 @@ public class Main_12015 {
 		
 		// 수열 각 위치별 최대 부분 수열 길이
 		int[] sequenceCount = new int[N];
-		
 		// 현재 최장 subsequence 기록
 		int[] subsequence = new int[N];
 		int size = 1, idx;
