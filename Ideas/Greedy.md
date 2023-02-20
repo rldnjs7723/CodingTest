@@ -2,8 +2,8 @@
 
 ## 목차
 
-1. [BOJ_2138 전구와 스위치](#BOJ_2138-전구와-스위치)
-2. [BOJ_1080 행렬](#BOJ_1080-행렬)
+1. [BOJ_2138 전구와 스위치](#1-boj_2138-전구와-스위치-백준-링크-소스-코드)
+2. [BOJ_1080 행렬](#2-boj_1080-행렬-백준-링크-소스-코드)
 
 ## 1. BOJ_2138 전구와 스위치 [(백준 링크)](https://www.acmicpc.net/problem/2138) [(소스 코드)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/2000/Main_2138.java)
 

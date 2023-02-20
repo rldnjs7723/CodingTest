@@ -2,9 +2,9 @@
 
 ## 목차
 
-1. [BOJ_16472 고냥이](#BOJ_16472-고냥이)
+1. [BOJ_16472 고냥이](#1-boj_16472-고냥이-백준-링크-소스-코드)
 
-## BOJ_16472 고냥이 [(백준 링크)](https://www.acmicpc.net/problem/16472) [(소스 코드)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/16000/Main_16472.java)
+## 1. BOJ_16472 고냥이 [(백준 링크)](https://www.acmicpc.net/problem/16472) [(소스 코드)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/16000/Main_16472.java)
 
 ### 문제 요약
 

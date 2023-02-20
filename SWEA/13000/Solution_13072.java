@@ -1,9 +1,36 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.StringTokenizer;
+
+class UserSolution
+{
+	// 직접 LinkedList 만들기
+	
+	public void init()
+	{
+	}
+	
+	public void hire(int mID, int mTeam, int mScore)
+	{
+	}
+	
+	public void fire(int mID)
+	{
+	}
+
+	public void updateSoldier(int mID, int mScore)
+	{
+	}
+
+	public void updateTeam(int mTeam, int mChangeScore)
+	{
+	}
+	
+	public int bestSoldier(int mTeam)
+	{
+		return 0;
+	}
+}
 
 class Solution_13072
 {
@@ -99,35 +126,5 @@ class Solution_13072
 		}
 
 		br.close();
-	}
-}
-
-class UserSolution
-{
-	// 직접 LinkedList 만들기
-	
-	public void init()
-	{
-	}
-	
-	public void hire(int mID, int mTeam, int mScore)
-	{
-	}
-	
-	public void fire(int mID)
-	{
-	}
-
-	public void updateSoldier(int mID, int mScore)
-	{
-	}
-
-	public void updateTeam(int mTeam, int mChangeScore)
-	{
-	}
-	
-	public int bestSoldier(int mTeam)
-	{
-		return 0;
 	}
 }
