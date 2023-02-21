@@ -120,6 +120,9 @@
 
 1. 가능한 모든 경우의 수를 탐색하여 최적의 해를 찾는 방법. 시간이 많이 소요됨
 2. N의 수가 합리적으로 작은 경우에서 시도 가능. `시간 복잡도 계산 필수`
+3. 완전 탐색 문제를 풀 때 항상 고려할 사항  
+   3-1. 백트래킹 (가지치기): `확실하게` 아닌 경우만 탐색을 수행하지 않도록 해야 함  
+   3-2. 메모이제이션: 동일한 부분에서 연산을 반복하면 기존에 계산한 결과를 저장해두었다가 활용할 필요가 있음
 
 ### Direction Search (사방 탐색)
 
@@ -318,6 +321,7 @@
 
 1. 해를 찾는 도중, 해가 아니라서 막히면 되돌아가서 다시 해를 찾아가는 기법
 2. 되돌아 갈 때 이전 상태를 반복하지 않도록 하는 장치와 현재 선택했던 상태를 지우는 방법을 구현해주어야 한다. [(1799)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/1000/Main_1799.java) [(2239)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/2000/Main_2239.java)
+3. DFS를 수행하면서 유망하지 않은 노드가 어떤 것인지 확실하게 판별해야 함. 완전탐색을 수행하면서 '시간 초과'나 '메모리 초과'가 아닌 '틀렸습니다'가 발생하는 경우 지금까지 당연히 맞다고 생각했던 조건을 다시 생각해볼 필요가 있음 [(6987)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/6000/Main_6987.java)
 
 # Recursive [(재귀)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/Recursive.md)
 
