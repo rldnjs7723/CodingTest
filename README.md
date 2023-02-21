@@ -155,11 +155,11 @@
 1. 2차원 배열 구조에서 왼쪽, 오른쪽, 위, 아래에 위치한 원소를 탐색하는 방식
 2. 왼쪽, 오른쪽, 위, 아래를 숫자로만 표현하면 혼란스럽기 때문에 실수를 방지하기 위해 다음과 같이 상수 선언해서 문제를 해결하는 것을 추천
 
-```java
-	public static final int LEFT = 0, UP = 1, RIGHT = 2, DOWN = 3;
-	public static final int[] dRow = {0, -1, 0, 1};
-	public static final int[] dCol = {-1, 0, 1, 0};
-```
+   ```java
+   public static final int LEFT = 0, UP = 1, RIGHT = 2, DOWN = 3;
+   public static final int[] dRow = {0, -1, 0, 1};
+   public static final int[] dCol = {-1, 0, 1, 0};
+   ```
 
 ### Depth First Search (깊이 우선 탐색)
 
@@ -379,30 +379,30 @@
 3. 문자열에 해당하는 알파벳이 다르다면 왼쪽(열 - 1)과 위(행 - 1)의 값 중 더 큰 값을 현재 행, 열의 값으로 설정한다.
 4. 이 때 LCS의 길이는 각 문자열의 길이를 Index로 하는 위치에 기록된 값이며, 연산 도중 대각선, 왼쪽, 위를 기록해두었다면 역순으로 탐색하면서 대각선으로 이동한 경우의 문자를 추출한다면 LCS 자체를 출력할 수도 있다.
 
-```java
-// LCS 길이 저장
-	int[][] lcsCount = new int[lenA + 1][lenB + 1];
-	// LCS 구성할 때 이동 방향 저장
-	int[][] lcsDirection = new int[lenA + 1][lenB + 1];
-	for(int i = 0; i < lenA; i++) {
-		for(int j = 0; j < lenB; j++) {
-			if(A.charAt(i) == B.charAt(j)) {
-				// 현재 알파벳이 동일하면 대각선 방향 + 1
-				lcsCount[i + 1][j + 1] = lcsCount[i][j] + 1;
-				lcsDirection[i + 1][j + 1] = DIAGONAL;
-			} else {
-				// 알파벳이 다르면 왼쪽과 위의 값중 더 큰 값을 할당
-				if(lcsCount[i + 1][j] >= lcsCount[i][j + 1]) {
-					lcsCount[i + 1][j + 1] = lcsCount[i + 1][j];
-					lcsDirection[i + 1][j + 1] = LEFT;
-				} else {
-					lcsCount[i + 1][j + 1] = lcsCount[i][j + 1];
-					lcsDirection[i + 1][j + 1] = UP;
-				}
-			}
-		}
-	}
-```
+   ```java
+   // LCS 길이 저장
+   int[][] lcsCount = new int[lenA + 1][lenB + 1];
+   // LCS 구성할 때 이동 방향 저장
+   int[][] lcsDirection = new int[lenA + 1][lenB + 1];
+   for(int i = 0; i < lenA; i++) {
+      for(int j = 0; j < lenB; j++) {
+         if(A.charAt(i) == B.charAt(j)) {
+            // 현재 알파벳이 동일하면 대각선 방향 + 1
+            lcsCount[i + 1][j + 1] = lcsCount[i][j] + 1;
+            lcsDirection[i + 1][j + 1] = DIAGONAL;
+         } else {
+            // 알파벳이 다르면 왼쪽과 위의 값중 더 큰 값을 할당
+            if(lcsCount[i + 1][j] >= lcsCount[i][j + 1]) {
+               lcsCount[i + 1][j + 1] = lcsCount[i + 1][j];
+               lcsDirection[i + 1][j + 1] = LEFT;
+            } else {
+               lcsCount[i + 1][j + 1] = lcsCount[i][j + 1];
+               lcsDirection[i + 1][j + 1] = UP;
+            }
+         }
+      }
+   }
+   ```
 
 # Graph [(그래프 탐색 알고리즘)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/Graph.md)
 
