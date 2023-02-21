@@ -3,21 +3,25 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
+/**
+ * SWEA 13072번 병사관리
+ * 문제 분류: 자료구조 (LinkedList), 구현
+ * @author Giwon
+ */
 class UserSolution
 {	
 	 // 팀 정보 저장용 클래스
 	 static class Team {
-		 int mTeam, mScore, size;
+		 int mTeam, mScore;
 		 Soldier head, tail;
 		 
 		 public Team(int mTeam, int mScore) {
 			 this.mTeam = mTeam;
 			 this.mScore = mScore;
-			 this.size = 0;
 			 // 더미 헤드 설정
 			 this.head = new Soldier(mTeam);
 			 this.tail = this.head;
-		}
+		 }
 		 
 		 public void add(int mID, int mTeam) {
 			 Soldier prev = this.tail;
@@ -28,26 +32,21 @@ class UserSolution
 			 prev.next = recruit;
 			 // 마지막 원소 변경
 			 this.tail = recruit;
-			 // 크기 수정
-			 this.size++;
 		 }
 		 
 		 // updateTeam 수행하기 위한 메서드. 다른 Team을 현재 Team에 병합
 		 public void update(Team other) {
 			 // 크기가 0이라면 아무 일도 일어나지 않음
-			 if(other.size == 0) return;
+			 if(other.isEmpty()) return;
 			 
 			 // 다른 팀의 첫 번째 노드를 현재 팀의 tail 뒤에 붙임
 			 this.tail.next = other.head.next;
 			 other.head.next.prev = this.tail;
 			 // 다른 팀의 tail이 현재 팀의 tail이 됨
 			 this.tail = other.tail;
-			 // 크기 갱신
-			 this.size += other.size;
 			 // 다른 팀의 크기는 0인 리스트가 됨
 			 other.head.next = null;
 			 other.tail = other.head;
-			 other.size = 0;
 		 }
 		 
 		 // updateTeam 수행
@@ -83,7 +82,7 @@ class UserSolution
 			 // 최소 한 명의 병사가 있음을 보장
 			 for(int i = 5; i >= 1; i--) {
 				 // 가장 점수가 높은 팀을 선택
-				 if(teamArr[mTeam][i].size > 0) {
+				 if(!teamArr[mTeam][i].isEmpty()) {
 					 maxTeam = teamArr[mTeam][i];
 					 break;
 				 }
@@ -98,6 +97,10 @@ class UserSolution
 			 }
 			 
 			 return max.mID;
+		 }
+		 
+		 public boolean isEmpty() {
+			 return this.head.next == null;
 		 }
 	 }
 	
@@ -121,7 +124,7 @@ class UserSolution
 			this.next = next;
 		}
 		
-		public void delete(int mID) {
+		public void delete() {
 			 // 팀의 연결 갱신
 			 Soldier prev = this.prev;
 			 Soldier next = this.next;
@@ -130,11 +133,12 @@ class UserSolution
 				 next.prev = prev;
 			 } else {
 				 // 마지막 원소를 삭제했다면 tail 갱신
-				 for(Team team: teamArr[this.mTeam]) {
+				 Team team;
+				 int i = 0;
+				 for(i = 1; i <= 5; i++) {
+					 team = teamArr[this.mTeam][i];
 					 if(team.tail == this) {
 						 team.tail = prev;
-						// 크기 수정
-						 team.size--;
 						 break;
 					 }
 				 }
@@ -175,25 +179,27 @@ class UserSolution
 	public void fire(int mID)
 	{
 		// 병사 해고
-		teamArr[idArr[mID].mTeam].delete(mID);
+		idArr[mID].delete();;
 	}
 
 	public void updateSoldier(int mID, int mScore)
 	{
-		// 병사 점수 수정
-		idArr[mID].update(mScore);
+		int mTeam = idArr[mID].mTeam;
+		// 병사 삭제 후 새로 생성
+		fire(mID);
+		hire(mID, mTeam, mScore);
 	}
 
 	public void updateTeam(int mTeam, int mChangeScore)
 	{
 		// 팀 점수 수정
-		teamArr[mTeam].update(mChangeScore);
+		Team.update(mTeam, mChangeScore);
 	}
 	
 	public int bestSoldier(int mTeam)
 	{
 		// 평판 점수가 높은 병사 고유번호 반환
-		return teamArr[mTeam].best();
+		return Team.best(mTeam);
 	}
 }
 
@@ -205,6 +211,7 @@ class Solution_13072
 	private final static int CMD_UPDATE_SOLDIER		= 4;
 	private final static int CMD_UPDATE_TEAM		= 5;
 	private final static int CMD_BEST_SOLDIER		= 6;
+	static int testcase;
 	
 	private final static UserSolution usersolution = new UserSolution();
 	
@@ -225,7 +232,7 @@ class Solution_13072
 		for (int q = 0; q < numQuery; ++q)
 		{
 			st = new StringTokenizer(br.readLine(), " ");
-
+			
 			int cmd;
 			cmd = Integer.parseInt(st.nextToken());
 
@@ -284,7 +291,7 @@ class Solution_13072
 		TC = Integer.parseInt(st.nextToken());
 		MARK = Integer.parseInt(st.nextToken());
 
-		for (int testcase = 1; testcase <= TC; ++testcase)
+		for (testcase = 1; testcase <= TC; ++testcase)
 		{
 			int score = run(br) ? MARK : 0;
             System.out.println("#" + testcase + " " + score);

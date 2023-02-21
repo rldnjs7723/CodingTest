@@ -20,10 +20,35 @@
 1. 입력의 크기가 작을 때, Scanner를 사용하면 정수, 실수 등의 입력을 간단하게 받을 수 있다.  
    정수: [(1000)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/1000/Main_1000.java)  
    실수: [(1008)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/1000/Main_1008.java)
+
+   ```java
+   Scanner sc = new Scanner(System.in);
+   int N = sc.nextInt();
+   long M = sc.nextLong();
+
+   sc.close;
+   ```
+
 2. 실수를 출력할 때 C에서와 같이 printf를 사용하여 실수의 자리수를 설정 가능 [(1008)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/1000/Main_1008.java)
 
    ```java
    System.out.printf("%.12f", A / B);
+   ```
+
+3. 기본적으로 입출력 속도는 BufferedReader / BufferedWriter를 사용하는 것이 빠르며, 입력 값을 나눌 때는 StringTokenizer를 사용하고, 출력 문자열 값을 합칠 때는 StringBuilder를 사용하는 것이 좋다. [(1230)](https://github.com/rldnjs7723/CodingTest/blob/main/SWEA/1000/Solution_1230.java)
+
+   ```java
+   BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+   BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+   StringTokenizer st = new StringTokeninzer(br.readLine());
+   int N = Integer.parseInt(st.nextToken());
+   StringBuilder sb = new StringBuilder();
+   sb.append("#");
+   bw.write(sb.toString());
+
+   bw.close; // 자동 flush
+   br.close;
    ```
 
 ## 알면 도움되는 메서드 / 클래스 변수
@@ -31,7 +56,7 @@
 ### Integer
 
 1. Integer.MAX_VALUE / MIN_VALUE : 정수의 최대, 최소 값
-2. Integer.toBinaryString() : 정수를 이진수로 변환. [비트마스킹](#bitmasking-비트마스킹) 디버깅에 유용
+2. Integer.toBinaryString() : 정수를 이진수로 변환. [비트마스킹](#bitmasking-비트마스킹) 디버깅에 유용 [(10726)](https://github.com/rldnjs7723/CodingTest/blob/main/SWEA/10000/Solution_10726.java)
 3. Integer.compare() : compareTo 메서드 Override 할 때 유용 [(20366)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/20000/Main_20366.java)
 
 ### Arrays
@@ -68,6 +93,7 @@
    2. [Queue (큐)](#queue-큐)
    3. [Tree (트리)](#tree-트리)
    4. [Heap (힙)](#heap-힙)
+   5. [LinkedList (연결 리스트)](#linkedlist-연결-리스트)
 6. [Bitmasking (비트마스킹)](#bitmasking-비트마스킹)
 7. [Greedy Algorithm (그리디 알고리즘)](#greedy-algorithm-그리디-알고리즘)
 8. [Divide and Conquer (분할 정복)](#divide-and-conquer-분할-정복)
@@ -206,6 +232,8 @@
 
 # Data Structure [(자료 구조)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/DataStructure.md)
 
+1. 스택, 큐, 트리, 힙, 리스트와 같은 기본적인 자료 구조는 직접 구현할 수 있어야 B형 문제 풀이를 대비할 수 있음 [(13072)](https://github.com/rldnjs7723/CodingTest/blob/main/SWEA/13000/Solution_13072.java)
+
 ## Stack (스택)
 
 1. 후입 선출 구조 (LIFO, Last-In-First-Out): 마지막에 삽입한 자료를 가장 먼저 꺼냄
@@ -237,6 +265,14 @@
 4. PriorityQueue 클래스로 기본 연산 수행 가능. Comparator를 따로 설정해주면 힙 정렬 상태도 수정 가능  
    2-1. 최소힙: PriorityQueue()  
    2-2. 최대힙: PrioirtyQueue(Collections.reverseOrder())
+
+## LinkedList (연결 리스트)
+
+1. 연산 시간 복잡도 비교  
+   1-1. Array: 정적, 조회 O(1), 삽입/삭제 O(N)  
+   1-2. ArrayList: 동적, 조회 O(1), 삽입/삭제 O(N)  
+   1-3. LinkedList: 동적, 조회 O(N), 삽입/삭제 O(1)
+2. 기본적으로 A형 알고리즘 문제를 풀 때는 ArrayList를 사용하는 것이 메모리, 시간적인 측면에서 더 좋은 결과를 가져옴.
 
 # Bitmasking [(비트마스킹)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/Bitmasking.md)
 
