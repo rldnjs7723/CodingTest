@@ -4,83 +4,95 @@ import java.util.Arrays;
 import java.util.StringTokenizer;
 
 class UserSolution
-{
-	// 병사 id 기준으로 저장한 배열
-	Soldier[] idArr;
-	// 팀 별 병사 관리 배열
-	Team[] teamArr;
-	
+{	
 	 // 팀 정보 저장용 클래스
-	 class Team {
-		 int mTeam;
+	 static class Team {
+		 int mTeam, mScore, size;
 		 Soldier head, tail;
-		 int[] teamUpdate;
-		 int updateCount;
 		 
-		 public Team(int mTeam) {
+		 public Team(int mTeam, int mScore) {
 			 this.mTeam = mTeam;
+			 this.mScore = mScore;
+			 this.size = 0;
 			 // 더미 헤드 설정
 			 this.head = new Soldier(mTeam);
 			 this.tail = this.head;
-			 // 팀 업데이트 버퍼링 (10만 회 이하)
-			 this.teamUpdate = new int[100000];
-			 updateCount = 0;
 		}
 		 
-		 public void add(int mID, int mTeam, int mScore) {
+		 public void add(int mID, int mTeam) {
 			 Soldier prev = this.tail;
 			 // 신병 생성
-			 Soldier recruit = new Soldier(mID, mTeam, mScore, prev, null, updateCount);
+			 Soldier recruit = new Soldier(mID, mTeam, prev, null);
 			 idArr[mID] = recruit;
 			 // 마지막 원소의 다음 병사 설정
 			 prev.next = recruit;
 			 // 마지막 원소 변경
 			 this.tail = recruit;
+			 // 크기 수정
+			 this.size++;
 		 }
 		 
-		 public void delete(int mID) {
-			 Soldier target = idArr[mID];
-			 // 팀의 연결 갱신
-			 Soldier prev = target.prev;
-			 Soldier next = target.next;
-			 prev.next = next;
-			 if(next != null) {
-				 next.prev = prev;
-			 } else {
-				 // 마지막 원소를 삭제했다면 tail 갱신
-				 this.tail = prev;
-			 }
-			 // 병사 삭제
-			 idArr[mID] = null;
+		 // updateTeam 수행하기 위한 메서드. 다른 Team을 현재 Team에 병합
+		 public void update(Team other) {
+			 // 크기가 0이라면 아무 일도 일어나지 않음
+			 if(other.size == 0) return;
+			 
+			 // 다른 팀의 첫 번째 노드를 현재 팀의 tail 뒤에 붙임
+			 this.tail.next = other.head.next;
+			 other.head.next.prev = this.tail;
+			 // 다른 팀의 tail이 현재 팀의 tail이 됨
+			 this.tail = other.tail;
+			 // 크기 갱신
+			 this.size += other.size;
+			 // 다른 팀의 크기는 0인 리스트가 됨
+			 other.head.next = null;
+			 other.tail = other.head;
+			 other.size = 0;
 		 }
 		 
-		 // updateTeam 버퍼링
-		 public void update(int mChangeScore) {
-			 teamUpdate[updateCount++] = mChangeScore;
-		 }
-		 
-		 public int best() {
-			 Soldier curr = this.head.next;
-			 // 소속 병사가 한 명 이상 고용되어 있음이 보장
-			 Soldier max = curr;
-			 int mChangeScore, resultScore;
-			 while(curr != null) {
-				 // 점수 계산
-				 resultScore = curr.mScore;
-				// updateTeam 버퍼 Flush
-				 for(int i = curr.lastIdx; i < updateCount; i++) {
-					 mChangeScore = teamUpdate[i];
-					 resultScore += mChangeScore;
-					 // 점수 최대 5
-					 resultScore = Math.min(5, resultScore);
-					 // 점수 최소 1
-					 resultScore = Math.max(1, resultScore);
+		 // updateTeam 수행
+		 public static void update(int mTeam, int mChangeScore) {
+			 // 수정한 점수가 0이라면 아무 일도 일어나지 않음
+			 if(mChangeScore == 0) return;
+			 
+			 // 수정한 점수가 양수일 때
+			 if(mChangeScore > 0) {
+				 // 점수가 5가 될 팀
+				 for(int i = 4; i >= 5 - mChangeScore; i--) {
+					 teamArr[mTeam][5].update(teamArr[mTeam][i]);
 				 }
-				 
-				 // 점수 업데이트
-				 curr.update(resultScore);
-				 
-				 // 평판 점수가 같으면 고유번호가 가장 큰 병사의 고유번호 반환
+				 // 나머지는 mChangeScore만큼 점수 상승
+				 for(int i = 4 - mChangeScore; i >= 1; i--) {
+					 teamArr[mTeam][i + mChangeScore].update(teamArr[mTeam][i]);
+				 }
+			 } else {
+				 // 수정한 점수가 음수일 때
+				// 점수가 1이 될 팀
+				 for(int i = 2; i <= 1 - mChangeScore; i++) {
+					 teamArr[mTeam][1].update(teamArr[mTeam][i]);
+				 }
+				 // 나머지는 mChangeScore만큼 점수 감소
+				 for(int i = 2 - mChangeScore; i <= 5; i++) {
+					 teamArr[mTeam][i + mChangeScore].update(teamArr[mTeam][i]);
+				 }
+			 }
+		 }
+		 
+		 public static int best(int mTeam) {
+			 Team maxTeam = null;
+			 // 최소 한 명의 병사가 있음을 보장
+			 for(int i = 5; i >= 1; i--) {
+				 // 가장 점수가 높은 팀을 선택
+				 if(teamArr[mTeam][i].size > 0) {
+					 maxTeam = teamArr[mTeam][i];
+					 break;
+				 }
+			 }
+			 
+			 Soldier curr = maxTeam.head.next;
+			 Soldier max = curr;
+			 while(curr != null) {
+				 // 현재 병사의 mID가 더 크면 더 큰 병사 리턴
 				 if(curr.compare(max)) max = curr;
 				 curr = curr.next;
 			 }
@@ -90,59 +102,74 @@ class UserSolution
 	 }
 	
 	// 병사 정보 저장용 클래스
-	class Soldier{
-		int mID, mTeam, mScore, lastIdx;
+	static class Soldier{
+		int mID, mTeam;
 		// 팀 연결용
 		Soldier prev, next;
 
 		public Soldier(int mTeam) {
 			this.mID = -1;
 			this.mTeam = mTeam;
-			this.mScore = -1;
 			this.prev = null;
 			this.next = null;
 		}
 		
-		public Soldier(int mID, int mTeam, int mScore, Soldier prev, Soldier next, int lastIdx) {
+		public Soldier(int mID, int mTeam, Soldier prev, Soldier next) {
 			this.mID = mID;
 			this.mTeam = mTeam;
-			this.mScore = mScore;
 			this.prev = prev;
 			this.next = next;
-			this.lastIdx = lastIdx;
 		}
 		
-		// 병사 점수 업데이트
-		public void update(int mScore) {
-			this.mScore = mScore;
-			this.lastIdx = teamArr[this.mTeam].updateCount;
-		}
+		public void delete(int mID) {
+			 // 팀의 연결 갱신
+			 Soldier prev = this.prev;
+			 Soldier next = this.next;
+			 prev.next = next;
+			 if(next != null) {
+				 next.prev = prev;
+			 } else {
+				 // 마지막 원소를 삭제했다면 tail 갱신
+				 for(Team team: teamArr[this.mTeam]) {
+					 if(team.tail == this) {
+						 team.tail = prev;
+						// 크기 수정
+						 team.size--;
+						 break;
+					 }
+				 }
+			 }
+			 // 병사 삭제
+			 idArr[mID] = null;
+		 }
 		
-		// 현재 병사가 더 크면 true
 		public boolean compare(Soldier obj) {
-			if(this.mScore == obj.mScore) {
-				return this.mID > obj.mID;
-			} else {
-				return this.mScore > obj.mScore;
-			}
+			return this.mID > obj.mID;
 		}
 	}
+	
+	// 병사 id 기준으로 저장한 배열
+	static Soldier[] idArr;
+	// 팀 별 병사 관리 배열
+	static Team[][] teamArr;
 	
 	public void init()
 	{
 		// 1 <= mID <= 100000 
 		idArr = new Soldier[100001];
-		// 1 <= mTeam <= 5
-		teamArr = new Team[6];
-		for(int i = 1; i <= 5; i++) {
-			teamArr[i] = new Team(i);
+		// 1 <= mTeam <= 5 && mScore가 1점인 병사부터 5점인 병사를 나눠서 관리할 배열
+		teamArr = new Team[6][6];
+		for(int mTeam = 1; mTeam <= 5; mTeam++) {
+			for(int mScore = 1; mScore <= 5; mScore++) {
+				teamArr[mTeam][mScore] = new Team(mTeam, mScore);
+			}
 		}
 	}
 	
 	public void hire(int mID, int mTeam, int mScore)
 	{
 		// 병사 고용
-		teamArr[mTeam].add(mID, mTeam, mScore);
+		teamArr[mTeam][mScore].add(mID, mTeam);
 	}
 	
 	public void fire(int mID)
@@ -233,11 +260,6 @@ class Solution_13072
 				userAns = usersolution.bestSoldier(mTeam);
 				ans = Integer.parseInt(st.nextToken());
 				if (userAns != ans) {
-					System.out.println(usersolution.idArr[userAns].mScore);
-					System.out.println(usersolution.idArr[userAns].lastIdx);
-					System.out.println(usersolution.idArr[ans].mScore);
-					System.out.println(usersolution.idArr[ans].lastIdx);
-					System.out.println("wrong answer: " + userAns + " " + ans);
 					isCorrect = false;
 				}
 				break;
