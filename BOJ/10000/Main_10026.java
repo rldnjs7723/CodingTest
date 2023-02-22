@@ -9,7 +9,7 @@ import java.util.Queue;
 
 /**
  * 백준 10026번 적록색약
- * 문제 분류: BFS, 사방 탐색, 구현
+ * 문제 분류: BFS, 사방 탐색, 구현, UnionFind
  * @author Giwon
  */
 public class Main_10026 {

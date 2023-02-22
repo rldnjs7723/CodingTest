@@ -2,22 +2,10 @@
 
 ## 목차
 
-1. [BOJ_16946 벽 부수고 이동하기 4](#1-boj_16946-벽-부수고-이동하기-4-백준-링크-소스-코드)
-2. [SWEA_1953 탈주범 검거](#2-swea_1953-탈주범-검거-swea-링크-소스-코드)
-3. [BOJ_10026 적록색약](#3-boj_10026-적록색약-백준-링크-소스-코드)
+1. [SWEA_1953 탈주범 검거](#1-swea_1953-탈주범-검거-swea-링크-소스-코드)
+2. [BOJ_2615 오목](#2-boj_2615-오목-백준-링크-소스-코드)
 
-## 1. BOJ_16946 벽 부수고 이동하기 4 [(백준 링크)](https://www.acmicpc.net/problem/16946) [(소스 코드)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/16000/Main_16946.java)
-
-### 문제 요약
-
-벽 주변에서 도달할 수 있는 모든 0의 개수를 세서 배열로 표현하는 문제
-
-### 풀이 아이디어
-
-모든 벽에 대해서 주변의 0의 개수를 체크해야 하기 때문에 각각 BFS를 수행하면 시간이 너무 오래 걸려 이미 개수를 셌던 구획은 다시 세지 않도록 따로 객체를 통해 표시해 둠.  
-추가적인 시간 복잡도 차이가 없기 때문에 DFS로 수행해도 무방할 것이라 생각
-
-## 2. SWEA_1953 탈주범 검거 [(SWEA 링크)](https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV5PpLlKAQ4DFAUq) [(소스 코드)](https://github.com/rldnjs7723/CodingTest/blob/main/SWEA/1000/Solution_1953.java)
+## 1. SWEA_1953 탈주범 검거 [(SWEA 링크)](https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV5PpLlKAQ4DFAUq) [(소스 코드)](https://github.com/rldnjs7723/CodingTest/blob/main/SWEA/1000/Solution_1953.java)
 
 ### 문제 요약
 
@@ -28,13 +16,13 @@
 기본적인 사방 탐색 + BFS로 문제 해결.  
 [백준 16946 벽 부수고 이동하기 4](#1-boj_16946-벽-부수고-이동하기-4-백준-링크-소스-코드)와 같이 객체를 통해 방문 체크를 수행
 
-## 3. BOJ_10026 적록색약 [(백준 링크)](https://www.acmicpc.net/problem/10026) [(소스 코드)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/10000/Main_10026.java)
+## 2. BOJ_2615 오목 [(백준 링크)](https://www.acmicpc.net/problem/2615) [(소스 코드)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/2000/Main_2615.java)
 
 ### 문제 요약
 
-색이 같은 구역끼리 묶은 뒤, 구역의 개수를 출력하는 문제
+바둑판의 상태가 주어졌을 때 흑이 이겼는지, 백이 이겼는지 판단하고 오목이 존재한다면 가장 왼쪽에 위치한 돌의 행, 열을 출력하는 문제.
 
 ### 풀이 아이디어
 
-[백준 16946 벽 부수고 이동하기 4](#1-boj_16946-벽-부수고-이동하기-4-백준-링크-소스-코드)와 같이 객체를 통해 방문 체크를 수행.  
-객체를 Set에 넣었을 때 equals랑 hashcode 메서드를 상속 받지 않았다면 객체의 주소값을 기준으로 동일한 객체를 판별하기 때문에, 객체가 몇 개 존재하는지가 몇 개의 구역이 존재하는지를 나타냄
+기본적으로 오른쪽, 아래, 오른쪽 아래, 왼쪽 아래로 탐색하면서 오목이 존재하는지 찾아야 함. 각 돌에서 이미 확인한 방향의 경우 비트마스크를 통해 각 방향을 탐색했는지 표시함.  
+이렇게 구현했기 때문에 왼쪽 아래로 탐색을 수행하는 경우 행, 열을 출력할 때 마지막 돌의 위치를 출력하는 예외 처리를 수행해야 했음. `조건을 항상 잘 읽어보자.`

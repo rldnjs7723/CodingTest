@@ -106,10 +106,14 @@
 11. [Dynamic Programming (다이나믹 프로그래밍)](#dynamic-programming-다이나믹-프로그래밍)
 12. [String (문자열)](#string-문자열)
     1. [Longest Common Subsequence (LCS)](#longest-common-subsequence-lcs-9252)
-13. [Graph (그래프 탐색 알고리즘)](#graph-그래프-탐색-알고리즘)
+13. [Union Find (Disjoint Set)](#union-find-disjoint-set)
+14. [Graph (그래프 탐색 알고리즘)](#graph-그래프-탐색-알고리즘)
     1. [Dijkstra (다익스트라 알고리즘)](#dijkstra-다익스트라-알고리즘)
     2. [Bellman-Ford (밸만-포드 알고리즘)](#bellman-ford-밸만-포드-알고리즘)
     3. [Floyd-Warshall (플로이드-워셜 알고리즘)](#floyd-warshall-플로이드-워셜-알고리즘)
+    4. [Minimum Spanning Tree (최소 신장 트리)](#minimum-spanning-tree-최소-신장-트리)
+       1. [Kruskal (크루스칼 알고리즘)](#1-kruskal-크루스칼-알고리즘)
+       2. [Prim (프림 알고리즘)](#2-prim-프림-알고리즘)
 
 # Math [(수학)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/Math.md)
 
@@ -286,7 +290,7 @@
    3-5. 비트 가득 찬 상태와 비교할 때 XOR 연산자 ^도 가끔 사용
 
 4. 팁  
-   4-1. 비트 선언할 때 0b1111과 같이 `이진수로 숫자를 입력할 수 있다.`  
+   4-1. 비트 선언할 때 0b1111과 같이 `이진수로 숫자를 입력할 수 있다.` [(2615)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/2000/Main_2615.java)  
    4-2. Integer.toBinaryString()으로 정수 자료형을 이진수로 출력할 수 있다.
 
 # Greedy Algorithm [(그리디 알고리즘)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/Greedy.md)
@@ -404,9 +408,11 @@
    }
    ```
 
+# Union Find [(Disjoint Set)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/UnionFind.md)
+
 # Graph [(그래프 탐색 알고리즘)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/Graph.md)
 
-1. 인접 행렬 / 인접 리스트 / 인접 HashMap로 그래프 표현 가능
+1. 인접 행렬 / 인접 리스트 / 인접 해시테이블로 그래프 표현 가능
 2. 인접 리스트의 경우 ArrayList로 구현했을 때 메모리를 생각보다 많이 잡아먹지 않음
 
 ## Dijkstra (다익스트라 알고리즘)
@@ -414,3 +420,9 @@
 ## Bellman-Ford (밸만-포드 알고리즘)
 
 ## Floyd-Warshall (플로이드-워셜 알고리즘)
+
+## Minimum Spanning Tree (최소 신장 트리)
+
+### 1. Kruskal (크루스칼 알고리즘)
+
+### 2. Prim (프림 알고리즘)

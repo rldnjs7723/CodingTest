@@ -7,7 +7,7 @@ import java.util.Queue;
 
 /**
  * 백준 16946번 벽 부수고 이동하기 4
- * 문제 분류: BFS, 사방 탐색
+ * 문제 분류: BFS, 사방 탐색, UnionFind
  * @author Giwon
  */
 public class Main_16946 {
