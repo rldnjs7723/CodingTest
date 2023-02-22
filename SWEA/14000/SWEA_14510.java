@@ -7,7 +7,7 @@ import java.util.StringTokenizer;
 
 /**
  * SWEA 14510번 나무 높이
- * 문제 분류: 그리디 알고리즘
+ * 문제 분류: 구현, 그리디 알고리즘?, 정수론?
  * @author Giwon
  */
 public class SWEA_14510 {
@@ -19,7 +19,7 @@ public class SWEA_14510 {
 		final int T = Integer.parseInt(br.readLine());
 		int N, max;
 		int[] tree;
-		List<Integer> toWater = new ArrayList<Integer>();
+		int two, one;
 		for(int test_case = 1; test_case <= T; test_case++) {
 			// 나무 개수
 			N = Integer.parseInt(br.readLine());
@@ -34,45 +34,40 @@ public class SWEA_14510 {
 			}
 			
 			// 더 늘려야 할 높이 설정
-			toWater.clear();
+			two = 0; one = 0;
 			for(int i = 0; i < N; i++) {
-				if(tree[i] < max) toWater.add(max - tree[i]);
+				// 홀수면 1 개수 추가
+				one += (max - tree[i]) % 2;
+				two += (max - tree[i]) / 2;
 			}
 			
-			int count = 0;
-			while(!toWater.isEmpty()) {
-				System.out.println(toWater);
-				
-				if(count % 2 == 0) {
-					// 홀수 날에는 키가 1 자람
-					// 홀수에 우선적으로 물을 주기
-					int i = 0;
-					for(i = 0; i < toWater.size(); i++) {
-						if(toWater.get(i) % 2 == 1) {
-							toWater.set(i, toWater.get(i) - 1);
-							if(toWater.get(i) == 0) toWater.remove(i);
-							break;
-						}
+			// 1의 개수만큼은 홀수날에 물을 줘야 함
+			// 1이 0개면 날짜 수정 없음
+			two = Math.max(0, two - Math.max(0, one - 1));
+			int count = Math.max(2 * one - 1, 0);
+			
+			// 4일이면 2가 3개 감소
+			count += (two / 3) * 4;
+			two %= 3;
+			if(two > 0) {
+				if(count % 2 == 1) {
+					// 짝수부터 시작할 때 (홀수가 1개라도 있을 때)
+					if(two == 1) {
+						// 짝수 날에 한 번 물 주기
+						count++;
+					} else if(two == 2) {
+						// 짝수 날에 두 번 물 주기
+						count += 3;
 					}
-					// 홀수가 없다면 짝수에 물 주기
-					if(i == toWater.size()) {
-						if(toWater.size() > 1) {
-							toWater.set(1, toWater.get(1) - 1);
-							if(toWater.get(1) == 0) toWater.remove(1);
-						}
-					}
-					count++;
 				} else {
-					// 짝수 날에는 키가 2 자람
-					// 전부 1이 아니라면 물을 주기 (확인하는 과정 시간 복잡도 문제 가능성)
-					for(int i = 0; i < toWater.size(); i++) {
-						if(toWater.get(i) > 1) {
-							toWater.set(i, toWater.get(i) - 2);
-							if(toWater.get(i) == 0) toWater.remove(i);
-							break;
-						}
+					// 홀수부터 시작할 때 (1이 0개)
+					if(two == 1) {
+						// 짝수 날에 한 번 물 주기
+						count += 2;
+					} else if(two == 2) {
+						// 홀수 날에 두 번, 짝수 날에 한 번 물 주기
+						count += 3;
 					}
-					count++;
 				}
 			}
 			

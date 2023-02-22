@@ -166,6 +166,11 @@
    public static final int[] dCol = {-1, 0, 1, 0};
    ```
 
+3. 위 구조처럼 왼쪽 -> 위 -> 오른쪽 -> 아래 순서로 탐색을 수행할 경우, 현재 방향의 반대 방향을 다음과 같이 나타낼 수 있다. [(16724)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/16000/Main_16724.java)
+   ```
+   opposite = (dir + 2) % 4
+   ```
+
 ### Depth First Search (깊이 우선 탐색)
 
 1. [트리 구조](#tree-트리)에서 루트 노드부터 더 이상 자식 노드가 없을 때까지 한 방향으로(왼쪽 자식) 탐색하고, 이후에는 마지막에 만난 갈림길에서 다른 방향으로 탐색을 수행하는 방식
