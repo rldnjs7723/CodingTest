@@ -406,6 +406,9 @@
 
 # Graph [(그래프 탐색 알고리즘)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/Graph.md)
 
+1. 인접 행렬 / 인접 리스트 / 인접 HashMap로 그래프 표현 가능
+2. 인접 리스트의 경우 ArrayList로 구현했을 때 메모리를 생각보다 많이 잡아먹지 않음
+
 ## Dijkstra (다익스트라 알고리즘)
 
 ## Bellman-Ford (밸만-포드 알고리즘)
