@@ -41,9 +41,10 @@ public class Main_1753 {
         	graph[u].add(v, w);
         }
         
-        // 시작 정점은 가중치 0
-        graph[K].weight = 0;
+        // 가중치 최솟값을 가지는 정점을 빠르게 구하기 위한 우선순위 큐
         PriorityQueue<Vertex> queue = new PriorityQueue<>();
+				// 시작 정점은 가중치 0
+        graph[K].weight = 0;
         queue.offer(graph[K]);
         Vertex curr;
         while(!queue.isEmpty()) {
@@ -67,7 +68,6 @@ public class Main_1753 {
 	public static class Edge extends HashMap<Integer, Integer>{}
     
     // 정점별 간선 리스트
-	@SuppressWarnings("serial")
 	public static class Vertex implements Comparable<Vertex>{
 		// 정점에 도달하는 weight 총합
 		int u, weight;
