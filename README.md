@@ -86,28 +86,30 @@
 
    6. [Next Permutation (다음 순열)](#next-permutation-다음-순열)
 
-3. [Sliding Window (슬라이딩 윈도우)](#sliding-window-슬라이딩-윈도우)
-4. [Two Pointers (투포인터 알고리즘)](#two-pointers-투포인터-알고리즘)
-5. [Data Structure (자료 구조)](#data-structure-자료-구조)
+3. [Two Pointers (투포인터 알고리즘)](#two-pointers-투포인터-알고리즘)
+
+   1. [Sliding Window (슬라이딩 윈도우)](#sliding-window-슬라이딩-윈도우)
+
+4. [Data Structure (자료 구조)](#data-structure-자료-구조)
    1. [Stack (스택)](#stack-스택)
    2. [Queue (큐)](#queue-큐)
    3. [Tree (트리)](#tree-트리)
    4. [Heap (힙)](#heap-힙)
    5. [LinkedList (연결 리스트)](#linkedlist-연결-리스트)
-6. [Bitmasking (비트마스킹)](#bitmasking-비트마스킹)
-7. [Greedy Algorithm (그리디 알고리즘)](#greedy-algorithm-그리디-알고리즘)
-8. [Divide and Conquer (분할 정복)](#divide-and-conquer-분할-정복)
+5. [Bitmasking (비트마스킹)](#bitmasking-비트마스킹)
+6. [Greedy Algorithm (그리디 알고리즘)](#greedy-algorithm-그리디-알고리즘)
+7. [Divide and Conquer (분할 정복)](#divide-and-conquer-분할-정복)
 
    1. [Binary Search (이진 탐색)](#binary-search-이진-탐색)
    2. [Longest Increasing Subsequence (LIS, 최장 증가 부분 수열)](#longest-increasing-subsequence-lis-최장-증가-부분-수열-참고)
 
-9. [Backtracking (백트래킹)](#backtracking-백트래킹)
-10. [Recursive (재귀)](#recursive-재귀)
-11. [Dynamic Programming (다이나믹 프로그래밍)](#dynamic-programming-다이나믹-프로그래밍)
-12. [String (문자열)](#string-문자열)
+8. [Backtracking (백트래킹)](#backtracking-백트래킹)
+9. [Recursive (재귀)](#recursive-재귀)
+10. [Dynamic Programming (다이나믹 프로그래밍)](#dynamic-programming-다이나믹-프로그래밍)
+11. [String (문자열)](#string-문자열)
     1. [Longest Common Subsequence (LCS)](#longest-common-subsequence-lcs-9252)
-13. [Union Find (Disjoint Set)](#union-find-disjoint-set)
-14. [Graph (그래프 탐색 알고리즘)](#graph-그래프-탐색-알고리즘)
+12. [Union Find (Disjoint Set)](#union-find-disjoint-set)
+13. [Graph (그래프 탐색 알고리즘)](#graph-그래프-탐색-알고리즘)
     1. [Dijkstra (다익스트라 알고리즘)](#dijkstra-다익스트라-알고리즘)
     2. [Bellman-Ford (밸만-포드 알고리즘)](#bellman-ford-밸만-포드-알고리즘)
     3. [Floyd-Warshall (플로이드-워셜 알고리즘)](#floyd-warshall-플로이드-워셜-알고리즘)
@@ -232,14 +234,14 @@
    }
    ```
 
-# Sliding Window [(슬라이딩 윈도우)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/SlidingWindow.md)
-
-1. 고정 사이즈의 윈도우가 이동하면서 윈도우 내에 있는 데이터로 문제를 푸는 방식
-
 # Two Pointers [(투포인터 알고리즘)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/TwoPointers.md)
 
-1. index 값을 가지는 i, j를 사용하여, 일정 조건에 따라 `i와 j를 증감 연산자로` 이동시켜 불필요한 경우의 수를 제거하는 알고리즘. [(16472)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/16000/Main_16472.java)
-2. 슬라이딩 윈도우와 비슷하지만, 구간의 너비가 가변적이라는 차이점이 존재. [(Two Pointers)](https://butter-shower.tistory.com/226)
+1.  index 값을 가지는 i, j를 사용하여, 일정 조건에 따라 `i와 j를 증감 연산자로` 이동시켜 불필요한 경우의 수를 제거하는 알고리즘. [(16472)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/16000/Main_16472.java)
+2.  슬라이딩 윈도우와 비슷하지만, 구간의 너비가 가변적이라는 차이점이 존재. [(Two Pointers)](https://butter-shower.tistory.com/226)
+
+## Sliding Window (슬라이딩 윈도우)
+
+1.  고정 사이즈의 윈도우가 이동하면서 윈도우 내에 있는 데이터로 문제를 푸는 방식
 
 # Data Structure [(자료 구조)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/DataStructure.md)
 
@@ -276,6 +278,7 @@
 4. PriorityQueue 클래스로 기본 연산 수행 가능. Comparator를 따로 설정해주면 힙 정렬 상태도 수정 가능
    1. 최소힙: PriorityQueue()
    2. 최대힙: PrioirtyQueue(Collections.reverseOrder())
+5. 원하는 객체 중에서 정렬 조건을 만족했을 때 가장 앞에 나오는 객체를 고르고 싶다면 Comparable 인터페이스를 구현한 뒤 PriorityQueue에 집어넣으면 됨. [(16236)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/16000/Main_16236.java)
 
 ## Set (집합)
 
@@ -437,8 +440,10 @@
 
 1. 시작점과 그래프가 주어졌을 때, 시작점에서부터 다른 정점까지의 최단 경로를 구하는 문제에 활용
 2. `음의 가중치를 가지는 사이클이 존재할 때는 사용할 수 없다.`
-3. 가중치 값이 가장 작은 정점을 찾을 때 [우선순위 큐](#heap-힙)를 활용하면 더 빠르게 수행할 수 있다. [(1753)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/1000/Main_1753.java)
-4. 알고리즘
+3. 위 2번 조건 때문에 가중치가 항상 양수인 경우에 사용하면 좋다.
+4. 가중치 값이 가장 작은 정점을 찾을 때 [우선순위 큐](#heap-힙)를 활용하면 더 빠르게 수행할 수 있다. [(1753)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/1000/Main_1753.java)
+5. 모든 정점에서 다른 정점으로 가는 최소 비용을 계산할 때, 일반적으로는 Dijkstra를 여러 번 사용하는 것이 Floyd-Warshall을 사용하는 것보다 빠르다. [(1238)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/1000/Main_1238.java)
+6. 알고리즘
 
    1. 출발 정점 이외의 나머지 정점은 가중치 무한으로 설정
    2. 출발 정점으로부터 다른 정점까지 도달하는 가중치 최솟값 갱신
@@ -464,6 +469,34 @@
 ## Bellman-Ford (밸만-포드 알고리즘)
 
 ## Floyd-Warshall (플로이드-워셜 알고리즘)
+
+1. `모든 정점에서 다른 정점으로 가는 최소 비용`을 전부 계산해야 할 때 주로 사용하는 알고리즘
+2. 각 간선에서 가중치 무한으로 초기화 할 때 값을 연산하는 과정에서 오버플로우가 발생할 수 있기 때문에 MAX_VALUE / 2 - 1 정도로 설정하는 것을 추천 [(1238)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/1000/Main_1238.java)
+3. 모든 정점에서 다른 정점으로 가는 최소 비용을 계산할 때, 일반적으로는 Dijkstra를 여러 번 사용하는 것이 Floyd-Warshall을 사용하는 것보다 빠르다. [(1238)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/1000/Main_1238.java)
+4. 알고리즘
+
+   1. 중간에 거쳐 갈 정점을 선택
+   2. 선택한 정점을 거쳐가는 경로에서 가중치가 갱신되면 갱신
+   3. 중간에 거쳐 갈 정점을 모든 정점을 돌아가며 설정한 뒤, 2번의 갱신 과정을 반복하면 인접 행렬로 표현했을 때 [i][j] 는 i에서 j로 가는 최소 비용이 완성됨.
+
+   ```java
+   // 플로이드-워셜 알고리즘 수행
+   public void floyd() {
+      // 중간 정점 k
+      for(int k = 1; k <= N; k++) {
+         // 시작 정점 i
+         for(int i = 1; i <= N; i++) {
+            // 끝 정점 j
+            for(int j = 1; j <= N; j++) {
+               // i -> j로 도달하는 최소비용 갱신
+               if(getCost(i, j) > getCost(i, k) + getCost(k, j)) {
+                  setCost(i, j, getCost(i, k) + getCost(k, j));
+               }
+            }
+         }
+      }
+   }
+   ```
 
 ## Minimum Spanning Tree (최소 신장 트리)
 
