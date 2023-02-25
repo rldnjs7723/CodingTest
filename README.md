@@ -8,6 +8,8 @@
 
 1. 입력 / 출력 값이 Overflow가 발생하는지 항상 수학적으로 계산하여 int 대신 long을 사용할 필요가 있는지 고려해야 함
 2. 시간 복잡도는 1억 번의 연산을 1초로 넉넉하게 두고 풀기
+3. 소프트웨어 역량 평가 A형의 경우 기본적으로 확인하는 능력이 `조건을 치환하는 능력`.  
+   주어진 조건 중에서 불필요한 내용은 생략하고, 주어진 조건을 시간 복잡도를 감소시킬 수 있는 형태로 표현하는 것이 중요하다. [(5644)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/DataStructure.md/#3-swea_5644-무선-충전-swea-링크-소스-코드) [(1767)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/Backtracking.md/#3-swea_1767-프로세서-연결하기-swea-링크-소스-코드)
 
 ## 이클립스 사용법
 
