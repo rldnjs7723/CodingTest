@@ -108,9 +108,9 @@
 8. [Backtracking (백트래킹)](#backtracking-백트래킹)
 9. [Recursive (재귀)](#recursive-재귀)
 10. [Dynamic Programming (다이나믹 프로그래밍)](#dynamic-programming-다이나믹-프로그래밍)
-    1. [LCA (Lowest Common Ancestor) 알고리즘](#lca-lowest-common-ancestor-알고리즘)
-11. [String (문자열)](#string-문자열)
     1. [Longest Common Subsequence (LCS)](#longest-common-subsequence-lcs-9252)
+    2. [Lowest Common Ancestor (LCA) 알고리즘](#lowest-common-ancestor-lca-알고리즘)
+11. [String (문자열)](#string-문자열)
 12. [Union Find (Disjoint Set)](#union-find-disjoint-set)
 13. [Graph (그래프 탐색 알고리즘)](#graph-그래프-탐색-알고리즘)
     1. [Dijkstra (다익스트라 알고리즘)](#dijkstra-다익스트라-알고리즘)
@@ -119,6 +119,9 @@
     4. [Minimum Spanning Tree (최소 신장 트리)](#minimum-spanning-tree-최소-신장-트리)
        1. [Kruskal (크루스칼 알고리즘)](#1-kruskal-크루스칼-알고리즘)
        2. [Prim (프림 알고리즘)](#2-prim-프림-알고리즘)
+    5. [Traveling Salesman Problem (TSP, 외판원 문제)](#traveling-salesman-problem-tsp-외판원-문제)
+    6. [Topology Sort (위상 정렬)](#topology-sort-위상-정렬)
+    7. [Strongly Connected Component (강한 결합 요소)](#strongly-connected-component-강한-결합-요소)
 
 # Math [(수학)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/Math.md)
 
@@ -400,7 +403,41 @@
 
 1. 특정 범위까지의 값을 구하기 위해서 이전에 계산했던 다른 범위의 값을 이용하여 효율적으로 계산하는 알고리즘
 
-## LCA (Lowest Common Ancestor) 알고리즘
+## Longest Common Subsequence (LCS) [(9252)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/9000/Main_9252.java)
+
+1. 다이나믹 프로그래밍을 통해 계산하는 알고리즘의 일종
+2. 알고리즘
+
+   1. 각 문자열의 길이만큼 행, 열을 가지는 2차원 배열을 설정한 뒤 각 문자열에 해당하는 알파벳이 동일하다면 대각선 방향(행 - 1, 열 - 1)의 값에 1을 더한다.
+   2. 문자열에 해당하는 알파벳이 다르다면 왼쪽(열 - 1)과 위(행 - 1)의 값 중 더 큰 값을 현재 행, 열의 값으로 설정한다.
+   3. 이 때 LCS의 길이는 각 문자열의 길이를 Index로 하는 위치에 기록된 값이며, 연산 도중 대각선, 왼쪽, 위를 기록해두었다면 역순으로 탐색하면서 대각선으로 이동한 경우의 문자를 추출한다면 LCS 자체를 출력할 수도 있다.
+
+   ```java
+   // LCS 길이 저장
+   int[][] lcsCount = new int[lenA + 1][lenB + 1];
+   // LCS 구성할 때 이동 방향 저장
+   int[][] lcsDirection = new int[lenA + 1][lenB + 1];
+   for(int i = 0; i < lenA; i++) {
+      for(int j = 0; j < lenB; j++) {
+         if(A.charAt(i) == B.charAt(j)) {
+            // 현재 알파벳이 동일하면 대각선 방향 + 1
+            lcsCount[i + 1][j + 1] = lcsCount[i][j] + 1;
+            lcsDirection[i + 1][j + 1] = DIAGONAL;
+         } else {
+            // 알파벳이 다르면 왼쪽과 위의 값중 더 큰 값을 할당
+            if(lcsCount[i + 1][j] >= lcsCount[i][j + 1]) {
+               lcsCount[i + 1][j + 1] = lcsCount[i + 1][j];
+               lcsDirection[i + 1][j + 1] = LEFT;
+            } else {
+               lcsCount[i + 1][j + 1] = lcsCount[i][j + 1];
+               lcsDirection[i + 1][j + 1] = UP;
+            }
+         }
+      }
+   }
+   ```
+
+## Lowest Common Ancestor (LCA) 알고리즘
 
 1. 트리에서 2차원 배열로 조상 노드를 저장하여 표현 (다이나믹 프로그래밍의 일종)
 2. 기본 점화식
@@ -453,40 +490,6 @@
    ```
 
 # String [(문자열)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/String.md)
-
-## Longest Common Subsequence (LCS) [(9252)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/9000/Main_9252.java)
-
-1. 다이나믹 프로그래밍을 통해 계산하는 알고리즘의 일종
-2. 알고리즘
-
-   1. 각 문자열의 길이만큼 행, 열을 가지는 2차원 배열을 설정한 뒤 각 문자열에 해당하는 알파벳이 동일하다면 대각선 방향(행 - 1, 열 - 1)의 값에 1을 더한다.
-   2. 문자열에 해당하는 알파벳이 다르다면 왼쪽(열 - 1)과 위(행 - 1)의 값 중 더 큰 값을 현재 행, 열의 값으로 설정한다.
-   3. 이 때 LCS의 길이는 각 문자열의 길이를 Index로 하는 위치에 기록된 값이며, 연산 도중 대각선, 왼쪽, 위를 기록해두었다면 역순으로 탐색하면서 대각선으로 이동한 경우의 문자를 추출한다면 LCS 자체를 출력할 수도 있다.
-
-   ```java
-   // LCS 길이 저장
-   int[][] lcsCount = new int[lenA + 1][lenB + 1];
-   // LCS 구성할 때 이동 방향 저장
-   int[][] lcsDirection = new int[lenA + 1][lenB + 1];
-   for(int i = 0; i < lenA; i++) {
-      for(int j = 0; j < lenB; j++) {
-         if(A.charAt(i) == B.charAt(j)) {
-            // 현재 알파벳이 동일하면 대각선 방향 + 1
-            lcsCount[i + 1][j + 1] = lcsCount[i][j] + 1;
-            lcsDirection[i + 1][j + 1] = DIAGONAL;
-         } else {
-            // 알파벳이 다르면 왼쪽과 위의 값중 더 큰 값을 할당
-            if(lcsCount[i + 1][j] >= lcsCount[i][j + 1]) {
-               lcsCount[i + 1][j + 1] = lcsCount[i + 1][j];
-               lcsDirection[i + 1][j + 1] = LEFT;
-            } else {
-               lcsCount[i + 1][j + 1] = lcsCount[i][j + 1];
-               lcsDirection[i + 1][j + 1] = UP;
-            }
-         }
-      }
-   }
-   ```
 
 # Union Find [(Disjoint Set)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/UnionFind.md)
 
@@ -562,3 +565,9 @@
 ### 1. Kruskal (크루스칼 알고리즘)
 
 ### 2. Prim (프림 알고리즘)
+
+## Traveling Salesman Problem (TSP, 외판원 문제)
+
+## Topology Sort (위상 정렬)
+
+## Strongly Connected Component (강한 결합 요소)
