@@ -57,7 +57,7 @@ ABC의 행렬 계산 경우의 수는 (AB)C와 A(BC)가 존재하는데, 두 경
 
 ### 문제 요약
 
-트리의 부모-자식 관계가 주어졌을 때 두 노드의 `최소 공통 조상(Lowest Common Ancester, LCA)`을 찾고 해당 공통 조상을 루트 노드로 하는 서브 트리의 크기를 출력하는 문제
+트리의 부모-자식 관계가 주어졌을 때 두 노드의 [최소 공통 조상(Lowest Common Ancester, LCA)](https://github.com/rldnjs7723/CodingTest#lca-lowest-common-ancestor-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98)을 찾고 해당 공통 조상을 루트 노드로 하는 서브 트리의 크기를 출력하는 문제
 
 ### 풀이 아이디어
 
