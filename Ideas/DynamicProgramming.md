@@ -6,6 +6,7 @@
 2. [BOJ_12852 1로 만들기 2](#2-boj_12852-1로-만들기-2-백준-링크-소스-코드)
 3. [BOJ_10844 쉬운 계단 수](#3-boj_10844-쉬운-계단-수-백준-링크-소스-코드)
 4. [BOJ_11049 행렬 곱셈 순서](#4-boj_11049-행렬-곱셈-순서-백준-링크-소스-코드)
+5. [SWEA_1248 공통조상](#5-swea_1248-공통조상-swea-링크-소스-코드)
 
 ## 1. BOJ_10942 팰린드롬? [(백준 링크)](https://www.acmicpc.net/problem/10942) [(소스 코드)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/10000/Main_10942.java)
 
@@ -51,3 +52,20 @@ dp[i][j] = dp[i - 1][j - 1] + dp[i - 1][j + 1];
 ### 풀이 아이디어
 
 ABC의 행렬 계산 경우의 수는 (AB)C와 A(BC)가 존재하는데, 두 경우를 비교했을 때 최솟값을 저장하도록 점화식을 작성.
+
+## 5. SWEA_1248 공통조상 [(SWEA 링크)](https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV15PTkqAPYCFAYD) [(소스 코드)](https://github.com/rldnjs7723/CodingTest/blob/main/SWEA/1000/Solution_1248.java)
+
+### 문제 요약
+
+트리의 부모-자식 관계가 주어졌을 때 두 노드의 `최소 공통 조상(Lowest Common Ancester, LCA)`을 찾고 해당 공통 조상을 루트 노드로 하는 서브 트리의 크기를 출력하는 문제
+
+### 풀이 아이디어
+
+문제의 시간 초과 자체는 20초 정도로, 트리를 구성한 다음 O(N) 시간에 해결하도록 구현해도 문제가 없으나, 학습 목적으로 LCA 알고리즘을 적용하여 해결함.
+
+```java
+parent[i][j] = parent[parent[i][j - 1]][j - 1]
+```
+
+위와 같은 기본 점화식을 바탕으로 다이나믹 프로그래밍 기법을 사용하여 비교 대상인 두 노드의 깊이를 메꿀 때 O(log N) 시간이 소요되도록 구현하였다.  
+나머지 해당 조상 노드를 루트로 하는 서브 트리의 크기는 재귀를 이용한 DFS를 통해 갱신하는 방식으로 구현.

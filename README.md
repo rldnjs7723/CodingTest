@@ -108,6 +108,7 @@
 8. [Backtracking (백트래킹)](#backtracking-백트래킹)
 9. [Recursive (재귀)](#recursive-재귀)
 10. [Dynamic Programming (다이나믹 프로그래밍)](#dynamic-programming-다이나믹-프로그래밍)
+    1. [LCA (Lowest Common Ancestor) 알고리즘](#lca-lowest-common-ancestor-알고리즘)
 11. [String (문자열)](#string-문자열)
     1. [Longest Common Subsequence (LCS)](#longest-common-subsequence-lcs-9252)
 12. [Union Find (Disjoint Set)](#union-find-disjoint-set)
@@ -174,6 +175,7 @@
    ```
    opposite = (dir + 2) % 4
    ```
+4. 방향에 따라 달라지는 값이 있다면 해당 값을 2번과 같이 미리 정의해두고 사용하면 시간도 적게 걸리고 덜 혼동 된다. [(15683)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/15000/Main_15683.java)
 
 ### Depth First Search (깊이 우선 탐색)
 
@@ -263,10 +265,11 @@
 ## Tree (트리)
 
 1. 정의: 모든 정점 사이에 경로가 존재하고 / |E| = |V| – 1인 그래프
-2. 위 정의에 따라 사이클이 존재하지 않는 특징을 가짐
+2. 특징: 위 정의에 따라 사이클이 존재하지 않는 특징을 가짐
 3. 용어
-   1. 차수: 노드에 연결된 자식 노드의 수 (노드 기준) / 루트 노드의 차수 (트리 기준)
-   2. 높이: 루트에서 노드에 이르는 간선의 수 (노드 기준) / 트리에서 노드의 높이 중 가장 큰 값 (트리 기준)
+   1. 차수(크기): 노드에 연결된 자식 노드의 수 (노드 기준) / 루트 노드의 차수 (트리 기준)
+   2. 높이(height, 레벨, level): 노드에서 리프 노드에 이르는 간선의 수 (노드 기준) / 루트 노드에서 리프 노드에 이르는 간선의 수 (트리 기준)
+   3. 깊이(depth): 루트 노드에서 노드에 이르는 간선의 수 (노드 기준) / 루트 노드에서 리프 노드까지 이르는 간선의 수 (트리 기준)
 4. 트리 순회
    1. 전위 순회: 부모 노드 -> 왼쪽 자식 -> 오른쪽 자식 순으로 방문
    2. 중위 순회: 왼쪽 자식 -> 부모 노드 -> 오른쪽 자식 순으로 방문
@@ -396,6 +399,58 @@
 # Dynamic Programming [(다이나믹 프로그래밍)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/DynamicProgramming.md)
 
 1. 특정 범위까지의 값을 구하기 위해서 이전에 계산했던 다른 범위의 값을 이용하여 효율적으로 계산하는 알고리즘
+
+## LCA (Lowest Common Ancestor) 알고리즘
+
+1. 트리에서 2차원 배열로 조상 노드를 저장하여 표현 (다이나믹 프로그래밍의 일종)
+2. 기본 점화식
+   ```
+   P[i][j] = (i노드의 2^j 번 째 조상)
+   P[i][j] = P[P[i][j - 1]][j - 1]
+   ```
+3. 위 점화식 덕분에 Balanced Tree가 아니더라도 LCA를 O(log N) 시간에 찾는 것이 가능 (트리 구성에는 O(N) 시간 소요)
+4. 알고리즘 [(1248)](https://github.com/rldnjs7723/CodingTest/blob/main/SWEA/1000/Solution_1248.java)
+
+   1. depth 0부터 최대 depth까지 BFS 형태로 자기 자신의 조상에 대한 정보를 업데이트
+
+   ```java
+   nodes[C].parent[0] = nodes[P];
+   ```
+
+   ```java
+   // 다이나믹 프로그래밍으로 2^i번 째 조상 미리 계산
+   int maxDepth = log2(this.depth);
+   for(int j = 1; j <= maxDepth; j++) {
+      // 현재 노드의 2^j 번째 조상은 2^j-1 번째 조상의 2^j-1 번째 조상
+      parent[j] = parent[j - 1].parent[j - 1];
+   }
+   ```
+
+   2. 최소 공통 조상을 비교하려는 두 노드의 높이를 같게 설정
+
+   ```java
+   // 두 노드의 깊이 맞추기
+   public static Node matchDepth(Node small, Node big, Tree tree) {
+   	int depthDiff;
+   	while(small.depth > big.depth) {
+   		depthDiff = log2(small.depth - big.depth);
+   		small = small.parent[depthDiff];
+   	}
+
+   	return small;
+   }
+   ```
+
+   3. 깊이를 맞췄다면 부모 노드로 한 단계씩 이동하며 부모 노드가 같을 때까지 반복
+
+   ```java
+   // 공통 조상 찾기
+   while(small.parent[0] != big.parent[0]) {
+      small = small.parent[0];
+      big = big.parent[0];
+   }
+   Node lca = small.parent[0];
+   ```
 
 # String [(문자열)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/String.md)
 

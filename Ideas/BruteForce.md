@@ -5,6 +5,8 @@
 1. [SWEA_1953 탈주범 검거](#1-swea_1953-탈주범-검거-swea-링크-소스-코드)
 2. [BOJ_2615 오목](#2-boj_2615-오목-백준-링크-소스-코드)
 3. [BOJ_13913 숨바꼭질 4](#3-boj_13913-숨바꼭질-4-백준-링크-소스-코드)
+4. [BOJ_13023 ABCDE](#4-boj_13023-abcde-백준-링크-소스-코드)
+5. [BOJ_15683 감시](#5-boj_15683-감시-백준-링크-소스-코드)
 
 ## 1. SWEA_1953 탈주범 검거 [(SWEA 링크)](https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV5PpLlKAQ4DFAUq) [(소스 코드)](https://github.com/rldnjs7723/CodingTest/blob/main/SWEA/1000/Solution_1953.java)
 
@@ -38,3 +40,23 @@
 
 BFS로 시작 위치부터 모든 이동을 수행해보며, 이동 최소 횟수가 갱신되는 경우에만 해당 위치에서 다음 위치로 탐색을 수행하도록 진행했을 때, 동생의 위치에 가장 먼저 도착할 때가 최소 이동 횟수.  
 갱신한 경우에 이전에 있었던 위치를 기록해두면 이동 경로도 역순으로 쉽게 찾을 수 있다.
+
+## 4. BOJ_13023 ABCDE [(백준 링크)](https://www.acmicpc.net/problem/13023) [(소스 코드)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/13000/Main_13023.java)
+
+### 문제 요약
+
+그래프를 DFS로 탐색했을 때 깊이가 4 이상인 경우가 존재하는지 확인하는 문제
+
+### 풀이 아이디어
+
+그래프에서 각 정점의 방문 체크를 수행하며 DFS를 수행할 수 있다면 해결 가능
+
+## 5. BOJ_15683 감시 [(백준 링크)](https://www.acmicpc.net/problem/15683) [(소스 코드)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/15000/Main_15683.java)
+
+### 문제 요약
+
+CCTV의 위치와 종류가 기록된 상태 공간이 주어졌을 때, 해당 CCTV의 방향을 바꿔가며 생기는 사각 지대 영역의 최솟값을 구하는 문제
+
+### 풀이 아이디어
+
+`각 CCTV가 바라보는 방향에 따라 감시 할 수 있는 방향에 대한 정보를 미리 배열로 정리해 두고`, CCTV가 바라보는 방향을 하나씩 바꿔가면서 DFS로 완전 탐색을 수행하면 된다.
