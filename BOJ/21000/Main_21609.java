@@ -37,17 +37,68 @@ public class Main_21609 {
 			}
 		}
 		
-		Queue<Group> queue = new PriorityQueue<>();
-		// 우선순위 큐로 Group 정렬
-		Group[][] groups = findGroup(3, grid, queue);
-		removeBlocks(grid, groups, queue.poll());
-		printArr(grid);
-		System.out.println("------------");
-		gravity(grid);
-		printArr(grid);
-		
-		
+		System.out.println(autoPlay(grid));
 		br.close();
+	}
+	
+	// 오토 플레이 후 점수 리턴
+	public static int autoPlay(int[][] grid) {
+		int score = 0;
+		
+		// 더 이상 제거할 수 있는 블록이 없을 때까지 오토 플레이
+		Queue<Group> queue = new PriorityQueue<>();
+		Group[][] temp, groups;
+		Group target;
+		// 그룹 선택
+		groups = null;
+		// 1 <= M <= 5;
+		for(int color = 1; color <= M; color++) {
+			temp = findGroup(color, grid, queue);
+			// 블록 개수가 가장 큰 그룹 상태만 남기기
+			if(!queue.isEmpty() && queue.peek().color == color) groups = temp;
+		}
+		while(!queue.isEmpty()) {
+			// 점수 추가
+			target = queue.poll();
+			score += target.size * target.size;
+			// 그룹 삭제
+			removeBlocks(grid, groups, target);
+			// 중력 작용
+			gravity(grid);
+			// 90도 반시계 방향 회전
+			counterClockwise(grid);
+			// 중력 작용
+			gravity(grid);
+			
+			// 그룹 선택
+			queue.clear();
+			groups = null;
+			// 1 <= M <= 5;
+			for(int color = 1; color <= M; color++) {
+				temp = findGroup(color, grid, queue);
+				// 블록 개수가 가장 큰 그룹 상태만 남기기
+				if(!queue.isEmpty() && queue.peek().color == color) groups = temp;
+			}
+		}
+		
+		return score;
+	}
+	
+	// 90도 반시계 방향으로 격자 회전
+	public static void counterClockwise(int[][] grid) {
+		int[][] temp = new int[N][N];
+		// Deep Copy
+		for(int row = 0; row < N; row++) {
+			for(int col = 0; col < N; col++) {
+				temp[row][col] = grid[row][col];
+			}
+		}
+		// 격자 회전
+		for(int row = 0; row < N; row++) {
+			for(int col = 0; col < N; col++) {
+				grid[row][col] = temp[col][N - 1 - row];
+			}
+		}
 	}
 	
 	/**
@@ -68,21 +119,14 @@ public class Main_21609 {
 	
 	// 중력에 맞게 블록 내리기
 	public static void gravity(int[][] grid) {
-		// 위에서부터 차례대로 중력에 맞게 내리기 (공백 제거)
-		for(int row = 0; row < N - 1; row++) {
-			for(int col = 0; col < N; col++) {
-				if(grid[row + 1][col] == BLANK && grid[row][col] > BLACK) {
-					grid[row + 1][col] = grid[row][col];
-					grid[row][col] = BLANK;
-				}
-			}
-		}
 		// 아래에서부터 차례대로 중력에 맞게 내리기
 		for(int row = N - 2; row >= 0; row--) {
 			for(int col = 0; col < N; col++) {
-				if(grid[row + 1][col] == BLANK && grid[row][col] > BLACK) {
-					grid[row + 1][col] = grid[row][col];
-					grid[row][col] = BLANK;
+				for(int iter = 0; iter < N - 1 - row; iter++) {
+					if(grid[row + 1 + iter][col] == BLANK && grid[row + iter][col] > BLACK) {
+						grid[row + 1 + iter][col] = grid[row + iter][col];
+						grid[row + iter][col] = BLANK;
+					} else break;
 				}
 			}
 		}
@@ -105,7 +149,7 @@ public class Main_21609 {
 			for(int col = 0; col < N; col++) {
 				// 현재 블록에 방문하지 않은 경우 그룹 체크
 				if(grid[row][col] == color && groups[row][col] == null) {
-					groups[row][col] = new Group(row, color, color);
+					groups[row][col] = new Group(row, col, color);
 					
 					bfs.clear();
 					bfs.offer(new Coord(row, col));
@@ -142,8 +186,8 @@ public class Main_21609 {
 						}
 					}
 					
-					// 현재 그룹 우선순위 큐에 추가
-					queue.offer(groups[row][col]);
+					// 현재 그룹 우선순위 큐에 추가 (그룹에 속한 블록의 수는 2개 이상이어야 함)
+					if(groups[row][col].size > 1) queue.offer(groups[row][col]);
 				}
 			}
 		}
@@ -173,6 +217,7 @@ public class Main_21609 {
 			this.col = col;
 		}
 
+		// 우선순위 큐 정렬을 위한 Comparable 인터페이스 구현
 		@Override
 		public int compareTo(Group o) {
 			// 블록의 크기에 따라 내림차순 정렬
@@ -184,6 +229,12 @@ public class Main_21609 {
 			// 기준 블록의 열에 따라 내림차순 정렬
 			return Integer.compare(o.col, this.col);
 		}
+		
+		// 디버깅용
+		@Override
+		public String toString() {
+			return "[ color: " + color + " size: " + size + " rainbow: " + rainbow + " row: " + row + " col: " + col + " ]";
+		}
 	}
 	
 	// 범위 체크
@@ -192,8 +243,13 @@ public class Main_21609 {
 	}
 	// 디버깅용 배열 출력
 	public static void printArr(int[][] arr) {
+		StringBuilder sb = new StringBuilder();
 		for(int[] inner: arr) {
-			System.out.println(Arrays.toString(inner));
+			for(int val: inner) {
+				sb.append((val == BLANK ? " " : val) + "| ");
+			}
+			sb.append("\n");
 		}
+		System.out.print(sb.toString());
 	}
 }
