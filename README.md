@@ -493,6 +493,47 @@
 
 # Union Find [(Disjoint Set)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/UnionFind.md)
 
+1. 서로소 집합: 서로 중복 포함된 원소가 없는 집합
+2. 알고리즘 (트리로 표현) [(3289)](https://github.com/rldnjs7723/CodingTest/blob/main/SWEA/3000/Solution_3289.java)
+
+   1. 두 개의 집합을 합칠 때, 한 집합의 루트 노드가 다른 집합의 루트 노드를 가리키도록 구현
+   2. Rank를 이용한 Union: 각 트리의 높이를 rank로 저장하고, rank가 낮은 집합을 rank가 높은 집합에 붙임
+   3. Path Compression: 루트 노드를 찾는 과정에서 마주치는 모든 노드가 직접 루트 노드를 가리키도록 포인터를 바꿔줌
+
+   ```java
+   // MakeSet
+   public DisjointSet() {
+      this.height = 0;
+      this.parent = null;
+   }
+
+   // FindSet
+   public DisjointSet findSet() {
+      if(this.parent == null) return this;
+      // Path Compression
+      this.parent = this.parent.findSet();
+      return this.parent;
+   }
+
+   // UnionSet
+   public static void unionSet(DisjointSet A, DisjointSet B) {
+      DisjointSet rootA = A.findSet();
+      DisjointSet rootB = B.findSet();
+
+      // 루트 노드가 같으면 같은 집합
+      if(rootA == rootB) return;
+
+      // Rank를 이용한 Union
+      if(rootA.height >= rootB.height) {
+         rootB.parent = rootA;
+         // 두 집합의 높이가 같으면 높이 증가
+         if(rootA.height == rootB.height) rootA.height++;
+      } else {
+         rootA.parent = rootB;
+      }
+   }
+   ```
+
 # Graph [(그래프 탐색 알고리즘)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/Graph.md)
 
 1. 인접 행렬 / 인접 리스트 / 인접 해시테이블로 그래프 표현 가능

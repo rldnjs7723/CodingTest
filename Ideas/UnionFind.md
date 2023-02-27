@@ -3,6 +3,7 @@
 1. [BOJ_16946 벽 부수고 이동하기 4](#1-boj_16946-벽-부수고-이동하기-4-백준-링크-소스-코드)
 2. [BOJ_10026 적록색약](#2-boj_10026-적록색약-백준-링크-소스-코드)
 3. [BOJ_16724 피리 부는 사나이](#3-boj_16724-피리-부는-사나이-백준-링크-소스-코드)
+4. [SWEA_3289 서로소 집합](#4-swea_3289-서로소-집합-백준-링크-소스-코드)
 
 ## 1. BOJ_16946 벽 부수고 이동하기 4 [(백준 링크)](https://www.acmicpc.net/problem/16946) [(소스 코드)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/16000/Main_16946.java)
 
@@ -37,3 +38,14 @@
 
 BFS를 통해 현재 위치에서 나가는 방향이거나 현재 위치로 들어오는 방향의 구역을 전부 같은 그룹으로 묶는다면 각 그룹의 마지막 위치에만 SAFE ZONE을 설치하면 되기 때문에, 전체 그룹의 개수를 카운트하기만 하면 되는 문제.  
 다른 Union Find 문제와 마찬가지로 더미 객체를 생성하여 방문 체크와 그룹 포함을 수행
+
+## 4. SWEA_3289 서로소 집합 [(SWEA 링크)](https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AWBJKA6qr2oDFAWr) [(소스 코드)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/3000/Main_3289.java)
+
+### 문제 요약
+
+1부터 N까지 자기 자신만을 원소로 가지는 집합이 있을 때, 합집합 연산 / 두 집합이 같은 집합인지 확인하는 연산 두 가지를 구현하고, 결과를 출력하는 문제
+
+### 풀이 아이디어
+
+전형적인 [Union Find (Disjoint Set)](https://github.com/rldnjs7723/CodingTest#union-find-disjoint-set) 문제.  
+Path Compression과 Rank를 이용한 Union을 통해 해결하면 수행 시간을 단축할 수 있다.
