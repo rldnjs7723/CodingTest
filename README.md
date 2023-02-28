@@ -503,7 +503,7 @@
    ```java
    // MakeSet
    public DisjointSet() {
-      this.height = 0;
+      this.rank = 0;
       this.parent = null;
    }
 
@@ -524,10 +524,10 @@
       if(rootA == rootB) return;
 
       // Rank를 이용한 Union
-      if(rootA.height >= rootB.height) {
+      if(rootA.rank >= rootB.rank) {
          rootB.parent = rootA;
-         // 두 집합의 높이가 같으면 높이 증가
-         if(rootA.height == rootB.height) rootA.height++;
+         // 두 집합의 Rank가 같으면 Rank 증가
+         if(rootA.rank == rootB.rank) rootA.rank++;
       } else {
          rootA.parent = rootB;
       }
@@ -605,7 +605,45 @@
 
 ### 1. Kruskal (크루스칼 알고리즘)
 
+1. 처음에 n 개의 집합으로 시작해서 n-1번의 합집합을 통해 최적해를 찾는 방식 [(Union Find)](https://github.com/rldnjs7723/CodingTest#union-find-disjoint-set)
+2. 시간복잡도: O(|E| log |E|) = O(|E| log |V|) (점근적으로 log |E|는 log |V|와 동일)
+3. 간선 중심이라 간선 정보가 주어질 때 사용하면 좋음
+4. 알고리즘
+
+   1. 모든 간선을 가중치 순으로 정렬
+   2. 최소 비용의 간선을 제거한 후, 해당 간선의 두 정점이 서로 다른 집합에 속한다면 두 집합을 Union
+   3. 모든 간선이 제거될 때까지 반복
+
+   ```java
+   public static int Kruskal(DisjointSet[] set, Queue<Edge> queue) {
+   	int weight = 0;
+   	Edge curr;
+   	while(!queue.isEmpty()) {
+   		// 최소 가중치인 간선을 선택
+   		curr = queue.poll();
+   		// 간선을 이루는 두 정점이 다른 집합인 경우에만 연결하고 가중치 추가
+   		if(DisjointSet.UnionSet(set[curr.u], set[curr.v])) weight += curr.w;
+   	}
+
+   	return weight;
+   }
+   ```
+
 ### 2. Prim (프림 알고리즘)
+
+1. Dijkstra 알고리즘과 비슷한 그리디 알고리즘
+2. 시간 복잡도: O(|E| log |V|)
+3. 정점 중심이라 인접 행렬이 주어질 때 사용하면 좋음
+4. 알고리즘
+
+   1. 선택된 정점의 집합 S를 구성. 단계를 넘어갈 때마다 집합 S가 하나씩 커짐
+   2. 각 Vertex 중 인접한 Vertex로 가는 가장 비용이 작은 값을 기록 (Relaxation)
+   3. 집합 S에 인접한 Vertex 중 가장 비용이 작은 Vertex를 집합 S에 포함 (Heap 사용하면 시간복잡도 줄일 수 있음)
+   4. 모든 정점을 선택할 때까지 반복
+
+   ```java
+   추후 알고리즘 구현 필요
+   ```
 
 ## Traveling Salesman Problem (TSP, 외판원 문제)
 

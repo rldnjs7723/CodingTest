@@ -49,3 +49,14 @@ BFS를 통해 현재 위치에서 나가는 방향이거나 현재 위치로 들
 
 전형적인 [Union Find (Disjoint Set)](https://github.com/rldnjs7723/CodingTest#union-find-disjoint-set) 문제.  
 Path Compression과 Rank를 이용한 Union을 통해 해결하면 수행 시간을 단축할 수 있다.
+
+## 5. BOJ_1197 최소 스패닝 트리 [(백준 링크)](https://www.acmicpc.net/problem/1197) [(소스 코드)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/1000/Main_1197.java)
+
+### 문제 요약
+
+그래프의 간선이 주어졌을 때 최소 신장 트리의 가중치 합을 계산하는 문제
+
+### 풀이 아이디어
+
+유명한 MST 문제.  
+[Kruskal 알고리즘](https://github.com/rldnjs7723/CodingTest#1-kruskal-%ED%81%AC%EB%A3%A8%EC%8A%A4%EC%B9%BC-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98)으로 푸는 경우 Union Find과 우선순위 큐를 기반으로 탐색을 수행할 수 있다.
