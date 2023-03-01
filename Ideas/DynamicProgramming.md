@@ -8,6 +8,7 @@
 4. [BOJ_11049 행렬 곱셈 순서](#4-boj_11049-행렬-곱셈-순서-백준-링크-소스-코드)
 5. [SWEA_1248 공통조상](#5-swea_1248-공통조상-swea-링크-소스-코드)
 6. [BOJ_15481 그래프와 MST](#6-boj_15481-그래프와-mst-백준-링크-소스-코드)
+7. [SWEA_1855 영준이의 진짜 BFS](#7-swea_1855-영준이의-진짜-bfs-swea-링크-소스-코드)
 
 ## 1. BOJ_10942 팰린드롬? [(백준 링크)](https://www.acmicpc.net/problem/10942) [(소스 코드)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/10000/Main_10942.java)
 
@@ -82,3 +83,15 @@ parent[i][j] = parent[parent[i][j - 1]][j - 1]
 크루스칼 알고리즘의 시간 복잡도는 |E| log |E|, |E|개의 간선에 대해 반복해야 하므로 단순 반복하면 E <= 200,000 이므로, 40,000,000,000번의 연산으로 시간 초과가 발생.  
 따라서 전체 간선을 통해 임의로 1번 노드를 루트로 하는 MST를 구성한 뒤, 두 노드 사이의 [최소 공통 조상 (LCA)](https://github.com/rldnjs7723/CodingTest#lowest-common-ancestor-lca-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98)을 찾아 조상 노드와 각 노드 사이에 위치한 간선들의 가중치 중에서 최댓값을 가지는 간선을 제거한 후 두 노드를 연결하는 간선을 추가하면 해결할 수 있다.  
 단순히 최소 공통 조상을 찾아 O(N)의 시간으로 처리하면 시간 초과가 뜰 것이라 예상했으나, Java의 경우 추가 시간으로 통과가 되었다. 이후 재채점을 통해 시간 초과가 발생한다면 각 공통 조상까지 가는 위치에 존재하는 모든 가중치 최댓값을 기록하는 방식으로 시간 복잡도를 줄일 수 있을 것이다.
+
+## 7. SWEA_1855 영준이의 진짜 BFS [(SWEA 링크)](https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV5LnipaDvwDFAXc) [(소스 코드)](https://github.com/rldnjs7723/CodingTest/blob/main/SWEA/1000/Solution_1855.java)
+
+### 문제 요약
+
+각 노드의 부모 노드가 주어졌을 때, 노드 번호의 크기가 작은 자식 먼저 탐색하는 BFS를 수행할 때 거치는 간선 개수를 카운트 하는 문제
+
+### 풀이 아이디어
+
+앞서 배운 LCA를 다이나믹 프로그래밍으로 구하는 알고리즘을 사용하면 쉽게 풀 수 있다.  
+`다만 노드의 개수가 이번 처럼 5,000개를 넘어가는 경우 Stack 메모리가 터질 수 있다는 점`  
+`LCA를 찾을 때 무조건 O(log N)의 시간 복잡도를 가지도록 탐색을 수행해야 한다는 점`을 주의해야 한다.

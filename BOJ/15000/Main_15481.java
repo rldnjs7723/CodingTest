@@ -70,7 +70,7 @@ public class Main_15481 {
 	}
 	
 	public static class Node {
-		int idx, depth, weight;
+		int idx, depth, weight, maxDepth;
 		// 조상 노드 다이나믹 프로그래밍으로 기록
 		Node[] parents;
 		Map<Integer, Integer> children;
@@ -97,7 +97,7 @@ public class Main_15481 {
 				// 현재 깊이는 부모 노드의 깊이 + 1
 				this.depth = parent.depth + 1;
 				
-				int maxDepth = log2(depth);
+				this.maxDepth = log2(depth);
 				for(int i = 1; i <= maxDepth; i++) {
 					// 현재 노드의 2^i 번째 조상은 2^i-1 번째 조상의 2^i-1 번째 조상
 					this.parents[i] = this.parents[i - 1].parents[i - 1];
@@ -166,10 +166,16 @@ public class Main_15481 {
 			}
 			
 			// 공통 조상 탐색
+			int next;
 			while(U != V) {
+				next = U.maxDepth;
+				while(U.parents[next] == V.parents[next]) {
+					if(next == 0) break;
+					next--;
+				}
 				
-				U = U.parents[0];
-				V = V.parents[0];
+				U = U.parents[next];
+				V = V.parents[next];
 			}
 			
 			return U;

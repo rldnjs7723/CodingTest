@@ -112,6 +112,7 @@
     2. [Lowest Common Ancestor (LCA) 알고리즘](#lowest-common-ancestor-lca-알고리즘)
 11. [String (문자열)](#string-문자열)
 12. [Union Find (Disjoint Set)](#union-find-disjoint-set)
+    1. [Flood Fill 알고리즘](#flood-fill-알고리즘)
 13. [Graph (그래프 탐색 알고리즘)](#graph-그래프-탐색-알고리즘)
     1. [Dijkstra (다익스트라 알고리즘)](#dijkstra-다익스트라-알고리즘)
     2. [Bellman-Ford (밸만-포드 알고리즘)](#bellman-ford-밸만-포드-알고리즘)
@@ -446,35 +447,57 @@
    P[i][j] = P[P[i][j - 1]][j - 1]
    ```
 3. 위 점화식 덕분에 Balanced Tree가 아니더라도 LCA를 O(log N) 시간에 찾는 것이 가능 (트리 구성에는 O(N) 시간 소요)
-4. 알고리즘 [(1248)](https://github.com/rldnjs7723/CodingTest/blob/main/SWEA/1000/Solution_1248.java)
+4. 알고리즘 [(1855)](https://github.com/rldnjs7723/CodingTest/blob/main/SWEA/1000/Solution_1855.java)
 
    1. depth 0부터 최대 depth까지 BFS 형태로 자기 자신의 조상에 대한 정보를 업데이트
 
    ```java
-   nodes[C].parent[0] = nodes[P];
+   nodes[child].parent[0] = parent;
    ```
 
+   다만 N이 클 경우 재귀로 구현하면 Stack 메모리가 터질 수 있으므로 반복문으로 구현하는 것을 권장한다.
+
    ```java
-   // 다이나믹 프로그래밍으로 2^i번 째 조상 미리 계산
-   int maxDepth = log2(this.depth);
-   for(int j = 1; j <= maxDepth; j++) {
-      // 현재 노드의 2^j 번째 조상은 2^j-1 번째 조상의 2^j-1 번째 조상
-      parent[j] = parent[j - 1].parent[j - 1];
+   public void updateStatus(Node[] nodes, Stack<Integer> stack) {
+      Node parentNode = nodes[parent[0]];
+      if(parentNode != null) {
+         // 현재 깊이는 부모 노드의 깊이 + 1
+         this.depth = parentNode.depth + 1;
+         this.maxDepth = log2(this.depth);
+
+         // DP로 조상 노드 정보 갱신
+         for(int i = 1; i <= maxDepth; i++) {
+            // 현재 노드의 2^i 번째 조상은 2^i-1 번째 조상의 2^i-1번째 조상
+            parent[i] = nodes[parent[i - 1]].parent[i - 1];
+         }
+      }
+
+      // 자식 노드 정렬 (자식 노드를 작은 번호부터 순서대로 탐색)
+      Collections.sort(children);
+
+      // 자식 노드들도 정보 갱신
+      for(int child: children) {
+         // N이 클 때 재귀로 구현하면 Stack 메모리가 터질 수 있음
+         stack.push(child);
+      }
    }
    ```
 
    2. 최소 공통 조상을 비교하려는 두 노드의 높이를 같게 설정
 
    ```java
-   // 두 노드의 깊이 맞추기
-   public static Node matchDepth(Node small, Node big, Tree tree) {
-   	int depthDiff;
-   	while(small.depth > big.depth) {
-   		depthDiff = log2(small.depth - big.depth);
-   		small = small.parent[depthDiff];
-   	}
-
-   	return small;
+   // 두 노드의 높이 맞추기
+   int depthDiff;
+   if(nodeA.depth >= nodeB.depth) {
+      while(nodeA.depth > nodeB.depth) {
+         depthDiff = log2(nodeA.depth - nodeB.depth);
+         nodeA = nodes[nodeA.parent[depthDiff]];
+      }
+   } else {
+      while(nodeA.depth < nodeB.depth) {
+         depthDiff = log2(nodeB.depth - nodeA.depth);
+         nodeB = nodes[nodeB.parent[depthDiff]];
+      }
    }
    ```
 
@@ -482,11 +505,18 @@
 
    ```java
    // 공통 조상 찾기
-   while(small.parent[0] != big.parent[0]) {
-      small = small.parent[0];
-      big = big.parent[0];
+   int next;
+   while(nodeA != nodeB) {
+      next = nodeA.maxDepth;
+      // 부모가 같지 않을 때까지 최대 노드부터 탐색
+      while(nodeA.parent[next] == nodeB.parent[next]) {
+         if(next == 0) break;
+         next--;
+      }
+
+      nodeA = nodes[nodeA.parent[next]];
+      nodeB = nodes[nodeB.parent[next]];
    }
-   Node lca = small.parent[0];
    ```
 
 # String [(문자열)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/String.md)
@@ -532,6 +562,22 @@
          rootA.parent = rootB;
       }
    }
+   ```
+
+## Flood Fill 알고리즘
+
+1. 시작점으로부터 연결된 영역을 찾는 알고리즘
+2. 기존의 Union Find와 달리 모든 영역에서 루트 노드만을 가리키도록 설정해주면 된다. [(1868)](https://github.com/rldnjs7723/CodingTest/blob/main/SWEA/1000/Solution_1868.java)
+
+   ```java
+   // 시작점에서 새로운 객체 생성
+   disjointSet[row][col] = new Object();
+   // 연결된 영역에서 같은 객체를 가리키도록 설정
+   disjointSet[r][c] = disjointSet[row][col];
+   // 구역의 개수를 카운트 할 경우 Set에 넣어서 중복된 객체를 제거한 뒤
+   set.add(disjointSet[row][col]);
+   // Set에 남아 있는 개수가 전체 구역의 개수
+   System.out.println(set.size())
    ```
 
 # Graph [(그래프 탐색 알고리즘)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/Graph.md)
