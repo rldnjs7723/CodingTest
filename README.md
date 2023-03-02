@@ -725,7 +725,44 @@
    4. 모든 정점을 선택할 때까지 반복
 
    ```java
-   추후 알고리즘 구현 필요
+   // 프림 알고리즘으로 MST 가중치 합 계산
+   public long prim() {
+      long weight = 0;
+      // 시작 정점 가중치 0으로 설정
+      vertices[START].weight = 0;
+      // 우선 순위 큐로 최소 가중치 간선 체크
+      Queue<Edge> minEdge = new PriorityQueue<>();
+      minEdge.offer(new Edge(START, 0));
+      Edge curr;
+      Vertex currVertex, nextVertex;
+      int v, w;
+      while(!minEdge.isEmpty()) {
+         curr = minEdge.poll();
+         currVertex = vertices[curr.v];
+         // 이미 방문한 정점은 생략
+         if(currVertex.visited) continue;
+         // 정점 방문 체크
+         currVertex.visited = true;
+         // 가중치 추가
+         weight += curr.w;
+
+         for(Entry<Integer, Integer> edge: currVertex.edges.entrySet()) {
+            v = edge.getKey();
+            w = edge.getValue();
+            nextVertex = vertices[v];
+            // 이미 방문한 정점은 생략
+            if(nextVertex.visited) continue;
+
+            // 가중치 갱신
+            if(nextVertex.weight > w) {
+               nextVertex.weight = w;
+               minEdge.offer(new Edge(v, w));
+            }
+         }
+      }
+
+      return weight;
+   }
    ```
 
 ## Traveling Salesman Problem (TSP, 외판원 문제)

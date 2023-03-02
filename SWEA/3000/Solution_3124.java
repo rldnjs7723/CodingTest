@@ -1,13 +1,16 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
 /**
  * SWEA 3124 최소 스패닝 트리
- * 문제 분류: 크루스칼 알고리즘
+ * 문제 분류: 프림 알고리즘
  * @author Giwon
  */
 public class Solution_3124 {
@@ -18,6 +21,7 @@ public class Solution_3124 {
 		
 		final int T = Integer.parseInt(br.readLine().trim());
 		int V, E, A, B, C;
+		Graph graph;
 		for(int test_case = 1; test_case <= T; test_case++) {
 			st = new StringTokenizer(br.readLine());
 			// 정점 수
@@ -25,13 +29,7 @@ public class Solution_3124 {
 			// 간선 수
 			E = Integer.parseInt(st.nextToken());
 			
-			// MakeSet
-			DisjointSet[] set = new DisjointSet[V + 1];
-			for(int i = 1; i <= V; i++) {
-				set[i] = new DisjointSet();
-			}
-			// 간선 정렬을 위한 우선순위 큐
-			Queue<Edge> queue = new PriorityQueue<>();
+			graph = new Graph(V);
 			// 간선 입력
 			for(int i = 0; i < E; i++) {
 				st = new StringTokenizer(br.readLine());
@@ -39,81 +37,109 @@ public class Solution_3124 {
 				B = Integer.parseInt(st.nextToken());
 				C = Integer.parseInt(st.nextToken());
 				
-				queue.offer(new Edge(A, B, C));
+				graph.add(A, B, C);
 			}
 			
-			// 크루스칼 알고리즘으로 MST 탐색
-			System.out.println("#" + test_case + " " + Kruskal(set, queue));
+			// 프림 알고리즘으로 MST 탐색
+			System.out.println("#" + test_case + " " + graph.prim());
 		}
 		
 		br.close();
 	}
 	
-	public static long Kruskal(DisjointSet[] set, Queue<Edge> queue) {
-		long weight = 0;
-		Edge curr;
-		while(!queue.isEmpty()) {
-			// 최소 가중치인 간선을 선택
-			curr = queue.poll();
-			// 간선을 이루는 두 정점이 다른 집합인 경우에만 연결하고 가중치 추가
-			if(DisjointSet.UnionSet(set[curr.u], set[curr.v])) weight += curr.w;
-		}
+	// 간선
+	public static class Edge implements Comparable<Edge>{
+		int v, w;
 		
-		return weight;
-	}
-	
-	public static class Edge implements Comparable<Edge> {
-		int u, v, w;
-
-		public Edge(int u, int v, int w) {
-			this.u = u;
+		public Edge(int v, int w) {
 			this.v = v;
 			this.w = w;
 		}
-
-		// 가중치에 따라 오름차순으로 정렬
+		
+		// 가중치 기반으로 오름차순 정렬
 		@Override
 		public int compareTo(Edge o) {
 			return Integer.compare(this.w, o.w);
 		}
 	}
 	
-	public static class DisjointSet {
-		int rank;
-		DisjointSet parent;
+	// 정점
+	public static class Vertex {
+		int weight;
+		boolean visited;
+		Map<Integer, Integer> edges;
 		
-		// MakeSet
-		public DisjointSet() {
-			this.rank = 0;
-			this.parent = null;
+		public Vertex() {
+			this.weight = Integer.MAX_VALUE;
+			this.visited = false;
+			edges = new HashMap<>();
 		}
 		
-		// FindSet
-		public DisjointSet findSet() {
-			// 부모 노드가 없다면 자신이 루트 노드
-			if(this.parent == null) return this;
-			// Path Compression
-			this.parent = this.parent.findSet();
-			return this.parent;
+		public void add(int v, int w) {
+			// 중복되는 간선이 있다면 가중치 작은 값만 남기기
+			if(edges.containsKey(v)) edges.put(v, Math.min(edges.get(v), w));
+			else edges.put(v, w);
 		}
+	}
+	
+	public static class Graph {
+		// 프림 알고리즘 시작 정점 임의로 1로 설정
+		public static final int START = 1;
+		int V;
+		Vertex[] vertices;
 		
-		// UnionSet
-		public static boolean UnionSet(DisjointSet A, DisjointSet B) {
-			DisjointSet rootA = A.findSet();
-			DisjointSet rootB = B.findSet();
+		public Graph(int V) {
+			this.V = V;
+			this.vertices = new Vertex[V + 1];
 			
-			// 두 집합이 동일한 집합인 경우 합칠 수 없다.
-			if(rootA == rootB) return false;
-			
-			// Rank를 이용한 Union
-			if(rootA.rank >= rootB.rank) {
-				rootB.parent = rootA;
-				// 두 집합의 rank가 같은 경우에만 크기 증가
-				if(rootA.rank == rootB.rank) rootA.rank++;
-			} else {
-				rootA.parent = rootB;
+			for(int i = 1; i <= V; i++) {
+				vertices[i] = new Vertex();
 			}
-			return true;
+		}
+		
+		public void add(int u, int v, int w) {
+			// 무향 그래프
+			vertices[u].add(v, w);
+			vertices[v].add(u, w);
+		}
+		
+		// 프림 알고리즘으로 MST 가중치 합 계산
+		public long prim() {
+			long weight = 0;
+			// 시작 정점 가중치 0으로 설정
+			vertices[START].weight = 0;
+			// 우선 순위 큐로 최소 가중치 간선 체크
+			Queue<Edge> minEdge = new PriorityQueue<>();
+			minEdge.offer(new Edge(START, 0));
+			Edge curr;
+			Vertex currVertex, nextVertex;
+			int v, w;
+			while(!minEdge.isEmpty()) {
+				curr = minEdge.poll();
+				currVertex = vertices[curr.v];
+				// 이미 방문한 정점은 생략
+				if(currVertex.visited) continue;
+				// 정점 방문 체크
+				currVertex.visited = true;
+				// 가중치 추가
+				weight += curr.w;
+				
+				for(Entry<Integer, Integer> edge: currVertex.edges.entrySet()) {
+					v = edge.getKey();
+					w = edge.getValue();
+					nextVertex = vertices[v];
+					// 이미 방문한 정점은 생략
+					if(nextVertex.visited) continue;
+					
+					// 가중치 갱신
+					if(nextVertex.weight > w) {
+						nextVertex.weight = w;
+						minEdge.offer(new Edge(v, w));
+					}
+				}
+			}
+			
+			return weight;
 		}
 	}
 }

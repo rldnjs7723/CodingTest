@@ -5,6 +5,7 @@
 1. [BOJ_1753 최단 경로](#1-boj_1753-최단-경로-백준-링크-소스-코드)
 2. [BOJ_11779 최소비용 구하기 2](#2-boj_11779-최소비용-구하기-2-백준-링크-소스-코드)
 3. [BOJ_1238 파티](#3-boj_1238-파티-백준-링크-소스-코드)
+4. [SWEA_3124 최소 스패닝 트리](#4-swea_3124-최소-스패닝-트리-swea-링크-소스-코드)
 
 ## 1. BOJ_1753 최단 경로 [(백준 링크)](https://www.acmicpc.net/problem/1753) [(소스 코드)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/1000/Main_1753.java)
 
@@ -38,3 +39,15 @@
 한 마을에서 파티 마을로 가는 모든 최소 비용을 계산해야 한다고 생각하여 [Floyd-Warshall 알고리즘](https://github.com/rldnjs7723/CodingTest/#floyd-warshall-플로이드-워셜-알고리즘)을 사용하는 문제라고 생각하였다. 이렇게 풀어도 자바 기준으로 시간 초과가 발생하지는 않았으나,  
 플로이드-워셜 알고리즘의 경우 모든 마을에서 다른 모든 마을로 가는 최소 비용을 계산하는 것이기 때문에 실제 계산해야 하는 경우의 수 자체가 더 많아져 낭비가 된다.  
 이 경우, [Dijkstra 알고리즘](https://github.com/rldnjs7723/CodingTest/#dijkstra-다익스트라-알고리즘)을 여러 번 사용하는 것이 플로이드-워셜 알고리즘을 사용하는 것보다 더 빠르게 수행할 수 있다.
+
+## 4. SWEA_3124 최소 스패닝 트리 [(SWEA 링크)](https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV_mSnmKUckDFAWb) [(소스 코드)](https://github.com/rldnjs7723/CodingTest/blob/main/SWEA/3000/Solution_3124.java)
+
+### 문제 요약
+
+[Kruskal 알고리즘](https://github.com/rldnjs7723/CodingTest#1-kruskal-%ED%81%AC%EB%A3%A8%EC%8A%A4%EC%B9%BC-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98)에서 Rank를 이용한 Union, Path Compression을 적용한 Union Find로 크루스칼 알고리즘을 구현하거나,  
+[Prim 알고리즘](https://github.com/rldnjs7723/CodingTest#2-prim-%ED%94%84%EB%A6%BC-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98)에서 Heap을 이용하여 다음 최소 간선을 O(1)의 시간에 찾을 수 있도록 구현해야 하는 문제
+
+### 풀이 아이디어
+
+크루스칼 알고리즘은 백준에서 사용했기 때문에 학습을 위해 프림 알고리즘을 사용하여 구현.  
+`최소인 정점을 우선순위 큐에 넣으면 값이 변했을 때 큐가 깨지기 때문에 최소인 간선을 넣어야 한다. Dijkstra 알고리즘도 동일하여 이번 기회에 수정하였다.`
