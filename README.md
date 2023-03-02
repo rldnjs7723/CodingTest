@@ -16,6 +16,17 @@
 1. Ctrl + F11: 실행
 2. Ctrl + Space: 자동완성.
 3. sysout 입력 후 Ctrl + Space를 누르면 System.out.println()이 입력 [(2558)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/2000/Main_2558.java)
+4. 디버거
+   1. 디버거 설정
+      1. Preferences -> Java -> Debug -> Detail Formatters
+         -> 하단의 Show variable details에서 As the label for all variables 체크
+      2. Preferences -> Java -> Debug -> Step Filtering
+         -> Use Step Filters 체크 후 하단의 Defined step filters 전부 체크
+   2. 디버거 조작법
+      1. F11 누르면 디버그 모드 실행.
+      2. F6 누르면 다음 라인 실행
+      3. F8 누르면 끝까지 실행
+      4. 코드 줄 왼쪽을 클릭해서 원이 생기면 breakpoint 생성된 것
 
 ## 자바 기본
 
@@ -599,19 +610,45 @@
    3. 방문하지 않은 정점 중 가장 가중치 값이 작은 정점 선택
    4. 해당 노드를 거쳐 다른 정점까지 도달하는 가중치 최솟값 갱신
    5. 3 ~ 4번을 더 이상 방문 할 정점이 없을 때까지 반복
+   6. `종료 정점 하나만 최단 경로를 구해야 하는 경우, 중간에 해당 정점에 도착했을 때 break 하도록 하면 시간을 단축할 수 있다.`
 
    ```java
-   // 가중치 최솟값을 가지는 정점을 빠르게 구하기 위한 우선순위 큐
-   PriorityQueue<Vertex> queue = new PriorityQueue<>();
-   // 시작 정점은 가중치 0
-   graph[K].weight = 0;
-   queue.offer(graph[K]);
-   Vertex curr;
-   while(!queue.isEmpty()) {
-      // 가장 가중치가 작은 정점에서 가중치 갱신
-      curr = queue.poll();
-      // 가중치를 갱신한 정점은 우선순위 큐에 넣어서 이후에 해당 정점을 기준으로 다른 정점 가중치 갱신하기
-      curr.updateWeight(graph, queue);
+   // 시작점과 다른 모든 정점 사이의 최단 경로 가중치를 다익스트라 알고리즘으로 계산
+   public void dijkstra(int start) {
+      // 최소 가중치 간선을 구하기 위한 우선순위 큐
+      Queue<Edge> minEdge = new PriorityQueue<>();
+      // 시작 정점 가중치 0으로 초기화
+      vertices[start].w = 0;
+      minEdge.offer(new Edge(start, 0));
+      Edge curr;
+      Vertex currV, nextV;
+      int v, w;
+      while(!minEdge.isEmpty()) {
+         curr = minEdge.poll();
+         currV = vertices[curr.v];
+         // 이미 방문한 정점은 생략
+         if(currV.visited) continue;
+         // 방문 체크
+         currV.visited = true;
+
+         // 다른 정점의 가중치 갱신
+         for(Entry<Integer, Integer> edge: currV.edges.entrySet()) {
+            // 간선의 종점
+            v = edge.getKey();
+            // 간선의 가중치
+            w = edge.getValue();
+            // 다음 정점
+            nextV = vertices[v];
+            // 이미 방문한 정점은 생략
+            if(nextV.visited) continue;
+
+            // 가중치 갱신
+            if(nextV.w > currV.w + w) {
+               nextV.w = currV.w + w;
+               minEdge.offer(new Edge(v, nextV.w));
+            }
+         }
+      }
    }
    ```
 

@@ -1,4 +1,5 @@
 /bin/
+/res/
 *.class
 .project
 .classpath
