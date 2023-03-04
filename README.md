@@ -67,6 +67,8 @@
 
 ## 알면 도움되는 메서드 / 클래스 변수
 
+1. [Set 메서드](https://github.com/rldnjs7723/CodingTest#set-%EC%A7%91%ED%95%A9)
+
 ### Integer
 
 1. Integer.MAX_VALUE / MIN_VALUE : 정수의 최대, 최소 값
@@ -79,6 +81,14 @@
 2. Arrays.sort(). 배열을 정렬. 새로 정의한 클래스에 적용하려면 Comparable 인터페이스 구현 필요.  
    정렬할 배열의 범위를 지정할 수도 있음 sort(배열, 시작 idx, 끝 idx); (끝 idx 미포함) [(20366)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/20000/Main_20366.java)
 3. Arrays.binarySearch(). 이진 탐색으로 특정 값이 존재하는 (들어가야 하는) Index를 찾는 메서드 [(이진 탐색)](#binary-search-이진-탐색)
+
+### Math
+
+1. 버림: Math.floor()
+2. 올림: Math.ceil()
+3. 반올림: Math.rount()
+4. 절댓값: Math.abs()
+5. 최대/최소: Math.Max(a, b) | Math.min(a, b)
 
 # 알고리즘
 
@@ -105,11 +115,14 @@
    1. [Sliding Window (슬라이딩 윈도우)](#sliding-window-슬라이딩-윈도우)
 
 4. [Data Structure (자료 구조)](#data-structure-자료-구조)
+
    1. [Stack (스택)](#stack-스택)
    2. [Queue (큐)](#queue-큐)
    3. [Tree (트리)](#tree-트리)
    4. [Heap (힙)](#heap-힙)
-   5. [LinkedList (연결 리스트)](#linkedlist-연결-리스트)
+   5. [Set (집합)](#set-집합)
+   6. [LinkedList (연결 리스트)](#linkedlist-연결-리스트)
+
 5. [Bitmasking (비트마스킹)](#bitmasking-비트마스킹)
 6. [Greedy Algorithm (그리디 알고리즘)](#greedy-algorithm-그리디-알고리즘)
 7. [Divide and Conquer (분할 정복)](#divide-and-conquer-분할-정복)
@@ -122,10 +135,10 @@
 10. [Dynamic Programming (다이나믹 프로그래밍)](#dynamic-programming-다이나믹-프로그래밍)
     1. [Longest Common Subsequence (LCS)](#longest-common-subsequence-lcs-9252)
     2. [Lowest Common Ancestor (LCA) 알고리즘](#lowest-common-ancestor-lca-알고리즘)
-11. [String (문자열)](#string-문자열)
-12. [Union Find (Disjoint Set)](#union-find-disjoint-set)
+11. [Union Find (Disjoint Set)](#union-find-disjoint-set)
     1. [Flood Fill 알고리즘](#flood-fill-알고리즘)
-13. [Graph (그래프 탐색 알고리즘)](#graph-그래프-탐색-알고리즘)
+12. [Graph (그래프 탐색 알고리즘)](#graph-그래프-탐색-알고리즘)
+
     1. [Dijkstra (다익스트라 알고리즘)](#dijkstra-다익스트라-알고리즘)
     2. [Bellman-Ford (밸만-포드 알고리즘)](#bellman-ford-밸만-포드-알고리즘)
     3. [Floyd-Warshall (플로이드-워셜 알고리즘)](#floyd-warshall-플로이드-워셜-알고리즘)
@@ -135,6 +148,10 @@
     5. [Traveling Salesman Problem (TSP, 외판원 문제)](#traveling-salesman-problem-tsp-외판원-문제)
     6. [Topology Sort (위상 정렬)](#topology-sort-위상-정렬)
     7. [Strongly Connected Component (강한 결합 요소)](#strongly-connected-component-강한-결합-요소)
+
+13. [String (문자열)](#string-문자열)
+    1. [Trie (트라이)](#trie-트라이)
+14. [Segment Tree (세그먼트 트리)](#segment-tree-세그먼트-트리)
 
 # Math [(수학)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/Math.md)
 
@@ -309,6 +326,16 @@
    1. HashSet: O(1) 시간으로 참조하고 싶을 때 사용. 일반적으로 가장 많이 활용
    2. TreeSet: O(log N) 시간 복잡도를 가지지만, Set 내부의 값을 정렬된 상태로 유지하고 싶을 때 사용.  
       Comparable 인터페이스를 통해 compareTo 메서드를 Override 하면 사용자가 정의한 기준으로 정렬을 수행 [(5644)](https://github.com/rldnjs7723/CodingTest/blob/main/SWEA/5000/Solution_5644.java)
+4. 알면 유용한 메서드
+   1. 부분집합: .containsAll(집합) => 부분집합이라면 true
+   2. 교집합: .retainAll(집합) => 교집합을 리턴
+   3. 합집합: .addAll(집합) => 합집합을 리턴
+   4. 차집합: .removeAll(집합) => 차집합을 리턴
+   5. TreeSet 메서드
+      1. 가장 앞의 객체: treeSet.first()
+      2. 가장 뒤의 객체: treeSet.last()
+      3. 특정 객체보다 한 단계 작은 객체: treeSet.lower(객체)
+      4. 특정 객체보다 한 단계 큰 객체: treeSet.higher(객체)
 
 ## LinkedList (연결 리스트)
 
@@ -530,8 +557,6 @@
       nodeB = nodes[nodeB.parent[next]];
    }
    ```
-
-# String [(문자열)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/String.md)
 
 # Union Find [(Disjoint Set)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/UnionFind.md)
 
@@ -771,3 +796,9 @@
 ## Topology Sort (위상 정렬)
 
 ## Strongly Connected Component (강한 결합 요소)
+
+# String [(문자열)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/String.md)
+
+## Trie (트라이)
+
+# Segment Tree (세그먼트 트리)

@@ -4,22 +4,25 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Stack;
 
 /**
  * 백준 3025번 돌 던지기
- * 문제 분류: 구현, 시뮬레이션, 다이나믹 프로그래밍
+ * 문제 분류: 구현, 시뮬레이션, 스택, 메모이제이션
  * @author Giwon
  */
 public class Main_3025 {
 	public static final int BLANK = 0, WALL = 1, ROCK = 2;
-
+	public static final int UP = 0, LEFT = 1, RIGHT = -1;
+	public static int R, C;
+	
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		String input = br.readLine();
 		// 보드 행 크기
-		final int R = Integer.parseInt(input.split(" ")[0]);
+		R = Integer.parseInt(input.split(" ")[0]);
 		// 보드 열 크기
-		final int C = Integer.parseInt(input.split(" ")[1]);
+		C = Integer.parseInt(input.split(" ")[1]);
 		
 		// 각 열에서 가장 높은 위치 저장 (돌이 가장 먼저 떨어질 곳)
 		int[] highest = new int[C];
@@ -35,77 +38,68 @@ public class Main_3025 {
 			}
 		}
 		
-		// 현재 행, 열 위치에 도달했을 때 다음에 이동하게 될 위치를 기록
-		Coord[][] nextLocation = new Coord[R][C];
+		// 현재 열 위치에 도달했을 때 다음에 이동하게 될 위치를 기록
+		Location[] nextLocation = new Location[C];
+		for(int col = 0; col < C; col++) {
+			nextLocation[col] = new Location();
+			nextLocation[col].push(new Coord(highest[col], col, null));
+		}
 		
 		// 돌을 던진 횟수
 		int N = Integer.parseInt(br.readLine().trim());
 		
-		int row, col, idx;
-		Coord loc;
+		int row, col, startCol;
+		Coord curr;
 		for(int i = 0; i < N; i++) {
-			col = Integer.parseInt(br.readLine().trim()) - 1;
+			startCol = Integer.parseInt(br.readLine().trim()) - 1;
+			curr = nextLocation[startCol].peek();
+			
 			// 시작점 설정 (항상 제일 윗 칸이 비어있는 경우에만 돌을 던짐)
-			row = highest[col];
-			// 이전에 기록해둔 위치가 있다면 
-			if((loc = nextLocation[row][col]) != null) {
-				row = loc.row;
-				col = loc.col;
-			}
-			
-			
-			
-			
-			
-			
+			row = curr.row;
+			col = curr.col;
 			
 			while(true) {
 				// 1. 가장 아랫줄인 경우 멈추기
 				if(row == R - 1) {
 					state[row][col] = ROCK;
-					// 바위 쌓아서 높이 갱신
-					idx = Collections.binarySearch(highest[col], row);
-					if(idx < 0) idx = -(idx + 1);
-					// 해당 열의 부분 높이 증가
-					highest[col].set(idx, highest[col].get(idx) - 1);
+					// 스택 갱신
+					updateStack(row, col, state, nextLocation);
 					break;
 				}
 				// 1. 아랫칸이 벽인 경우 멈추기
 				if(state[row + 1][col] == WALL) {
 					state[row][col] = ROCK;
-					// 바위 쌓아서 높이 갱신
-					idx = Collections.binarySearch(highest[col], row);
-					if(idx < 0) idx = -(idx + 1);
-					// 해당 열의 부분 높이 증가
-					highest[col].set(idx, highest[col].get(idx) - 1);
+					// 스택 갱신
+					updateStack(row, col, state, nextLocation);
 					break;
 				}
 				
 				// 왼쪽과 왼쪽 아래 칸이 비어 있는 경우 왼쪽 아래로 이동
 				if(col > 0 && state[row][col - 1] == BLANK && state[row + 1][col - 1] == BLANK) {
 					col--;
-					idx = Collections.binarySearch(highest[col], row);
-					if(idx < 0) idx = -(idx + 1);
-					row = highest[col].get(idx) - 1;
+					// 아래가 벽이나 마지막이 아닐 때까지 내려가기
+					while(row < R - 1 && state[row + 1][col] != WALL) {
+						row++;
+					}
+					nextLocation[startCol].push(new Coord(row, col, nextLocation[startCol].peek()));
 					continue;
 				}
 				
 				// 오른쪽과 오른쪽 아래 칸이 비어 있는 경우 오른쪽 아래로 이동
 				if(col < C - 1 && state[row][col + 1] == BLANK && state[row + 1][col + 1] == BLANK) {
 					col++;
-					idx = Collections.binarySearch(highest[col], row);
-					if(idx < 0) idx = -(idx + 1);
-					row = highest[col].get(idx) - 1;
+					// 아래가 벽이나 마지막이 아닐 때까지 내려가기
+					while(row < R - 1 && state[row + 1][col] != WALL) {
+						row++;
+					}
+					nextLocation[startCol].push(new Coord(row, col, nextLocation[startCol].peek()));
 					continue;
 				}
 				
 				// 움직일 수 없다면 멈추기
 				state[row][col] = ROCK;
-				// 바위 쌓아서 높이 갱신
-				idx = Collections.binarySearch(highest[col], row);
-				if(idx < 0) idx = -(idx + 1);
-				// 해당 열의 부분 높이 증가
-				highest[col].set(idx, highest[col].get(idx) - 1);
+				// 스택 갱신
+				updateStack(row, col, state, nextLocation);
 				break;
 			}
 		}
@@ -114,15 +108,87 @@ public class Main_3025 {
 		br.close();
 	}
 	
-	public static class Coord {
-		int row, col;
-		Coord next, prev;
+	// 현재 행, 열 위치에 최종으로 들어오는 모든 열의 스택 갱신
+	public static void updateStack(int row, int col, int[][] state, Location[] nextLocation) {
+		// 현재 위치의 오른쪽이 돌인 경우
+		if(col < C - 1 && state[row][col + 1] == ROCK) {
+			// 현재 위치에 오른쪽으로 들어온 모든 열을 이전으로 롤백
+			for(int c = 0; c < C; c++) {
+				if(nextLocation[c].peek().isEqual(row, col, RIGHT)) {
+					nextLocation[c].pop();
+				}
+			}
+			
+			// 현재 위치에서 왼쪽으로 이동했을 경우도 고려
+			
+			
+		}
 		
-		public Coord(int row, int col) {
+		// TODO
+		// 현재 위치의 오른쪽이 벽이라면 더 이상 오른쪽으로 갈 수 없음?
+		// 이건 자동으로 처리가 되는가?
+		
+		
+		// 현재 위치의 왼쪽이 돌인 경우
+		if(col > 0 && state[row][col - 1] == ROCK) {
+			// 현재 위치에 왼쪽으로 들어온 모든 열을 이전으로 롤백
+			for(int c = 0; c < C; c++) {
+				if(nextLocation[c].peek().isEqual(row, col, LEFT)) {
+					nextLocation[c].pop();
+				}
+			}
+		}
+		
+		// 현재 위치에 최종으로 도달하는 모든 열의 행을 갱신
+		for(int c = 0; c < C; c++) {
+			if(nextLocation[c].peek().isEqual(row, col)) {
+				nextLocation[c].peek().row--;
+			}
+		}
+	}
+	
+	
+	@SuppressWarnings("serial")
+	public static class Location extends Stack<Coord>{}
+	
+	public static class Coord {
+		// 좌표 행, 열 위치
+		int row, col;
+		// 이전에 어떤 위치에서 왔는지 체크
+		Coord prev;
+		
+		public Coord(int row, int col, Coord prev) {
 			this.row = row;
 			this.col = col;
-			this.next = null;
-			this.prev = null;
+			this.prev = prev;
+		}
+		
+		// 이전에 어떤 방향에서 왔는지 리턴
+		public int getPrevDir() {
+			if(prev == null) return UP;
+			return this.col - prev.col;
+		}
+		
+		@Override
+		public String toString() {
+			return "[ row: " + row + " col: " + col + " ]";
+		}
+		
+		public boolean isEqual(int row, int col) {
+			return this.row == row && this.col == col;
+		}
+		
+		public boolean isEqual(Coord prev) {
+			return this.isEqual(prev.row, prev.col);
+		}
+		
+		public boolean isEqual(int row, int col, int dir) {
+			return this.row == row && this.col == col && this.getPrevDir() == dir;
+		}
+		
+		public boolean isEqual(int row, int col, Coord prev) {
+			if(this.prev == null) return false;
+			return this.row == row && this.col == col && this.prev.isEqual(prev);
 		}
 	}
 	
