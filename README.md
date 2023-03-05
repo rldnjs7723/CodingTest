@@ -11,6 +11,7 @@
 3. 소프트웨어 역량 평가 A형의 경우 기본적으로 확인하는 능력이 `조건을 치환하는 능력`.  
    주어진 조건 중에서 불필요한 내용은 생략하고, 주어진 조건을 시간 복잡도를 감소시킬 수 있는 형태로 표현하는 것이 중요하다. [(5644)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/DataStructure.md/#3-swea_5644-무선-충전-swea-링크-소스-코드) [(1767)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/Backtracking.md/#3-swea_1767-프로세서-연결하기-swea-링크-소스-코드)
 4. 재귀를 돌릴 때 깊이가 5000 이상으로 들어갈 것 같다면 Stack이 터질 수 있기 때문에, 이 경우 반복문으로 수정하는 것이 좋다. 특히, 기본 예제는 다 되는데 입력이 큰 예제에서 Segmentation Fault가 발생한다면 이를 의심하는 것이 좋다.
+5. 시간 초과나 틀렸습니다가 발생할 때, 놓친 조건이 없는지 다시 천천히 읽어 보자. 접근 자체가 틀렸다면 어차피 그 문제는 못 푼다.
 
 ## 이클립스 사용법
 
@@ -344,6 +345,7 @@
    2. ArrayList: 동적, 조회 O(1), 삽입/삭제 O(N)
    3. LinkedList: 동적, 조회 O(N), 삽입/삭제 O(1)
 2. 기본적으로 A형 알고리즘 문제를 풀 때는 ArrayList를 사용하는 것이 메모리, 시간적인 측면에서 더 좋은 결과를 가져옴.
+3. 리스트에 삽입, 삭제 연산을 여러 번 수행해야 할 경우 뒤 인덱스부터 수행하면 불필요한 처리 작업을 수행하지 않아도 된다.
 
 # Bitmasking [(비트마스킹)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/Bitmasking.md)
 
