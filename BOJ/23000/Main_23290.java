@@ -204,6 +204,20 @@ public class Main_23290 {
 		return target >= 0 && target < SIZE;
 	}
 	
+	// 중간 상태 출력
+	public static void printArr(Fish[][] state, int type) {
+		StringBuilder sb = new StringBuilder();
+		for(Fish[] inner: state) {
+			for(Fish fish: inner) {
+				if(type == 0) sb.append(fish.getAmount() + " ");
+				else sb.append(fish.getFinal() + " ");
+				
+			}
+			sb.append("\n");
+		}
+		System.out.println(sb.toString() + "-----------");
+	}
+	
 	public static class SharkMove implements Comparable<SharkMove> {
 		// 마지막 상어 위치
 		int row, col;
@@ -342,14 +356,14 @@ public class Main_23290 {
 					
 					// 다음 방향 탐색
 					d = nextDirection(d);
-					
 				} while (d != dir);
+				
 				
 				// 다음에 이동할 방향을 찾지 못 했다면 남은 모든 물고기도 방향을 찾지 못하는 경우
 				if(!success) {
 					// 제자리에 머무르기
 					for(int i = 0; i < 8; i++) {
-						this.temp[dir] = this.amount[dir]; 
+						this.temp[i] += this.amount[i]; 
 					}
 					return;
 				}
