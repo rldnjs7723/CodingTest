@@ -75,3 +75,14 @@
 
 기본적인 아이디어로는 [Bellman-Ford 알고리즘](https://github.com/rldnjs7723/CodingTest#bellman-ford-%EB%B0%B8%EB%A7%8C-%ED%8F%AC%EB%93%9C-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98)을 사용하여 음의 사이클이 존재하는지 확인만 할 수 있으면 된다.  
 다만, 음의 사이클이 존재할 때 해당 사이클이 도착 도시에 영향을 미칠 수 있는지 확인하기 위해 DFS로 연결 되어 있는지 확인하는 작업을 추가로 수행해야 한다.
+
+## 7. BOJ_1948 임계경로 [(백준 링크)](https://www.acmicpc.net/problem/1948) [(소스 코드)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/1000/Main_1948.java)
+
+### 문제 요약
+
+Directed Acyclic Graph (DAG)가 입력으로 주어질 때, 시작 정점에서 도착 정점으로 가는 최장 거리를 계산하고, 최장 경로를 이루는 모든 간선의 개수를 계산하는 문제
+
+### 풀이 아이디어
+
+[DAG에서의 최단 경로](https://github.com/rldnjs7723/CodingTest#topology-sort-%EC%9C%84%EC%83%81-%EC%A0%95%EB%A0%AC)를 구하는 알고리즘을 모르고 있었기에 공부를 하고 문제 풀이를 진행.  
+위상 정렬을 통해 DAG에서의 최장 거리를 각 정점에 계산한 뒤, 위상 정렬을 역순으로 수행하면서 해당 간선이 최장 경로를 이루는 간선인지 체크.

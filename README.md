@@ -146,7 +146,8 @@
     4. [Minimum Spanning Tree (최소 신장 트리)](#minimum-spanning-tree-최소-신장-트리)
        1. [Kruskal (크루스칼 알고리즘)](#1-kruskal-크루스칼-알고리즘)
        2. [Prim (프림 알고리즘)](#2-prim-프림-알고리즘)
-    5. [Topology Sort (위상 정렬)](#topology-sort-위상-정렬)
+    5. [Topological Sort (위상 정렬)](#topological-sort-위상-정렬)
+       1. [DAG에서의 최단 경로 (최장 경로)](#dag에서의-최단-경로-최장-경로)
     6. [Traveling Salesman Problem (TSP, 외판원 문제)](#traveling-salesman-problem-tsp-외판원-문제)
 
     7. [Strongly Connected Component (강한 결합 요소)](#strongly-connected-component-강한-결합-요소)
@@ -853,7 +854,7 @@
    }
    ```
 
-## Topology Sort (위상 정렬)
+## Topological Sort (위상 정렬)
 
 1. 그래프가 비순환 유향 그래프 (Directed Acyclic Graph, DAG)일 때 사용 가능
 2. 정점을 변의 방향을 거스르지 않도록 나열하는 것
@@ -896,6 +897,61 @@
       }
 
       return result;
+   }
+   ```
+
+### DAG에서의 최단 경로 (최장 경로)
+
+1. 기본적으로 그래프에서의 최장 경로를 구하는 문제는 NP-Hard로 정의 되지만, DAG에서는 위상 정렬을 통해 빠르게 계산할 수 있다. [(1948)]()
+2. 시간 복잡도: O(|V| + |E|)
+3. 알고리즘
+
+   1. 위상 정렬을 통해 주어진 DAG에 대해 위상 순서를 계산
+   2. 시작 정점의 비용을 0으로 두고, 나머지 정점의 비용은 무한으로 초기화
+   3. 시작 정점부터 시작하여 위상 순서대로 Relaxation을 수행
+
+   ```java
+   // 위상 정렬을 통해 시작 도시에서 각 도시까지의 최단 거리 계산
+   public void topologicalSort(int start) {
+      int u, v, cost;
+      // BFS로 위상 정렬 수행
+      Queue<Integer> sortedVertex = new ArrayDeque<>();
+      Queue<Integer> bfsQueue = new ArrayDeque<>();
+      bfsQueue.offer(start);
+      while(!bfsQueue.isEmpty()) {
+         u = bfsQueue.poll();
+         sortedVertex.offer(u);
+
+         // 진출 간선에 연결된 모든 정점에 대해 진입 간선 제거
+         for(int vertex: V[u].outgoing.keySet()) {
+            V[vertex].incomingCount--;
+            if(V[vertex].incomingCount == 0) bfsQueue.offer(vertex);
+         }
+      }
+
+      // 시작 정점 비용 0으로 초기화
+      V[start].cost = 0;
+      // 위상 정렬된 순서로 Relaxation 수행
+      while(!sortedVertex.isEmpty()) {
+         u = sortedVertex.poll();
+
+         for(Entry<Integer, Integer> entry: V[u].outgoing.entrySet()) {
+            v = entry.getKey();
+            cost = entry.getValue();
+
+            // Relaxation
+            V[v].cost = Math.min(V[v].cost, V[u].cost + cost);
+         }
+      }
+   }
+   ```
+
+   4. 최장 경로를 구하는 문제의 경우, 모든 간선의 가중치에 -1을 곱하여 음수로 만든 뒤 최단 거리를 구해서 모든 비용에 다시 -1을 곱해주면 빠르게 계산할 수 있다.
+
+   ```java
+   // 모든 정점의 비용 양수로 변환
+   for(u = 1; u <= N; u++) {
+      V[u].cost = -V[u].cost;
    }
    ```
 
