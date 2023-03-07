@@ -146,8 +146,9 @@
     4. [Minimum Spanning Tree (최소 신장 트리)](#minimum-spanning-tree-최소-신장-트리)
        1. [Kruskal (크루스칼 알고리즘)](#1-kruskal-크루스칼-알고리즘)
        2. [Prim (프림 알고리즘)](#2-prim-프림-알고리즘)
-    5. [Traveling Salesman Problem (TSP, 외판원 문제)](#traveling-salesman-problem-tsp-외판원-문제)
-    6. [Topology Sort (위상 정렬)](#topology-sort-위상-정렬)
+    5. [Topology Sort (위상 정렬)](#topology-sort-위상-정렬)
+    6. [Traveling Salesman Problem (TSP, 외판원 문제)](#traveling-salesman-problem-tsp-외판원-문제)
+
     7. [Strongly Connected Component (강한 결합 요소)](#strongly-connected-component-강한-결합-요소)
 
 13. [String (문자열)](#string-문자열)
@@ -631,7 +632,8 @@
 3. 위 2번 조건 때문에 가중치가 항상 양수인 경우에 사용하면 좋다.
 4. 가중치 값이 가장 작은 정점을 찾을 때 [우선순위 큐](#heap-힙)를 활용하면 더 빠르게 수행할 수 있다. [(1753)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/1000/Main_1753.java)
 5. 모든 정점에서 다른 정점으로 가는 최소 비용을 계산할 때, 일반적으로는 Dijkstra를 여러 번 사용하는 것이 Floyd-Warshall을 사용하는 것보다 빠르다. [(1238)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/1000/Main_1238.java)
-6. 알고리즘
+6. 시간 복잡도: θ(|E| log |V|)
+7. 알고리즘
 
    1. 출발 정점 이외의 나머지 정점은 가중치 무한으로 설정
    2. 출발 정점으로부터 다른 정점까지 도달하는 가중치 최솟값 갱신
@@ -681,6 +683,64 @@
    ```
 
 ## Bellman-Ford (밸만-포드 알고리즘)
+
+1. 문제의 조건에서 `음의 사이클을 가지고 있는지 여부`를 판단해야 하는 경우 사용하는 알고리즘
+2. 시간 복잡도: θ(|E||V|)
+3. 알고리즘
+
+   1. 시작 정점의 비용은 0, 다른 모든 정점의 비용은 무한으로 초기화
+   2. 모든 정점에 대해 비용 갱신하는 과정을 |V| - 1(정점 수 - 1)번만큼 반복.
+      이렇게 하면 |V| - 1개의 노드를 거쳐서 갈 때의 최소 비용이 각 정점에 저장
+   3. 중간에 갱신되는 정점이 없다면 갱신이 끝난 것.
+   4. |V| - 1개의 노드를 거쳐간 이후에도 갱신이 가능하다면 음의 사이클이 존재하는 경우.
+
+   ```java
+   // 시작 정점으로 돌아오는 음의 사이클이 존재하는지 확인
+   public boolean BellmanFord() {
+      // 간선이 존재하는 정점을 시작 정점으로 설정
+      int start = hasEdge();
+
+      // 각 정점 비용 초기화
+      initialize();
+      // 시작 정점 비용 0
+      if(start != -1) edges[start][COST] = 0;
+
+      int changed = 0;
+      for(int i = 0; i < N; i++) {
+         // 각 정점별로 비용 갱신 후 갱신된 정점의 개수 반환
+         changed = updateCost();
+         // 갱신된 정점이 없다면 갱신 완료
+         if(changed == 0) break;
+      }
+
+      // 전체 갱신 이후에도 계속 갱신이 가능하면 음의 사이클이 존재
+      changed = updateCost();
+      if(changed != 0) return true;
+      else return false;
+   }
+
+   // 각 정점별로 비용 갱신 후 갱신된 정점의 개수 반환
+   public int updateCost() {
+      int changed = 0;
+      int[] edge, curr;
+      for(int u = 1; u <= N; u++) {
+         edge = edges[u];
+
+         // 간선이 없다면 다음 정점으로 이동
+         if(edge[COUNT] == 0) continue;
+         // 각 정점에서 다른 정점으로 가는 비용 갱신
+         for(int v = 1; v <= N; v++) {
+            curr = edges[v];
+            if(curr[COST] > edges[u][v] + edge[COST]) {
+               curr[COST] = edges[u][v] + edge[COST];
+               changed++;
+            }
+         }
+      }
+
+      return changed;
+   }
+   ```
 
 ## Floyd-Warshall (플로이드-워셜 알고리즘)
 
@@ -793,9 +853,53 @@
    }
    ```
 
-## Traveling Salesman Problem (TSP, 외판원 문제)
-
 ## Topology Sort (위상 정렬)
+
+1. 그래프가 비순환 유향 그래프 (Directed Acyclic Graph, DAG)일 때 사용 가능
+2. 정점을 변의 방향을 거스르지 않도록 나열하는 것
+3. 시간 복잡도: θ(|V| + |E|) = θ(max(|V|, |E|))
+4. 진출, 진입 간선 삭제를 반대로 하면 Topological Order의 역순 형태로 나타낼 수 있다. [(1005)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/1000/Main_1005.java)
+5. 알고리즘
+
+   1. Incoming Edge (진입 간선): Vertex로 들어오는 Edge  
+      Outgoing Edge (진출 간선): Vertex에서 나가는 Edge
+   2. 시작 정점은 Incoming Edge가 없는 정점을 선택
+   3. 정점의 Outgoing Edge를 전부 삭제한 후 다음 정점을 선택
+
+   ```java
+   // 위상 정렬 수행
+   public Queue<Integer> topologicalSort() {
+      // 위상 정렬 결과
+      Queue<Integer> result = new ArrayDeque<>();
+
+      // 위상 정렬 시작점 탐색
+      Queue<Integer> sortQueue = new ArrayDeque<>();
+      for(int u = 1; u <= N; u++) {
+         // 진입 간선 수가 0인 경우.
+         if(V[u].incoming == 0) sortQueue.offer(u);
+      }
+      // DAG가 아니라면 위상 정렬은 불가능
+      if(sortQueue.isEmpty()) return null;
+
+      // 모든 정점을 포함할 때까지 위상 정렬 수행
+      int u;
+      while(!sortQueue.isEmpty()) {
+         u = sortQueue.poll();
+         result.offer(u);
+
+         for(int v: V[u].outgoing) {
+            // 현재 시작 정점을 진입 간선으로 가지는 경우 삭제
+            V[v].incoming--;
+            // 만약 방금 삭제한 간선이 마지막 진입 간선이면 정렬 큐에 포함
+            if(V[v].incoming == 0) sortQueue.offer(v);
+         }
+      }
+
+      return result;
+   }
+   ```
+
+## Traveling Salesman Problem (TSP, 외판원 문제)
 
 ## Strongly Connected Component (강한 결합 요소)
 
