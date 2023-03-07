@@ -84,5 +84,5 @@ Directed Acyclic Graph (DAG)가 입력으로 주어질 때, 시작 정점에서 
 
 ### 풀이 아이디어
 
-[DAG에서의 최단 경로](https://github.com/rldnjs7723/CodingTest#topology-sort-%EC%9C%84%EC%83%81-%EC%A0%95%EB%A0%AC)를 구하는 알고리즘을 모르고 있었기에 공부를 하고 문제 풀이를 진행.  
+[DAG에서의 최단 경로](https://github.com/rldnjs7723/CodingTest#dag%EC%97%90%EC%84%9C%EC%9D%98-%EC%B5%9C%EB%8B%A8-%EA%B2%BD%EB%A1%9C-%EC%B5%9C%EC%9E%A5-%EA%B2%BD%EB%A1%9C)를 구하는 알고리즘을 모르고 있었기에 공부를 하고 문제 풀이를 진행.  
 위상 정렬을 통해 DAG에서의 최장 거리를 각 정점에 계산한 뒤, 위상 정렬을 역순으로 수행하면서 해당 간선이 최장 경로를 이루는 간선인지 체크.
