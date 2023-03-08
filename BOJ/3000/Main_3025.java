@@ -3,7 +3,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Stack;
 
 /**
@@ -118,16 +117,7 @@ public class Main_3025 {
 					nextLocation[c].pop();
 				}
 			}
-			
-			// 현재 위치에서 왼쪽으로 이동했을 경우도 고려
-			
-			
 		}
-		
-		// TODO
-		// 현재 위치의 오른쪽이 벽이라면 더 이상 오른쪽으로 갈 수 없음?
-		// 이건 자동으로 처리가 되는가?
-		
 		
 		// 현재 위치의 왼쪽이 돌인 경우
 		if(col > 0 && state[row][col - 1] == ROCK) {
@@ -147,26 +137,34 @@ public class Main_3025 {
 		}
 	}
 	
-	
+//	
+//	public static class DisjointSet {
+//		Location prevLocation;
+//		DisjointSet parent;
+//		
+//		public DisjointSet() {
+//			
+//			this.parent = null;
+//		}
+//		
+//		// 
+//		public Location getLocation() {
+//			if(this.parent == null) return this.prevLocation;
+//			
+//			return this.parent.getLocation();
+//		}
+//	}
+//	
 	@SuppressWarnings("serial")
 	public static class Location extends Stack<Coord>{}
 	
 	public static class Coord {
 		// 좌표 행, 열 위치
 		int row, col;
-		// 이전에 어떤 위치에서 왔는지 체크
-		Coord prev;
 		
-		public Coord(int row, int col, Coord prev) {
+		public Coord(int row, int col) {
 			this.row = row;
 			this.col = col;
-			this.prev = prev;
-		}
-		
-		// 이전에 어떤 방향에서 왔는지 리턴
-		public int getPrevDir() {
-			if(prev == null) return UP;
-			return this.col - prev.col;
 		}
 		
 		@Override
@@ -182,14 +180,6 @@ public class Main_3025 {
 			return this.isEqual(prev.row, prev.col);
 		}
 		
-		public boolean isEqual(int row, int col, int dir) {
-			return this.row == row && this.col == col && this.getPrevDir() == dir;
-		}
-		
-		public boolean isEqual(int row, int col, Coord prev) {
-			if(this.prev == null) return false;
-			return this.row == row && this.col == col && this.prev.isEqual(prev);
-		}
 	}
 	
 	// 보드 출력
@@ -214,8 +204,4 @@ public class Main_3025 {
 		
 		System.out.print(sb.toString());
 	}
-	
-	// 각 열에서 벽이나 돌이 위치한 곳 기록
-	@SuppressWarnings("serial")
-	public static class WallRow extends ArrayList<Integer>{}
 }
