@@ -134,8 +134,11 @@
 8. [Backtracking (백트래킹)](#backtracking-백트래킹)
 9. [Recursive (재귀)](#recursive-재귀)
 10. [Dynamic Programming (다이나믹 프로그래밍)](#dynamic-programming-다이나믹-프로그래밍)
+
     1. [Longest Common Subsequence (LCS)](#longest-common-subsequence-lcs-9252)
     2. [Lowest Common Ancestor (LCA) 알고리즘](#lowest-common-ancestor-lca-알고리즘)
+    3. [Traveling Salesman Problem (TSP, 외판원 문제)](#traveling-salesman-problem-tsp-외판원-문제)
+
 11. [Union Find (Disjoint Set)](#union-find-disjoint-set)
     1. [Flood Fill 알고리즘](#flood-fill-알고리즘)
 12. [Graph (그래프 탐색 알고리즘)](#graph-그래프-탐색-알고리즘)
@@ -147,10 +150,10 @@
        1. [Kruskal (크루스칼 알고리즘)](#1-kruskal-크루스칼-알고리즘)
        2. [Prim (프림 알고리즘)](#2-prim-프림-알고리즘)
     5. [Topological Sort (위상 정렬)](#topological-sort-위상-정렬)
-       1. [DAG에서의 최단 경로 (최장 경로)](#dag에서의-최단-경로-최장-경로)
-    6. [Traveling Salesman Problem (TSP, 외판원 문제)](#traveling-salesman-problem-tsp-외판원-문제)
 
-    7. [Strongly Connected Component (강한 결합 요소)](#strongly-connected-component-강한-결합-요소)
+       1. [DAG에서의 최단 경로 (최장 경로)](#dag에서의-최단-경로-최장-경로)
+
+    6. [Strongly Connected Component (강한 결합 요소)](#strongly-connected-component-강한-결합-요소)
 
 13. [String (문자열)](#string-문자열)
     1. [Trie (트라이)](#trie-트라이)
@@ -483,7 +486,7 @@
 
 ## Lowest Common Ancestor (LCA) 알고리즘
 
-1. 트리에서 2차원 배열로 조상 노드를 저장하여 표현 (다이나믹 프로그래밍의 일종)
+1. 트리에서 2차원 배열로 조상 노드를 희소 배열에 저장하여 표현 (다이나믹 프로그래밍의 일종)
 2. 기본 점화식
    ```
    P[i][j] = (i노드의 2^j 번 째 조상)
@@ -559,6 +562,57 @@
 
       nodeA = nodes[nodeA.parent[next]];
       nodeB = nodes[nodeB.parent[next]];
+   }
+   ```
+
+## Traveling Salesman Problem (TSP, 외판원 문제)
+
+1. 비트필드를 이용한 다이나믹 프로그래밍을 사용하는 문제. 비트마스크를 통해 현재 위치에서 방문한 도시 상태를 저장하고, 아직 방문하지 않은 영역에 대한 최단 경로를 한 번만 탐색하도록 수행
+2. 구현 시 주의할 점
+   1. 이 문제는 최적의 Hamiltonian Cycle을 찾는 문제이므로 어떤 정점에서 출발하더라도 항상 최적해는 같게 나온다.
+   2. 다만, 현재 도시와 방문한 도시의 비트마스크에 따라 최적 거리가 다르게 나오기 때문에 각 도시별로 비트마스크를 따로 저장해줘야 한다.
+   3. 만약 모든 도시를 방문한 이후, 출발점으로 돌아갈 수 없는 경우에는 초기값으로 설정해준 INF 값과, 출발점으로 돌아갈 수 없다는 것을 나타내는 INVALID 값을 서로 다르게 설정해줘야 한다.  
+      그렇지 않다면 이후 출발점으로 돌아갈 수 없다는 것을 탐색했던 도시에서 INF 값이 저장되어 있는 것을 보고 반복적으로 탐색을 수행하기 때문에 시간 초과가 발생한다. [(참고)](https://chb2005.tistory.com/86)
+   4. 앞서 INVALID를 INF와 분리할 때는 Math.min으로 최솟값을 갱신했기 때문에 INVALID가 제대로 저장되도록 INF보다 작은 값으로 설정해줘야 한다. 다만 전체 비용보다는 반드시 커야 한다.
+3. 알고리즘
+
+   1. 점화식: tsp[curr][bitmask] = Math.min(tsp[curr][bitmask], dfs(i, next) + W[curr][i])
+   2. 현재 위치, 방문한 도시 상태에서 나머지 도시를 방문하는 최소 거리 = 다음 점으로 이동한 뒤, 다음 점에서 나머지 도시를 방문하는 최소 거리 + 다음 점까지의 비용
+   3. 시작 도시를 0번으로 고정한 뒤, 0번 도시에서 출발하여 Bottom-Top 형태로 구현
+   4. 최소 거리가 아닌, 최적 경로를 구하고 싶다면 최솟값을 갱신할 때 도시 Index를 기록하도록 수정.
+
+   ```java
+   // curr에서 시작했을 때, 다음 도시에서 남은 점을 방문하는 최소 거리 탐색
+   public static int dfs(int curr, int bitmask) {
+   	if(bitmask == FULL) {
+   		// 출발점으로 돌아오는 최소 비용 갱신
+
+   		// 출발점으로 돌아가지 못하는 경우
+   		if(W[curr][START] == INF) {
+   			tsp[curr][bitmask] = INVALID;
+   		} else {
+   			tsp[curr][bitmask] = W[curr][START];
+   		}
+   		return tsp[curr][bitmask];
+   	}
+
+   	// 이미 탐색을 수행했다면 생략
+   	if(tsp[curr][bitmask] != INF) return tsp[curr][bitmask];
+
+   	// 현재 위치에서 하나씩 더하며 탐색 수행
+   	int next;
+   	for(int i = 0; i < N; i++) {
+   		next = bitmask | (1 << i);
+   		// 이미 방문한 경우 생략
+   		if(next == bitmask) continue;
+   		// 다음 점까지 이동할 수 없다면 생략
+   		if(W[curr][i] == INF) continue;
+
+   		// 다음 점까지의 거리 + 다음 점에 방문하고 남은 점을 최적 경로로 돌았을 때의 거리가 최소가 되는 값 탐색
+   		tsp[curr][bitmask] = Math.min(tsp[curr][bitmask], dfs(i, next) + W[curr][i]);
+   	}
+
+   	return tsp[curr][bitmask];
    }
    ```
 
@@ -954,8 +1008,6 @@
       V[u].cost = -V[u].cost;
    }
    ```
-
-## Traveling Salesman Problem (TSP, 외판원 문제)
 
 ## Strongly Connected Component (강한 결합 요소)
 

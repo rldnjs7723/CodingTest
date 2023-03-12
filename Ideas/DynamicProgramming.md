@@ -9,6 +9,7 @@
 5. [SWEA_1248 공통조상](#5-swea_1248-공통조상-swea-링크-소스-코드)
 6. [BOJ_15481 그래프와 MST](#6-boj_15481-그래프와-mst-백준-링크-소스-코드)
 7. [SWEA_1855 영준이의 진짜 BFS](#7-swea_1855-영준이의-진짜-bfs-swea-링크-소스-코드)
+8. [BOJ_2098 외판원 순회](#8-boj_2098-외판원-순회-백준-링크-소스-코드)
 
 ## 1. BOJ_10942 팰린드롬? [(백준 링크)](https://www.acmicpc.net/problem/10942) [(소스 코드)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/10000/Main_10942.java)
 
@@ -95,3 +96,14 @@ parent[i][j] = parent[parent[i][j - 1]][j - 1]
 앞서 배운 LCA를 다이나믹 프로그래밍으로 구하는 알고리즘을 사용하면 쉽게 풀 수 있다.  
 `다만 노드의 개수가 이번 처럼 5,000개를 넘어가는 경우 Stack 메모리가 터질 수 있다는 점`  
 `LCA를 찾을 때 무조건 O(log N)의 시간 복잡도를 가지도록 탐색을 수행해야 한다는 점`을 주의해야 한다.
+
+## 8. BOJ_2098 외판원 순회 [(백준 링크)](https://www.acmicpc.net/problem/2098) [(소스 코드)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/2000/Main_2098.java)
+
+### 문제 요약
+
+NP-Hard로 잘 알려진 외판원 순회 문제. N <= 16인 범위에서 모든 도시를 방문하는 최소 거리를 계산한다.
+
+### 풀이 아이디어
+
+[Traveling Salesman Problem (TSP, 외판원 문제)](https://github.com/rldnjs7723/CodingTest#traveling-salesman-problem-tsp-%EC%99%B8%ED%8C%90%EC%9B%90-%EB%AC%B8%EC%A0%9C)에 문제 풀이 팁, 알고리즘 구현에 대해 설명하였다.  
+비트필드를 통한 다이나믹 프로그래밍 문제로, 시간 복잡도를 줄이기 위해 여러 기술이 들어가야 했다.

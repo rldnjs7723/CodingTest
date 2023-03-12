@@ -5,10 +5,10 @@ import java.util.StringTokenizer;
 
 /**
  * SWEA 14510번 나무 높이
- * 문제 분류: 구현, 그리디 알고리즘?, 정수론?
+ * 문제 분류: 구현, 그리디 알고리즘, 정수론
  * @author Giwon
  */
-public class SWEA_14510 {
+public class Solution_14510 {
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

@@ -12,7 +12,7 @@ import java.util.StringTokenizer;
  * 문제 분류: Flood Fill, 백트래킹, 완전 탐색
  * @author Giwon
  */
-class Solution_14596 {
+public class Solution_14596 {
 	private final static int CMD_INIT					= 1;
 	private final static int CMD_NUMBER_OF_CANDIDATE	= 2;
 	private final static int CMD_MAX_AREA				= 3;
