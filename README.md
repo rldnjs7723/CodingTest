@@ -100,6 +100,7 @@
 1. [Math (수학)](#math-수학)
 
    1. [Prime Number (소수)](#prime-number-소수)
+   2. [Modulo (나머지 연산)](#modulo-나머지-연산)
 
 2. [Brute Force (완전 탐색)](#brute-force-완전-탐색)
 
@@ -159,6 +160,8 @@
     1. [Trie (트라이)](#trie-트라이)
 14. [Segment Tree (세그먼트 트리)](#segment-tree-세그먼트-트리)
 
+15. [Sweeping (스위핑 알고리즘)](#sweeping-스위핑-알고리즘)
+
 # Math [(수학)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/Math.md)
 
 1. 일반적으로 수열이 주어졌을 때 규칙을 찾아서 계산 식으로 표현해야 하는 경우가 많다. [(9527)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/9000/Main_9527.java)
@@ -190,6 +193,27 @@
    	}
    }
    ```
+
+## Modulo [(나머지 연산)]
+
+다음 성질은 분할 정복을 통한 거듭 제곱 문제에서 자주 사용됨.
+
+1. 분배 법칙 [(1328)](https://www.acmicpc.net/problem/1328)  
+   나누기에 대해서는 성립하지 않는다.
+   ```
+   (a × b) % c = ((a % c) × (b % c)) % c
+   (a ± b) % c = ((a % c) ± (b % c)) % c
+   ```
+2. 페르마의 소정리 [(13172)](https://www.acmicpc.net/problem/13172)  
+   X가 소수일 때,  
+   $\frac{a}{b}$ mod X = (a × b<sup>-1</sup>) mod X  
+   b<sup>X - 2</sup> = b<sup>-1</sup> mod X
+3. 이항 계수 [(11401)](https://www.acmicpc.net/problem/11401)  
+   <sub>n</sub>C<sub>r</sub> = $\frac{n!}{r! × (n - r)!}$  
+   이항 계수의 나머지를 계산할 때, 나누기에 대해서는 분배 법칙이 성립하지 않기 때문에  
+   페르마의 소정리를 통해 (r! × (n - r)!)<sup>-1</sup>의 나머지를 계산하여  
+   ((n!) % X + (r! × (n - r)!)<sup>-1</sup> % X) % X를 계산하면  
+   <sub>n</sub>C<sub>r</sub>를 X로 나눈 나머지를 계산할 수 있다.
 
 # Brute Force [(완전 탐색)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/BruteForce.md)
 
@@ -574,7 +598,7 @@
    3. 만약 모든 도시를 방문한 이후, 출발점으로 돌아갈 수 없는 경우에는 초기값으로 설정해준 INF 값과, 출발점으로 돌아갈 수 없다는 것을 나타내는 INVALID 값을 서로 다르게 설정해줘야 한다.  
       그렇지 않다면 이후 출발점으로 돌아갈 수 없다는 것을 탐색했던 도시에서 INF 값이 저장되어 있는 것을 보고 반복적으로 탐색을 수행하기 때문에 시간 초과가 발생한다. [(참고)](https://chb2005.tistory.com/86)
    4. 앞서 INVALID를 INF와 분리할 때는 Math.min으로 최솟값을 갱신했기 때문에 INVALID가 제대로 저장되도록 INF보다 작은 값으로 설정해줘야 한다. 다만 전체 비용보다는 반드시 커야 한다.
-3. 알고리즘
+3. 알고리즘 [(2098)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/2000/Main_2098.java)
 
    1. 점화식: tsp[curr][bitmask] = Math.min(tsp[curr][bitmask], dfs(i, next) + W[curr][i])
    2. 현재 위치, 방문한 도시 상태에서 나머지 도시를 방문하는 최소 거리 = 다음 점으로 이동한 뒤, 다음 점에서 나머지 도시를 방문하는 최소 거리 + 다음 점까지의 비용
@@ -1016,3 +1040,5 @@
 ## Trie (트라이)
 
 # Segment Tree (세그먼트 트리)
+
+# Sweeping (스위핑 알고리즘)
