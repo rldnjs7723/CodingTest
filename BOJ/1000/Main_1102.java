@@ -50,6 +50,13 @@ public class Main_1102 {
 		// 켜야 하는 발전소 최소 개수
 		P = Integer.parseInt(br.readLine().trim());
 		
+		// 이미 켜져 있는 발전소의 개수가 더 많다면 비용 0
+		if(checkCount(bitmask) >= P) {
+			System.out.println(0);
+			br.close();
+			return;
+		}
+		
 		// 시작 비용 무한으로 초기화
 		TSP = new int[N][SIZE];
 		for(int i = 0; i < N; i++) {
@@ -60,13 +67,13 @@ public class Main_1102 {
 		for(int i = 0; i < N; i++) {
 			if((bitmask & (1 << i)) > 0) {
 				// 켜져 있는 발전소에서 출발
-				doTSP(i, bitmask);
+				doTSP(i, bitmask, 1 << i);
 				min = Math.min(min, TSP[i][bitmask]);
 			}
 		}
 		
 //		printArr(TSP);
-		System.out.println(min == INF && P > 0 ? -1 : min);
+		System.out.println(min == INF ? -1 : min);
 		br.close();
 	}
 
@@ -82,7 +89,7 @@ public class Main_1102 {
 	}
 	
 	// TSP 문제 풀이
-	public static int doTSP(int curr, int bitmask) {
+	public static int doTSP(int curr, int bitmask, int visited) {
 		// 켜야 하는 발전소 수를 달성했다면 0리턴
 		if(checkCount(bitmask) >= P) {
 			TSP[curr][bitmask] = 0;
@@ -93,16 +100,23 @@ public class Main_1102 {
 		// 이미 탐색했었다면 결과 리턴
 		if(TSP[curr][bitmask] != INF) return TSP[curr][bitmask];
 		
-		int next;
+		int next, nextVisit;
 		for(int i = 0; i < N; i++) {
 			next = bitmask | (1 << i);
+			nextVisit = visited | (1 << i);
 			// 이미 방문한 발전소는 생략
-			if(next == bitmask) continue;
+			if(nextVisit == visited) continue;
 			
 			// 현재 발전소에서 나머지 발전소를 켜는 최소 비용 갱신
-			TSP[curr][bitmask] = Math.min(TSP[curr][bitmask], doTSP(i, next) + COST[curr][i]);
+			if(next == bitmask) {
+				// 이미 켜져 있는 발전소는 비용 없음
+				TSP[curr][bitmask] = Math.min(TSP[curr][bitmask], doTSP(i, next, nextVisit));
+			} else {
+				TSP[curr][bitmask] = Math.min(TSP[curr][bitmask], doTSP(i, next, nextVisit) + COST[curr][i]);
+			}
+			
 			// 현재 발전소로 되돌아 오는 경우 체크
-			TSP[curr][bitmask] = Math.min(TSP[curr][bitmask], doTSP(curr, next) + COST[curr][i]);
+			TSP[curr][bitmask] = Math.min(TSP[curr][bitmask], doTSP(curr, next, visited) + COST[curr][i]);
 		}
 		
 		return TSP[curr][bitmask];

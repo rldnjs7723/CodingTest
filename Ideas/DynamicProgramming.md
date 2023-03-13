@@ -107,3 +107,14 @@ NP-Hard로 잘 알려진 외판원 순회 문제. N <= 16인 범위에서 모든
 
 [Traveling Salesman Problem (TSP, 외판원 문제)](https://github.com/rldnjs7723/CodingTest#traveling-salesman-problem-tsp-%EC%99%B8%ED%8C%90%EC%9B%90-%EB%AC%B8%EC%A0%9C)에 문제 풀이 팁, 알고리즘 구현에 대해 설명하였다.  
 비트필드를 통한 다이나믹 프로그래밍 문제로, 시간 복잡도를 줄이기 위해 여러 기술이 들어가야 했다.
+
+## 9. BOJ_1102 발전소 [(백준 링크)](https://www.acmicpc.net/problem/1102) [(소스 코드)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/1000/Main_1102.java)
+
+### 문제 요약
+
+외판원 순회 문제와 비슷한 문제. 다만, 외판원 순회와 다르게 이미 체크된 영역으로 돌아갈 수 있으며 (자기 자신 포함), 그 때에는 비용이 0이다.
+
+### 풀이 아이디어
+
+[Traveling Salesman Problem (TSP, 외판원 문제)](https://github.com/rldnjs7723/CodingTest#traveling-salesman-problem-tsp-%EC%99%B8%ED%8C%90%EC%9B%90-%EB%AC%B8%EC%A0%9C)와 거의 비슷한 문제였기 때문에, 비트필드를 이용한 다이나믹 프로그래밍으로 푸는 문제이다.  
+다만, 발전소가 처음부터 켜져 있는 경우 이미 켜져있는 곳으로 돌아갈 수 있기 때문에 다시 돌아가는 코드를 작성해주고, 다이나믹 프로그래밍 자체는 발전소를 방문한 위치의 비트마스크로 수행해주면서 이미 방문한 발전소를 체크하는 비트마스크를 추가해야 한다.
