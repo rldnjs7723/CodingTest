@@ -122,7 +122,6 @@ public class Main_2042 {
 			// 오른쪽 자식 노드
 			long right = calculateSum(mid + 1, end, idx * 2 + 1, sumStart, sumEnd);
 			
-//			System.out.println(left.add(right));
 			return left + right;
 		}
 		
