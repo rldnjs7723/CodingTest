@@ -1116,6 +1116,54 @@
 
 ## Knuth-Morris-Pratt (KMP) Pattern Matching
 
+1. 문자열의 각 위치를 비교하면서 다른 문자열이 나왔다면, 이전까지 일치했던 부분으로 되돌아가 이어서 탐색하도록 하는 알고리즘
+2. 시간 복잡도: O(N + M)
+3. 알고리즘
+
+    1. 접두사 - 접미사의 최대 일치 길이 테이블 계산하기
+
+    ```java
+    // 접두사, 접미사 일치 길이 테이블 계산
+    public static int[] makeTable(String pattern) {
+    	int size = pattern.length();
+    	int[] table = new int[size];
+
+    	int j = 0;
+    	for(int i = 1; i < size; i++) {
+    		while(j > 0 && pattern.charAt(i) != pattern.charAt(j)) {
+    			j = table[j - 1];
+    		}
+
+    		if(pattern.charAt(i) == pattern.charAt(j)) {
+    			table[i] = ++j;
+    		}
+    	}
+
+    	return table;
+    }
+    ```
+
+    2. 테이블이 일치하지 않는다면 일치하는 부분까지 돌아가서 이어서 탐색 수행
+
+    ```java
+    for(int i = 0; i < size; i++) {
+      // 일치하는 부분까지 돌아가기
+      while(j > 0 && input.charAt(i) != pattern.charAt(j)) {
+         j = table[j - 1];
+      }
+
+      if(input.charAt(i) == pattern.charAt(j)) {
+         j++;
+         if(j == patternSize) {
+            j = table[j - 1];
+            sameIndex.add(i - patternSize + 1);
+         }
+      }
+    }
+    ```
+
 ## Trie (트라이)
 
 # Sweeping (스위핑 알고리즘)
+
+# Sorting (정렬 알고리즘)
