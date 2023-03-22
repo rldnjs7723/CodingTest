@@ -161,7 +161,8 @@
 14. [String (문자열)](#string-문자열)
 
     1. [Knuth-Morris-Pratt (KMP) Pattern Matching](#knuth-morris-pratt-kmp-pattern-matching)
-    2. [Trie (트라이)](#trie-트라이)
+    2. [Rabin-Karp Algorithm (라빈-카프 알고리즘)](#rabin-karp-algorithm-라빈-카프-알고리즘)
+    3. [Trie (트라이)](#trie-트라이)
 
 15. [Sweeping (스위핑 알고리즘)](#sweeping-스위핑-알고리즘)
 
@@ -1161,6 +1162,8 @@
       }
     }
     ```
+
+## Rabin-Karp Algorithm (라빈-카프 알고리즘)
 
 ## Trie (트라이)
 

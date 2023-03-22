@@ -16,32 +16,32 @@ public class Main_1725 {
 		final int N = Integer.parseInt(br.readLine().trim());
 		
 		Stack<Histogram> heights = new Stack<>();
-		int height, area;
+		int currHeight, area;
 		int max = 0;
 		Histogram temp;
 		for(int i = 0; i < N; i++) {
-			height = Integer.parseInt(br.readLine().trim());
+			currHeight = Integer.parseInt(br.readLine().trim());
 			if(heights.isEmpty()) {
-				heights.push(new Histogram(i, height));
+				heights.push(new Histogram(i, currHeight));
 				continue;
 			}
 			
 			
 			// 현재 막대의 높이가 가장 높은 경우
-			if(heights.peek().height < height) {
-				heights.push(new Histogram(i, height));
+			if(heights.peek().height < currHeight) {
+				heights.push(new Histogram(i, currHeight));
 				continue;
 			} 
 			
 			// 현재 막대의 높이가 이전보다 작은 경우
-			while(heights.peek().height > height) {
+			while(heights.peek().height > currHeight) {
 				temp = heights.pop();
 				// 최대 넓이 갱신
 				area = temp.height * (i - temp.idx);
 				max = Math.max(max, area);
 				
-				if(heights.isEmpty() || heights.peek().height < height) {
-					heights.push(new Histogram(temp.idx, height));
+				if(heights.isEmpty() || heights.peek().height < currHeight) {
+					heights.push(new Histogram(temp.idx, currHeight));
 					break;
 				}
 			}
