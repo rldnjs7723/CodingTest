@@ -12,7 +12,7 @@ import java.util.StringTokenizer;
 
 /**
  * 백준 20188번 등산 마니아
- * 문제 분류: 다이나믹 프로그래밍
+ * 문제 분류: 다이나믹 프로그래밍, 자료구조(트리)
  * @author Giwon
  */
 public class Main_20188 {
@@ -188,6 +188,7 @@ public class Main_20188 {
             	result += nodes[i].totalEdgeCount;
             }
             
+            // i < j인 경우만 체크를 해야 하므로 2로 나누기
             return result / 2;
         }
         
