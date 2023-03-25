@@ -4,6 +4,7 @@
 
 1. [BOJ_1799 비숍](#1-boj_1799-비숍-백준-링크-소스-코드)
 2. [BOJ_1992 쿼드트리](#2-boj_1992-쿼드트리-백준-링크-소스-코드)
+3. [SWEA_13736 사탕 분배](#3-swea_13736-사탕-분배-swea-링크-소스-코드)
 
 ## 1. BOJ_1799 비숍 [(백준 링크)](https://www.acmicpc.net/problem/1799) [(소스 코드)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/1000/Main_1799.java)
 
@@ -26,3 +27,13 @@
 ### 풀이 아이디어
 
 강의에서 봤던 예제와 동일한 문제. 현재 모든 값이 1이나 0이 아닌 경우 동일한 크기의 배열 4개로 분할하여 z 형태로 문자열을 이어 붙임
+
+## 3. SWEA_13736 사탕 분배 [(SWEA 링크)](https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AX8BB5d6T7gDFARO) [(소스 코드)](https://github.com/rldnjs7723/CodingTest/blob/main/SWEA/13000/Solution_13736.java)
+
+### 문제 요약
+
+사탕의 개수 A, B가 주어지고, 해당 사탕의 분배 횟수 K가 주어졌을 때 사탕의 개수가 많은 쪽에서 작은 쪽으로 작은 쪽의 사탕의 개수만큼 분배한 뒤 최종적으로 더 작은 개수의 사탕 수를 출력하는 문제.
+
+### 풀이 아이디어
+
+작은 사탕의 개수는 P, 2P, 4P, 8P... 의 순서로 계속 증가하는데 만약 전체 사탕의 개수보다 커졌다면 전체 사탕의 개수로 나눈 나머지와 결과가 동일하다는 성질을 발견하였기에 [분할 정복을 이용한 거듭제곱](https://github.com/rldnjs7723/CodingTest#분할-정복을-이용한-거듭제곱)으로 문제를 해결하였다.

@@ -200,7 +200,7 @@
 
 ## Modulo [(나머지 연산)]
 
-다음 성질은 분할 정복을 통한 거듭 제곱 문제에서 자주 사용됨.
+다음 성질은 [분할 정복을 이용한 거듭 제곱](#분할-정복을-이용한-거듭제곱) 문제에서 자주 사용됨.
 
 1. 분배 법칙 [(1328)](https://www.acmicpc.net/problem/1328)  
    나누기에 대해서는 성립하지 않는다.
@@ -411,6 +411,71 @@
     3. 통합: 필요하면 해결된 해답을 모음
 2.  시간 복잡도를 줄이기 위해 `현재의 문제를 크기가 작은 문제 여러 개로 분할하여 계산할 수 있는지 확인해볼 필요가 있다.` [(1799)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/1000/Main_1799.java)
 
+## 분할 정복을 이용한 거듭제곱
+
+1. base<sup>N</sup>의 계산을 O(log N) 시간에 수행하기 위한 방법
+2. 주로 [나머지 연산의 성질](#modulo-나머지-연산)을 이용하여 특정 수를 제곱한 뒤, 해당 수를 나눈 나머지를 계산하는 문제가 자주 출제된다.
+3. 알고리즘
+
+    1. 거듭제곱을 저장할 수 있도록 새로운 클래스를 하나 만들어주고, 이진 탐색에 사용하기 위해 Comparable 인터페이스도 구현한다.
+
+    ```java
+    // 거듭제곱 저장 클래스
+    public static class Exponent implements Comparable<Exponent> {
+    	long power;
+    	long val;
+
+    	public Exponent(long power, long val) {
+    		super();
+    		this.power = power;
+    		this.val = val;
+    	}
+
+    	@Override
+    	public int compareTo(Exponent o) {
+    		return Long.compare(this.power, o.power);
+    	}
+
+    	@Override
+    	public String toString() {
+    		return "Exponent [power=" + power + ", val=" + val + "]";
+    	}
+    }
+    ```
+
+    2. 거듭 제곱을 미리 계산하고, 나머지 연산의 성질을 이용하여 미리 나머지만 남긴다.
+
+    ```java
+    // 지수
+    long power = 1;
+    // 거듭 제곱 값
+    long val = 2;
+    // 거듭 제곱 미리 계산
+    TreeSet<Exponent> powDP = new TreeSet<>();
+    while(power <= K) {
+      powDP.add(new Exponent(power, val));
+      power *= 2;
+      val *= val;
+      val %= DIV;
+    }
+    ```
+
+    3. 곱하기 연산의 수행 횟수를 K라고 했을 때, K보다 작은 가장 큰 지수를 찾아 해당 지수의 거듭 제곱 결과를 곱한다. 이는 TreeSet의 floor 메서드를 통해 빠르게 찾을 수 있다.  
+       이후 거듭 제곱의 지수만큼 횟수를 차감한 뒤 연산을 반복한다.
+
+    ```java
+    Exponent curr;
+    while(K > 0) {
+      binarySearch.power = K;
+      curr = twoPow.floor(binarySearch);
+      // 결과 계산
+      result *= curr.val;
+      result %= DIV;
+      // 곱하기 연산 수행 횟수 차감
+      K -= curr.power;
+    }
+    ```
+
 ## Binary Search [(이진 탐색)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/BinarySearch.md)
 
 1. 자료의 가운데에 있는 항목의 키 값과 비교하여 다음 검색의 위치를 결정하고 검색을 계속 진행하는 방식
@@ -418,6 +483,8 @@
 3. 이진 탐색 도중에 다른 작업을 수행하지 않고, 특정 값이 위치할 Index를 찾으려고 한다면 Arrays.binarySearch() 메서드를 사용해도 된다.
     1. Arrays.binarySearch()에서 목표 값을 못 찾는 경우 해당 값이 위치해야 할 Index를 음수로 만든 후 -1을 더한다. (2번 인덱스에 있어야 했다면 -3을 반환)
     2. Arrays.binarySearch(배열, fromIndex, toIndex, key)로 범위 지정도 가능
+
+## Parametric Search [(매개 변수 탐색)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/BinarySearch.md)
 
 ## Longest Increasing Subsequence (LIS, 최장 증가 부분 수열) [(참고)](https://chanhuiseok.github.io/posts/algo-49/)
 
