@@ -328,6 +328,9 @@
 1. 선입 선출 구조 (FIFO, First In First Out): 가장 먼저 삽입된 원소는 가장 먼저 삭제
 2. Queue는 인터페이스로 구현되어 있고, 실제 사용할 때는 `ArrayDeque 클래스`를 사용하는 것이 속도 측면에서 좋음
 3. [BFS](#breadth-first-search-너비-우선-탐색) 구현에 자주 사용
+4. Deque의 경우 앞과 뒤 모두에서 삽입, 삭제가 가능한 자료구조.
+    1. deque.getFirst() / deque.getLast()로 값을 얻고,
+    2. deque.removeFirst() / deque.removeLast()로 값을 삭제
 
 ## Tree (트리)
 
