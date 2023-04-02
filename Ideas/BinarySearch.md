@@ -1,9 +1,10 @@
-# 이진 탐색 (이분 탐색) 알고리즘 문제 정리
+# 이분 탐색 (+ 파라미터 탐색) 알고리즘 문제 정리
 
 ## 목차
 
 1. [BOJ_2805 나무 자르기](#1-boj_2805-나무-자르기-백준-링크-소스-코드)
 2. [BOJ_12015 가장 긴 증가하는 부분 수열2](#2-boj_12015-가장-긴-증가하는-부분-수열2-백준-링크-소스-코드)
+3. [SWEA_10507 영어 공부](#3-swea_10507-영어-공부-swea-링크-소스-코드)
 
 ## 1. BOJ_2805 나무 자르기 [(백준 링크)](https://www.acmicpc.net/problem/2805) [(소스 코드)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/2000/Main_2805.java)
 
@@ -27,3 +28,13 @@ N <= 1000000 이므로 O(N log N)의 시간복잡도에서 충분히 잘 돌아�
 ### 풀이 아이디어
 
 14003 가장 긴 증가하는 부분 수열5 문제의 하위 호환. 길이만 구하면 되므로 쉬움
+
+## 3. SWEA_10507 영어 공부 [(SWEA 링크)](https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AXNQOb3avD0DFAXS) [(소스 코드)](https://github.com/rldnjs7723/CodingTest/blob/main/SWEA/10000/Solution_10507.java)
+
+### 문제 요약
+
+두 수 사이에 p개 만큼의 숫자를 추가할 수 있을 때, 1씩 증가하는 연속된 수열의 최대 길이를 구하는 문제
+
+### 풀이 아이디어
+
+파라미터 탐색을 통해 각 Index에서 다른 영어 공부를 한 날짜의 Index를 연결하기 위해 p에서 사용해야 하는 날짜의 개수를 먼저 계산한 뒤, 이분 탐색을 통해 연결할 때 사용한 날짜의 개수가 전체 p보다 작거나 같다면 더 큰수를 탐색하도록 파라미터 탐색을 수행하면 풀 수 있다.

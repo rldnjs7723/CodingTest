@@ -212,12 +212,19 @@
    X가 소수일 때,  
    $\frac{a}{b}$ mod X = (a × b<sup>-1</sup>) mod X  
    b<sup>X - 2</sup> = b<sup>-1</sup> mod X
-3. 이항 계수 [(11401)](https://www.acmicpc.net/problem/11401)  
-   <sub>n</sub>C<sub>r</sub> = $\frac{n!}{r! × (n - r)!}$  
-   이항 계수의 나머지를 계산할 때, 나누기에 대해서는 분배 법칙이 성립하지 않기 때문에  
-   페르마의 소정리를 통해 (r! × (n - r)!)<sup>-1</sup>의 나머지를 계산하여  
-   ((n!) % X + (r! × (n - r)!)<sup>-1</sup> % X) % X를 계산하면  
-   <sub>n</sub>C<sub>r</sub>를 X로 나눈 나머지를 계산할 수 있다.
+3. 이항 계수 [(11401)](https://www.acmicpc.net/problem/11401)
+
+    1. 페르마의 소정리를 이용한 계산  
+       <sub>n</sub>C<sub>r</sub> = $\frac{n!}{r! × (n - r)!}$  
+       이항 계수의 나머지를 계산할 때, 나누기에 대해서는 분배 법칙이 성립하지 않기 때문에  
+       페르마의 소정리를 통해 (r! × (n - r)!)<sup>-1</sup>의 나머지를 계산하여  
+       ((n!) % X + (r! × (n - r)!)<sup>-1</sup> % X) % X를 계산하면  
+       <sub>n</sub>C<sub>r</sub>를 X로 나눈 나머지를 계산할 수 있다.
+
+    2. 다이나믹 프로그래밍을 이용한 계산 [(1010)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/1000/Main_1010.java)  
+       r이 0이나 n일 때 <sub>n</sub>C<sub>r</sub> = 1  
+       나머지의 경우 <sub>n</sub>C<sub>r</sub> = <sub>n-1</sub>C<sub>r-1</sub> + <sub>n-1</sub>C<sub>r</sub>  
+       이러한 특성에 분배 법칙을 적용하여 계산할 수도 있다.
 
 # Brute Force [(완전 탐색)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/BruteForce.md)
 
