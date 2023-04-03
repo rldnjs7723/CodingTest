@@ -37,3 +37,14 @@
 ### 풀이 아이디어
 
 작은 사탕의 개수는 P, 2P, 4P, 8P... 의 순서로 계속 증가하는데 만약 전체 사탕의 개수보다 커졌다면 전체 사탕의 개수로 나눈 나머지와 결과가 동일하다는 성질을 발견하였기에 [분할 정복을 이용한 거듭제곱](https://github.com/rldnjs7723/CodingTest#분할-정복을-이용한-거듭제곱)으로 문제를 해결하였다.
+
+## 4. BOJ_7578 공장 [(백준 링크)](https://www.acmicpc.net/problem/7578) [(소스 코드)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/7000/Main_7578.java)
+
+### 문제 요약
+
+각 Index에 위치한 기계를 A, B에서 서로 다른 위치에 놓은 뒤 전선으로 연결했을 때 전선이 교차하는 부분의 개수를 세는 문제
+
+### 풀이 아이디어
+
+A의 위치에 B에서의 Index 값을 저장한 뒤, 각 Index 뒤에 위치한 수들 중에서 현재 값보다 작은 값의 개수를 세는 문제로 변환할 수 있으며, BOJ_10090 Counting Inversions [(백준 링크)](https://www.acmicpc.net/problem/10090) 문제로 나타낼 수 있다.  
+현재 값보다 작은 값의 개수를 셀 때 [Merge Sort](https://github.com/rldnjs7723/CodingTest#merge-sort-병합-정렬)를 수행하면서 왼쪽 배열의 원소 중 오른쪽에 위치한 배열의 원소보다 큰 값의 개수를 카운트해주면 문제를 해결할 수 있다.

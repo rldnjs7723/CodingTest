@@ -165,6 +165,8 @@
     3. [Trie (트라이)](#trie-트라이)
 
 15. [Sweeping (스위핑 알고리즘)](#sweeping-스위핑-알고리즘)
+16. [Sorting (정렬 알고리즘)](#sorting-정렬-알고리즘)
+    1. [Merge Sort (병합 정렬)](#merge-sort-병합-정렬)
 
 # Math [(수학)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/Math.md)
 
@@ -1247,3 +1249,62 @@
 # Sweeping (스위핑 알고리즘)
 
 # Sorting (정렬 알고리즘)
+
+## Merge Sort (병합 정렬)
+
+1. 분할 정복을 통해 배열을 정렬하는 방식. 시간 복잡도는 O(N log N)
+2. 알고리즘
+
+    1. 배열의 범위를 절반씩 나누면서 왼쪽, 오른쪽 배열을 재귀적으로 정렬
+    2. 양쪽의 배열을 정렬한 이후 두 배열을 합치면서 정렬
+
+    ```java
+    // 병합 정렬
+    public static long mergeSort(int start, int end, int[] arr) {
+       if(start == end) return 0;
+
+       int mid = start + (end - start) / 2;
+
+       // 왼쪽 배열
+       mergeSort(start, mid, arr);
+       // 오른쪽 배열
+       mergeSort(mid + 1, end, arr);
+
+       // 배열 합치기
+       merge(start, end, arr);
+    }
+    ```
+
+    3. 배열을 합칠 때는 왼쪽 배열과 오른쪽 배열의 Index에 위치한 값을 비교하며 더 작은 값을 결과 배열에 추가한 뒤 Index++을 수행한다.
+
+    ```java
+    public static void merge(int start, int end, int[] arr) {
+    	// 병합 정렬한 결과 저장할 배열
+    	int[] result = new int[end - start + 1];
+    	int mid = start + (end - start) / 2;
+
+    	// 병합
+    	int i = 0, j = 0;
+    	while(i + start <= mid && j + mid + 1 <= end) {
+    		if(arr[i + start] >= arr[j + mid + 1]) {
+    			result[i + j] = arr[j++ + mid + 1];
+    		} else {
+    			result[i + j] = arr[i++ + start];
+    		}
+    	}
+
+    	// 남은 부분 정렬
+    	while(i + start <= mid) {
+    		result[i + j] = arr[i++ + start];
+    	}
+    	while(j + mid + 1 <= end) {
+    		result[i + j] = arr[j++ + mid + 1];
+    	}
+
+    	// 병합 정렬한 결과 배열에 반영
+    	int len = end - start + 1;
+    	for(int k = 0; k < len; k++) {
+    		arr[start + k] = result[k];
+    	}
+    }
+    ```
