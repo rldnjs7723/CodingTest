@@ -5,6 +5,7 @@
 1. [BOJ_1799 비숍](#1-boj_1799-비숍-백준-링크-소스-코드)
 2. [BOJ_1992 쿼드트리](#2-boj_1992-쿼드트리-백준-링크-소스-코드)
 3. [SWEA_13736 사탕 분배](#3-swea_13736-사탕-분배-swea-링크-소스-코드)
+4. [BOJ_7578 공장](#4-boj_7578-공장-백준-링크-소스-코드)
 
 ## 1. BOJ_1799 비숍 [(백준 링크)](https://www.acmicpc.net/problem/1799) [(소스 코드)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/1000/Main_1799.java)
 
