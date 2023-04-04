@@ -162,7 +162,8 @@
 
     1. [Knuth-Morris-Pratt (KMP) Pattern Matching](#knuth-morris-pratt-kmp-pattern-matching)
     2. [Rabin-Karp Algorithm (라빈-카프 알고리즘)](#rabin-karp-algorithm-라빈-카프-알고리즘)
-    3. [Trie (트라이)](#trie-트라이)
+    3. [Boyer-Moore Algorithm (보이어-무어 알고리즘)](#boyer-moore-algorithm-보이어-무어-알고리즘)
+    4. [Trie (트라이)](#trie-트라이)
 
 15. [Sweeping (스위핑 알고리즘)](#sweeping-스위핑-알고리즘)
 16. [Sorting (정렬 알고리즘)](#sorting-정렬-알고리즘)
@@ -1243,6 +1244,24 @@
     ```
 
 ## Rabin-Karp Algorithm (라빈-카프 알고리즘)
+
+1. 문자열을 해싱한 뒤 해시 값으로 비교하는 알고리즘
+2. 최악의 경우 O(MN)이지만 평균적으로 O(N). 선형에 가까움
+3. 알고리즘
+
+    1. 해시 값을 계산할 때는 이전에 계산했던 해시 값을 재활용하여 Sliding Window 형태로 계산
+    2. 문자열 길이가 길어지는 경우 해시 값에 Modular 연산을 수행하여 일정 자리수로 맞춰준다.
+    3. 해시 값이 일치하더라도 실제 문자열이 일치하지 않을 수 있으므로 해시 값이 일치할 때 Brute Force로 일치하는 지 검사해야 한다.
+
+## Boyer-Moore Algorithm (보이어-무어 알고리즘)
+
+1. 패턴과 문자열을 비교할 때 불일치하는 부분이 있다면 패턴 내에 이동하는 해당 문자의 위치로 이동하는 알고리즘
+2. 최악의 경우 O(MN). 평균적으로 O(N)
+3. 알고리즘
+    1. 문자가 불일치 할 때 이동할 거리를 계산한 Skip 테이블 구성
+    2. 패턴을 비교할 때 오른쪽에서 왼쪽으로 비교
+    3. 문자가 불일치한다면 Skip 테이블에서의 이동 거리만큼 이동.
+    4. 마지막 문자가 아닌 중간에서 불일치가 발생한 경우 (Skip 테이블의 값 - 일치한 문자 개수) 만큼 이동
 
 ## Trie (트라이)
 
