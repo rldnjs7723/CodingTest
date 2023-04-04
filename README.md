@@ -129,7 +129,7 @@
 6. [Greedy Algorithm (그리디 알고리즘)](#greedy-algorithm-그리디-알고리즘)
 7. [Divide and Conquer (분할 정복)](#divide-and-conquer-분할-정복)
 
-    1. [Binary Search (이진 탐색)](#binary-search-이진-탐색)
+    1. [Binary Search (이분 탐색)](#binary-search-이분-탐색)
     2. [Longest Increasing Subsequence (LIS, 최장 증가 부분 수열)](#longest-increasing-subsequence-lis-최장-증가-부분-수열-참고)
 
 8. [Backtracking (백트래킹)](#backtracking-백트래킹)
@@ -489,13 +489,24 @@
     }
     ```
 
-## Binary Search [(이진 탐색)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/BinarySearch.md)
+## Binary Search [(이분 탐색)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/BinarySearch.md)
 
 1. 자료의 가운데에 있는 항목의 키 값과 비교하여 다음 검색의 위치를 결정하고 검색을 계속 진행하는 방식
 2. `자료가 정렬된 상태에서만 가능`
 3. 이진 탐색 도중에 다른 작업을 수행하지 않고, 특정 값이 위치할 Index를 찾으려고 한다면 Arrays.binarySearch() 메서드를 사용해도 된다.
     1. Arrays.binarySearch()에서 목표 값을 못 찾는 경우 해당 값이 위치해야 할 Index를 음수로 만든 후 -1을 더한다. (2번 인덱스에 있어야 했다면 -3을 반환)
     2. Arrays.binarySearch(배열, fromIndex, toIndex, key)로 범위 지정도 가능
+4. 이분 탐색 주의할 점
+    1. 이분 탐색을 구현 할 때 ==, >, <와 같이 3가지 경우로 나누기보다 >=, <와 같이 두 가지 경우로 나눠서 구현하여 생각하는 것이 좋은 사고 방식
+    2. 중간값을 계산할 때
+    ```
+    (start + end) / 2
+    ```
+    와 같이 계산하면 오버플로우가 발생할 수 있기 때문에
+    ```
+    start + (end - start) / 2
+    ```
+    처럼 계산하는 것이 좋다.
 
 ## Parametric Search [(매개 변수 탐색)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/BinarySearch.md)
 
