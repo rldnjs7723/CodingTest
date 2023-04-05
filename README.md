@@ -130,7 +130,8 @@
 7. [Divide and Conquer (분할 정복)](#divide-and-conquer-분할-정복)
 
     1. [Binary Search (이분 탐색)](#binary-search-이분-탐색)
-    2. [Longest Increasing Subsequence (LIS, 최장 증가 부분 수열)](#longest-increasing-subsequence-lis-최장-증가-부분-수열-참고)
+    2. [Parametric Search (매개 변수 탐색)](#parametric-search-매개-변수-탐색)
+    3. [Longest Increasing Subsequence (LIS, 최장 증가 부분 수열)](#longest-increasing-subsequence-lis-최장-증가-부분-수열-참고)
 
 8. [Backtracking (백트래킹)](#backtracking-백트래킹)
 9. [Recursive (재귀)](#recursive-재귀)
@@ -496,7 +497,7 @@
 3. 이진 탐색 도중에 다른 작업을 수행하지 않고, 특정 값이 위치할 Index를 찾으려고 한다면 Arrays.binarySearch() 메서드를 사용해도 된다.
     1. Arrays.binarySearch()에서 목표 값을 못 찾는 경우 해당 값이 위치해야 할 Index를 음수로 만든 후 -1을 더한다. (2번 인덱스에 있어야 했다면 -3을 반환)
     2. Arrays.binarySearch(배열, fromIndex, toIndex, key)로 범위 지정도 가능
-4. 이분 탐색 주의할 점
+4. 이분 탐색 팁
     1. 이분 탐색을 구현 할 때 ==, >, <와 같이 3가지 경우로 나누기보다 >=, <와 같이 두 가지 경우로 나눠서 구현하여 생각하는 것이 좋은 사고 방식
     2. 중간값을 계산할 때
     ```
@@ -506,9 +507,28 @@
     ```
     start + (end - start) / 2
     ```
-    처럼 계산하는 것이 좋다.
+    처럼 계산하는 것이 좋다.  
+    3. 중간값 별 다음 탐색 범위 설정
+    ```
+    start + (end - start) / 2
+    left의 end = mid
+    right의 start = mid + 1
+    ```
+    ```
+    start + (end - start) / 2 + 1
+    left의 end = mid - 1
+    right의 start = mid
+    ```
 
 ## Parametric Search [(매개 변수 탐색)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/BinarySearch.md)
+
+1. Binary Search (이분 탐색)가 일정 범위 내부에서 일정 조건을 만족하는 원소를 찾는 `최적화 문제`를 해결하는 알고리즘이라면, 이를 어떤 값이 조건을 만족하는 지 확인하는 `결정 문제`로 바꿔서 해결하는 방식이 Parametric Search (매개 변수 탐색)이다.
+2. 파라미터 탐색이 가능한 조건
+    ```
+    x1 < x2 일 때, f(x1) = true라면 f(x2)도 true인 경우
+    ```
+    이러한 조건을 만족하면 이분 탐색을 수행하는 것처럼 함수 값을 비교하면서 O(log N)으로 비교 횟수를 줄일 수 있다.  
+    즉, `이분 탐색 내부에서 함수를 적용하여 다음 분기를 결정하는 문제는 파라미터 탐색 방식으로 해결할 수 있다.`
 
 ## Longest Increasing Subsequence (LIS, 최장 증가 부분 수열) [(참고)](https://chanhuiseok.github.io/posts/algo-49/)
 
@@ -558,7 +578,7 @@
 2. 되돌아 갈 때 이전 상태를 반복하지 않도록 하는 장치와 현재 선택했던 상태를 지우는 방법을 구현해주어야 한다. [(1799)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/1000/Main_1799.java) [(2239)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/2000/Main_2239.java)
 3. DFS를 수행하면서 유망하지 않은 노드가 어떤 것인지 확실하게 판별해야 함. 완전탐색을 수행하면서 '시간 초과'나 '메모리 초과'가 아닌 '틀렸습니다'가 발생하는 경우 지금까지 당연히 맞다고 생각했던 조건을 다시 생각해볼 필요가 있음 [(6987)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/6000/Main_6987.java)
 
-# Recursive [(재귀)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/Recursive.md)
+# Recursive (재귀)
 
 1. 자신의 정의하는 내용 안에 자신을 포함하는 형태의 함수
 2. 주어진 문제의 해를 구하기 위해 `동일하면서 더 작은 문제(최적 부분 구조)`의 해를 이용하는 방법
