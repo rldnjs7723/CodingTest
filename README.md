@@ -170,11 +170,11 @@
 16. [Sorting (정렬 알고리즘)](#sorting-정렬-알고리즘)
     1. [Merge Sort (병합 정렬)](#merge-sort-병합-정렬)
 
-# Math [(수학)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/Math.md)
+# [Math](#목차) [(수학)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/Math.md)
 
 1. 일반적으로 수열이 주어졌을 때 규칙을 찾아서 계산 식으로 표현해야 하는 경우가 많다. [(9527)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/9000/Main_9527.java)
 
-## Prime Number [(소수)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/PrimeNumber.md)
+## [Prime Number](#목차) [(소수)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/PrimeNumber.md)
 
 1. N의 약수 중 가장 큰 것은 N/2보다 작거나 같음
 2. 숫자 N이 소수가 아니라면 root(N)을 기준으로 대칭 구조이므로 root(N)보다 작거나 같은 수로 나누어 떨어지면 소수가 아님
@@ -202,7 +202,7 @@
     }
     ```
 
-## Modulo [(나머지 연산)]
+## [Modulo (나머지 연산)](#목차)
 
 다음 성질은 [분할 정복을 이용한 거듭 제곱](#분할-정복을-이용한-거듭제곱) 문제에서 자주 사용됨.
 
@@ -230,7 +230,7 @@
        나머지의 경우 <sub>n</sub>C<sub>r</sub> = <sub>n-1</sub>C<sub>r-1</sub> + <sub>n-1</sub>C<sub>r</sub>  
        이러한 특성에 분배 법칙을 적용하여 계산할 수도 있다.
 
-# Brute Force [(완전 탐색)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/BruteForce.md)
+# [Brute Force](#목차) [(완전 탐색)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/BruteForce.md)
 
 1. 가능한 모든 경우의 수를 탐색하여 최적의 해를 찾는 방법. 시간이 많이 소요됨
 2. N의 수가 합리적으로 작은 경우에서 시도 가능. `시간 복잡도 계산 필수`
@@ -238,7 +238,7 @@
     1. 백트래킹 (가지치기): `확실하게` 아닌 경우만 탐색을 수행하지 않도록 해야 함
     2. 메모이제이션: 동일한 부분에서 연산을 반복하면 기존에 계산한 결과를 저장해두었다가 활용할 필요가 있음
 
-### Direction Search (사방 탐색)
+## [Direction Search (사방 탐색)](#목차)
 
 1. 2차원 배열 구조에서 왼쪽, 오른쪽, 위, 아래에 위치한 원소를 탐색하는 방식
 2. 왼쪽, 오른쪽, 위, 아래를 숫자로만 표현하면 혼란스럽기 때문에 실수를 방지하기 위해 다음과 같이 상수 선언해서 문제를 해결하는 것을 추천
@@ -255,27 +255,27 @@
     ```
 4. 방향에 따라 달라지는 값이 있다면 해당 값을 2번과 같이 미리 정의해두고 사용하면 시간도 적게 걸리고 덜 혼동 된다. [(15683)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/15000/Main_15683.java)
 
-### Depth First Search (깊이 우선 탐색)
+## [Depth First Search (깊이 우선 탐색)](#목차)
 
 1. [트리 구조](#tree-트리)에서 루트 노드부터 더 이상 자식 노드가 없을 때까지 한 방향으로(왼쪽 자식) 탐색하고, 이후에는 마지막에 만난 갈림길에서 다른 방향으로 탐색을 수행하는 방식
 2. 일반적으로 가장 마지막에 발견한 위치를 가장 먼저 탐색하기 때문에 후입 선출 구조인 [Stack](#stack-스택)을 활용하여 구현.
 3. 다만 [재귀](#recursive-재귀) 깊이가 너무 깊지 않은 경우 재귀로 구현했을 때의 속도가 더 빠르기 때문에 비트마스킹을 이용한 재귀로 구현하는 것을 추천 [(3234)](https://github.com/rldnjs7723/CodingTest/blob/main/SWEA/3000/Solution_3234.java)
 
-### Breadth First Search (너비 우선 탐색)
+## [Breadth First Search (너비 우선 탐색)](#목차)
 
 1. [트리 구조](#tree-트리)에서 루트 노드의 자식 노드를 먼저 방문한 후 방문한 자식 노드에서 자식 노드를 차례로 방문하는 방식
 2. 일반적으로 같은 높이에 위치한 노드를 먼저 탐색하려면 먼저 발견한 위치를 먼저 탐색해야 하기 때문에 선입 선출 구조인 [Queue](#queue-큐)를 활용해서 구현
 
-### Permutation (순열)
+## [Permutation (순열)](#목차)
 
 1. 가능한 모든 순서쌍에 대해 재귀나 Stack을 이용하여 DFS를 통한 완전 탐색을 수행
 
-### Combination (조합)
+## [Combination (조합)](#목차)
 
 1. 특정 원소의 선택 여부를 통해 부분 집합을 구성하는 문제로 자주 등장
 2. 완전 탐색으로 수행할 경우 선택 / 비선택의 경우로 시간 복잡도 O(2^N)
 
-## Next Permutation [(다음 순열)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/NextPermutation.md)
+## [Next Permutation](#목차) [(다음 순열)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/NextPermutation.md)
 
 1. 현 순열을 기준으로 사전 순으로 다음 순열 생성해주는 알고리즘
 2. 방문 체크를 수행하는 기존 순열보다 빠르지만, `nPn 문제에만 적용 가능`
@@ -316,25 +316,25 @@
     }
     ```
 
-# Two Pointers [(투포인터 알고리즘)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/TwoPointers.md)
+# [Two Pointers](#목차) [(투포인터 알고리즘)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/TwoPointers.md)
 
 1.  index 값을 가지는 i, j를 사용하여, 일정 조건에 따라 `i와 j를 증감 연산자로` 이동시켜 불필요한 경우의 수를 제거하는 알고리즘. [(16472)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/16000/Main_16472.java)
 2.  슬라이딩 윈도우와 비슷하지만, 구간의 너비가 가변적이라는 차이점이 존재. [(Two Pointers)](https://butter-shower.tistory.com/226)
 
-## Sliding Window (슬라이딩 윈도우)
+## [Sliding Window (슬라이딩 윈도우)](#목차)
 
 1.  고정 사이즈의 윈도우가 이동하면서 윈도우 내에 있는 데이터로 문제를 푸는 방식
 
-# Data Structure [(자료 구조)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/DataStructure.md)
+# [Data Structure](#목차) [(자료 구조)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/DataStructure.md)
 
 1. 스택, 큐, 트리, 힙, 리스트와 같은 기본적인 자료 구조는 직접 구현할 수 있어야 B형 문제 풀이를 대비할 수 있음 [(13072)](https://github.com/rldnjs7723/CodingTest/blob/main/SWEA/13000/Solution_13072.java)
 
-## Stack (스택)
+## [Stack (스택)](#목차)
 
 1. 후입 선출 구조 (LIFO, Last-In-First-Out): 마지막에 삽입한 자료를 가장 먼저 꺼냄
 2. [DFS](#depth-first-search-깊이-우선-탐색) 구현에 자주 사용
 
-## Queue (큐)
+## [Queue (큐)](#목차)
 
 1. 선입 선출 구조 (FIFO, First In First Out): 가장 먼저 삽입된 원소는 가장 먼저 삭제
 2. Queue는 인터페이스로 구현되어 있고, 실제 사용할 때는 `ArrayDeque 클래스`를 사용하는 것이 속도 측면에서 좋음
@@ -343,7 +343,7 @@
     1. deque.getFirst() / deque.getLast()로 값을 얻고,
     2. deque.removeFirst() / deque.removeLast()로 값을 삭제
 
-## Tree (트리)
+## [Tree (트리)](#목차)
 
 1. 정의: 모든 정점 사이에 경로가 존재하고 / |E| = |V| – 1인 그래프
 2. 특징: 위 정의에 따라 사이클이 존재하지 않는 특징을 가짐
@@ -356,7 +356,7 @@
     2. 중위 순회: 왼쪽 자식 -> 부모 노드 -> 오른쪽 자식 순으로 방문
     3. 후위 순회: 왼쪽 자식 -> 오른쪽 자식 -> 부모 노드 순으로 방문
 
-## Heap (힙)
+## [Heap (힙)](#목차)
 
 1. 완전 이진 트리 중 자식 노드가 부모 노드보다 작은(최대 힙) / 큰(최소 힙) 조건을 만족하는 트리
 2. 일반적으로 최댓값, 최솟값을 빠르게 O(log N) 시간 안에 찾기 위해 사용하는 자료 구조
@@ -366,7 +366,7 @@
     2. 최대힙: PrioirtyQueue(Collections.reverseOrder())
 5. 원하는 객체 중에서 정렬 조건을 만족했을 때 가장 앞에 나오는 객체를 고르고 싶다면 Comparable 인터페이스를 구현한 뒤 PriorityQueue에 집어넣으면 됨. [(16236)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/16000/Main_16236.java)
 
-## Set (집합)
+## [Set (집합)](#목차)
 
 1. 특정한 순서를 가지지 않고 (입력 순서를 유지하지 않고), 중복을 허용하지 않는 자료구조
 2. equals와 hashCode 메서드를 override하지 않으면 객체의 주소값을 기준으로 중복을 판단.
@@ -385,7 +385,7 @@
         3. 특정 객체보다 한 단계 작은 객체: treeSet.lower(객체)
         4. 특정 객체보다 한 단계 큰 객체: treeSet.higher(객체)
 
-## LinkedList (연결 리스트)
+## [LinkedList (연결 리스트)](#목차)
 
 1. 연산 시간 복잡도 비교
     1. Array: 정적, 조회 O(1), 삽입/삭제 O(N)
@@ -394,7 +394,7 @@
 2. 기본적으로 A형 알고리즘 문제를 풀 때는 ArrayList를 사용하는 것이 메모리, 시간적인 측면에서 더 좋은 결과를 가져옴.
 3. 리스트에 삽입, 삭제 연산을 여러 번 수행해야 할 경우 뒤 인덱스부터 수행하면 불필요한 처리 작업을 수행하지 않아도 된다.
 
-# Bitmasking [(비트마스킹)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/Bitmasking.md)
+# [Bitmasking](#목차) [(비트마스킹)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/Bitmasking.md)
 
 1. 각각의 비트를 하나의 플래그로 사용하여 상태를 표현할 때 사용
 2. 여러 개의 데이터를 압축하여 하나의 정수 자료형으로 나타낼 때 사용
@@ -410,7 +410,7 @@
     1. 비트 선언할 때 0b1111과 같이 `이진수로 숫자를 입력할 수 있다.` [(2615)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/2000/Main_2615.java)
     2. Integer.toBinaryString()으로 정수 자료형을 이진수로 출력할 수 있다.
 
-# Greedy Algorithm [(그리디 알고리즘)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/Greedy.md)
+# [Greedy Algorithm](#목차) [(그리디 알고리즘)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/Greedy.md)
 
 1. 여러 경우 중 하나를 선택할 때 그 순간에 최적이라고 생각되는 것을 선택하는 알고리즘.
     1. 탐욕적 선택이 최적해로 갈 수 있음이 증명된 경우에만 사용
@@ -418,7 +418,7 @@
 2. `한 번 선택한 것을 번복하지 않음`
 3. 규칙을 찾지 못하고 너무 복잡하게 해결하는 경우 일정 조건을 완전 탐색으로 제한하고 그리디로 접근하는 방식도 좋음 [(2138)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/2000/Main_2138.java)
 
-# Divide and Conquer [(분할 정복)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/DevideAndConquer.md)
+# [Divide and Conquer](#목차) [(분할 정복)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/DevideAndConquer.md)
 
 1.  1. 분할: 해결할 문제를 여러 작은 부분으로 나눔
     2. 정복: 나눈 작은 문제를 각각 해결
@@ -490,7 +490,7 @@
     }
     ```
 
-## Binary Search [(이분 탐색)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/BinarySearch.md)
+## [Binary Search](#목차) [(이분 탐색)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/BinarySearch.md)
 
 1. 자료의 가운데에 있는 항목의 키 값과 비교하여 다음 검색의 위치를 결정하고 검색을 계속 진행하는 방식
 2. `자료가 정렬된 상태에서만 가능`
@@ -520,7 +520,7 @@
     right의 start = mid
     ```
 
-## Parametric Search [(매개 변수 탐색)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/BinarySearch.md)
+## [Parametric Search](#목차) [(매개 변수 탐색)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/BinarySearch.md)
 
 1. Binary Search (이분 탐색)가 일정 범위 내부에서 일정 조건을 만족하는 원소를 찾는 `최적화 문제`를 해결하는 알고리즘이라면, 이를 어떤 값이 조건을 만족하는 지 확인하는 `결정 문제`로 바꿔서 해결하는 방식이 Parametric Search (매개 변수 탐색)이다.
 2. 파라미터 탐색이 가능한 조건
@@ -530,7 +530,7 @@
     이러한 조건을 만족하면 이분 탐색을 수행하는 것처럼 함수 값을 비교하면서 O(log N)으로 비교 횟수를 줄일 수 있다.  
     즉, `이분 탐색 내부에서 함수를 적용하여 다음 분기를 결정하는 문제는 파라미터 탐색 방식으로 해결할 수 있다.`
 
-## Longest Increasing Subsequence (LIS, 최장 증가 부분 수열) [(참고)](https://chanhuiseok.github.io/posts/algo-49/)
+## [Longest Increasing Subsequence (LIS, 최장 증가 부분 수열)](#목차) [(참고)](https://chanhuiseok.github.io/posts/algo-49/)
 
 1. 이진 탐색 알고리즘의 일종
 2. 알고리즘
@@ -572,24 +572,24 @@
     }
     ```
 
-# Backtracking [(백트래킹)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/Backtracking.md)
+# [Backtracking](#목차) [(백트래킹)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/Backtracking.md)
 
 1. 해를 찾는 도중, 해가 아니라서 막히면 되돌아가서 다시 해를 찾아가는 기법
 2. 되돌아 갈 때 이전 상태를 반복하지 않도록 하는 장치와 현재 선택했던 상태를 지우는 방법을 구현해주어야 한다. [(1799)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/1000/Main_1799.java) [(2239)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/2000/Main_2239.java)
 3. DFS를 수행하면서 유망하지 않은 노드가 어떤 것인지 확실하게 판별해야 함. 완전탐색을 수행하면서 '시간 초과'나 '메모리 초과'가 아닌 '틀렸습니다'가 발생하는 경우 지금까지 당연히 맞다고 생각했던 조건을 다시 생각해볼 필요가 있음 [(6987)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/6000/Main_6987.java)
 
-# Recursive (재귀)
+# [Recursive (재귀)](#목차)
 
 1. 자신의 정의하는 내용 안에 자신을 포함하는 형태의 함수
 2. 주어진 문제의 해를 구하기 위해 `동일하면서 더 작은 문제(최적 부분 구조)`의 해를 이용하는 방법
 3. 점화식 / 수열의 귀납적 정의에 자주 이용 [(9527)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/9000/Main_9527.java)
 4. [DFS](#depth-first-search-깊이-우선-탐색) 탐색을 수행할 때 Stack을 사용하는 경우보다 빠름. `재귀 깊이가 너무 깊지 않은 경우 재귀로 구현하는 것이 좋음` [(3234)](https://github.com/rldnjs7723/CodingTest/blob/main/SWEA/3000/Solution_3234.java)
 
-# Dynamic Programming [(다이나믹 프로그래밍)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/DynamicProgramming.md)
+# [Dynamic Programming](#목차) [(다이나믹 프로그래밍)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/DynamicProgramming.md)
 
 1. 특정 범위까지의 값을 구하기 위해서 이전에 계산했던 다른 범위의 값을 이용하여 효율적으로 계산하는 알고리즘
 
-## Longest Common Subsequence (LCS) [(9252)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/9000/Main_9252.java)
+## [Longest Common Subsequence (LCS)](#목차) [(9252)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/9000/Main_9252.java)
 
 1. 다이나믹 프로그래밍을 통해 계산하는 알고리즘의 일종
 2. 알고리즘
@@ -623,7 +623,7 @@
     }
     ```
 
-## Lowest Common Ancestor (LCA) 알고리즘
+## [Lowest Common Ancestor (LCA) 알고리즘](#목차)
 
 1. 트리에서 2차원 배열로 조상 노드를 희소 배열에 저장하여 표현 (다이나믹 프로그래밍의 일종)
 2. 기본 점화식
@@ -704,7 +704,7 @@
     }
     ```
 
-## Traveling Salesman Problem (TSP, 외판원 문제)
+## [Traveling Salesman Problem (TSP, 외판원 문제)](#목차)
 
 1. 비트필드를 이용한 다이나믹 프로그래밍을 사용하는 문제. 비트마스크를 통해 현재 위치에서 방문한 도시 상태를 저장하고, 아직 방문하지 않은 영역에 대한 최단 경로를 한 번만 탐색하도록 수행
 2. 구현 시 주의할 점
@@ -755,7 +755,7 @@
     }
     ```
 
-# Union Find [(Disjoint Set)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/UnionFind.md)
+# [Union Find](#목차) [(Disjoint Set)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/UnionFind.md)
 
 1. 서로소 집합: 서로 중복 포함된 원소가 없는 집합
 2. 알고리즘 (트리로 표현) [(3289)](https://github.com/rldnjs7723/CodingTest/blob/main/SWEA/3000/Solution_3289.java)
@@ -798,7 +798,7 @@
     }
     ```
 
-## Flood Fill 알고리즘
+## [Flood Fill 알고리즘](#목차)
 
 1. 시작점으로부터 연결된 영역을 찾는 알고리즘
 2. 기존의 Union Find와 달리 모든 영역에서 루트 노드만을 가리키도록 설정해주면 된다. [(1868)](https://github.com/rldnjs7723/CodingTest/blob/main/SWEA/1000/Solution_1868.java)
@@ -814,12 +814,12 @@
     System.out.println(set.size())
     ```
 
-# Graph [(그래프 탐색 알고리즘)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/Graph.md)
+# [Graph](#목차) [(그래프 탐색 알고리즘)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/Graph.md)
 
 1. 인접 행렬 / 인접 리스트 / 인접 해시테이블로 그래프 표현 가능
 2. 인접 리스트의 경우 ArrayList로 구현했을 때 메모리를 생각보다 많이 잡아먹지 않음
 
-## Dijkstra (다익스트라 알고리즘)
+## [Dijkstra (다익스트라 알고리즘)](#목차)
 
 1. 시작점과 그래프가 주어졌을 때, 시작점에서부터 다른 정점까지의 최단 경로를 구하는 문제에 활용
 2. `음의 가중치를 가지는 사이클이 존재할 때는 사용할 수 없다.`
@@ -876,7 +876,7 @@
     }
     ```
 
-## Bellman-Ford (밸만-포드 알고리즘)
+## [Bellman-Ford (밸만-포드 알고리즘)](#목차)
 
 1. 문제의 조건에서 `음의 사이클을 가지고 있는지 여부`를 판단해야 하는 경우 사용하는 알고리즘
 2. 시간 복잡도: θ(|E||V|)
@@ -936,7 +936,7 @@
     }
     ```
 
-## Floyd-Warshall (플로이드-워셜 알고리즘)
+## [Floyd-Warshall (플로이드-워셜 알고리즘)](#목차)
 
 1. `모든 정점에서 다른 정점으로 가는 최소 비용`을 전부 계산해야 할 때 주로 사용하는 알고리즘
 2. 각 간선에서 가중치 무한으로 초기화 할 때 값을 연산하는 과정에서 오버플로우가 발생할 수 있기 때문에 MAX_VALUE / 2 - 1 정도로 설정하는 것을 추천 [(1238)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/1000/Main_1238.java)
@@ -966,9 +966,9 @@
     }
     ```
 
-## Minimum Spanning Tree (최소 신장 트리)
+## [Minimum Spanning Tree (최소 신장 트리)](#목차)
 
-### 1. Kruskal (크루스칼 알고리즘)
+### [1. Kruskal (크루스칼 알고리즘)](#목차)
 
 1. 처음에 n 개의 집합으로 시작해서 n-1번의 합집합을 통해 최적해를 찾는 방식 [(Union Find)](https://github.com/rldnjs7723/CodingTest#union-find-disjoint-set)
 2. 시간복잡도: O(|E| log |E|) = O(|E| log |V|) (점근적으로 log |E|는 log |V|와 동일)
@@ -994,7 +994,7 @@
     }
     ```
 
-### 2. Prim (프림 알고리즘)
+### [2. Prim (프림 알고리즘)](#목차)
 
 1. Dijkstra 알고리즘과 비슷한 그리디 알고리즘
 2. 시간 복잡도: O(|E| log |V|)
@@ -1047,7 +1047,7 @@
     }
     ```
 
-## Topological Sort (위상 정렬)
+## [Topological Sort (위상 정렬)](#목차)
 
 1. 그래프가 비순환 유향 그래프 (Directed Acyclic Graph, DAG)일 때 사용 가능
 2. 정점을 변의 방향을 거스르지 않도록 나열하는 것
@@ -1093,7 +1093,7 @@
     }
     ```
 
-### DAG에서의 최단 경로 (최장 경로)
+### [DAG에서의 최단 경로 (최장 경로)](#목차)
 
 1. 기본적으로 그래프에서의 최장 경로를 구하는 문제는 NP-Hard로 정의 되지만, DAG에서는 위상 정렬을 통해 빠르게 계산할 수 있다. [(1948)]()
 2. 시간 복잡도: O(|V| + |E|)
@@ -1148,9 +1148,9 @@
     }
     ```
 
-## Strongly Connected Component (강한 결합 요소)
+## [Strongly Connected Component (강한 결합 요소)](#목차)
 
-# Segment Tree [(세그먼트 트리)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/SegmentTree.md)
+# [Segment Tree](#목차) [(세그먼트 트리)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/SegmentTree.md)
 
 1. 수열이 주어질 때 특정 구간의 합을 O(log N) 시간에 계산할 수 있도록 만드는 자료구조
 2. 구간 합 트리를 구성할 때는 (N보다 큰 가장 작은 2의 배수 \* 2) 만큼의 개수를 가지므로 배열을 해당 크기만큼 초기화해줘야 한다. 이는 (4 \* N)만큼의 크기를 가지도록 구현하더라도 문제가 없다. [(참고)](https://m.blog.naver.com/ndb796/221282210534)
@@ -1224,9 +1224,9 @@
     }
     ```
 
-# String [(문자열)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/String.md)
+# [String](#목차) [(문자열)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/String.md)
 
-## Knuth-Morris-Pratt (KMP) Pattern Matching
+## [Knuth-Morris-Pratt (KMP) Pattern Matching](#목차)
 
 1. 문자열의 각 위치를 비교하면서 다른 문자열이 나왔다면, 이전까지 일치했던 부분으로 되돌아가 이어서 탐색하도록 하는 알고리즘
 2. 시간 복잡도: O(N + M)
@@ -1274,7 +1274,7 @@
     }
     ```
 
-## Rabin-Karp Algorithm (라빈-카프 알고리즘)
+## [Rabin-Karp Algorithm (라빈-카프 알고리즘)](#목차)
 
 1. 문자열을 해싱한 뒤 해시 값으로 비교하는 알고리즘
 2. 최악의 경우 O(MN)이지만 평균적으로 O(N). 선형에 가까움
@@ -1284,7 +1284,7 @@
     2. 문자열 길이가 길어지는 경우 해시 값에 Modular 연산을 수행하여 일정 자리수로 맞춰준다.
     3. 해시 값이 일치하더라도 실제 문자열이 일치하지 않을 수 있으므로 해시 값이 일치할 때 Brute Force로 일치하는 지 검사해야 한다.
 
-## Boyer-Moore Algorithm (보이어-무어 알고리즘)
+## [Boyer-Moore Algorithm (보이어-무어 알고리즘)](#목차)
 
 1. 패턴과 문자열을 비교할 때 불일치하는 부분이 있다면 패턴 내에 이동하는 해당 문자의 위치로 이동하는 알고리즘
 2. 최악의 경우 O(MN). 평균적으로 O(N)
@@ -1294,13 +1294,13 @@
     3. 문자가 불일치한다면 Skip 테이블에서의 이동 거리만큼 이동.
     4. 마지막 문자가 아닌 중간에서 불일치가 발생한 경우 (Skip 테이블의 값 - 일치한 문자 개수) 만큼 이동
 
-## Trie (트라이)
+## [Trie (트라이)](#목차)
 
-# Sweeping (스위핑 알고리즘)
+# [Sweeping (스위핑 알고리즘)](#목차)
 
-# Sorting (정렬 알고리즘)
+# [Sorting (정렬 알고리즘)](#목차)
 
-## Merge Sort (병합 정렬)
+## [Merge Sort (병합 정렬)](#목차)
 
 1. 분할 정복을 통해 배열을 정렬하는 방식. 시간 복잡도는 O(N log N)
 2. 알고리즘
