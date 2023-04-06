@@ -101,6 +101,9 @@
 
     1. [Prime Number (소수)](#prime-number-소수)
     2. [Modulo (나머지 연산)](#modulo-나머지-연산)
+    3. [Intermediate Value Theorem (중간값 정리)](#intermediate-value-theorem-중간값-정리)
+    4. [Matrix Exponentiation (행렬 멱법)](#matrix-exponentiation-행렬-멱법)
+    5. [GCD, LCM (최대 공약수, 최소 공배수)](#gcd-lcm-최대-공약수-최소-공배수)
 
 2. [Brute Force (완전 탐색)](#brute-force-완전-탐색)
 
@@ -215,6 +218,7 @@
 2. 페르마의 소정리 [(13172)](https://www.acmicpc.net/problem/13172)  
    X가 소수일 때,  
    $\frac{a}{b}$ mod X = (a × b<sup>-1</sup>) mod X  
+   b<sup>X - 1</sup> = 1 mod X  
    b<sup>X - 2</sup> = b<sup>-1</sup> mod X
 3. 이항 계수 [(11401)](https://www.acmicpc.net/problem/11401)
 
@@ -229,6 +233,78 @@
        r이 0이나 n일 때 <sub>n</sub>C<sub>r</sub> = 1  
        나머지의 경우 <sub>n</sub>C<sub>r</sub> = <sub>n-1</sub>C<sub>r-1</sub> + <sub>n-1</sub>C<sub>r</sub>  
        이러한 특성에 분배 법칙을 적용하여 계산할 수도 있다.
+
+## [Intermediate Value Theorem (중간값 정리)](#목차)
+
+함수 f가 연속 함수이고, f(a) \* f(b) < 0을 만족한다면 (a, b) 사이에 근을 적어도 하나 가진다.
+
+## [Matrix Exponentiation (행렬 멱법)](#목차)
+
+1. 선형 재귀 점화식이 주어질 때 이를 행렬 곱을 통해 계산하는 방법.  
+   단순 다이나믹 프로그래밍으로는 시간이 부족할 경우, 분할 정복을 이용하여 최적화 할 때 사용된다.
+
+2. 항이 3개인 점화식에 대한 행렬 멱법
+
+    ```
+    F(n) = a * F(n-1) + b * F(n-2) + c * F(n-3)
+    ```
+
+    을 만족할 때,
+
+    ```
+    F(n)     (a b c)   F(n-1)
+    F(n-1) = (a b c) * F(n-2)
+    F(n-2)   (a b c)   F(n-3)
+    ```
+
+    ```
+    F(n)     (a b c)n-2   F(2)
+    F(n-1) = (a b c)    * F(1)
+    F(n-2)   (a b c)      F(0)
+    ```
+
+3. 피보나치 수 행렬 멱법  
+   ( 1 1 ) <sup>n</sup> = ( F<sub>n+1</sub> F<sub>n</sub> )  
+   ( 1 0 )  ( F<sub>n</sub> F<sub>n-1</sub> )
+
+## [GCD, LCM (최대 공약수, 최소 공배수)](#목차)
+
+1. 최대 공약수, 최소 공배수 성질
+
+    ```
+    A = GCD * a
+    B = GCD * b
+    ```
+
+    를 만족할 때,
+
+    ```
+    LCM = GCD * a * b
+    A * B = GCD * LCM
+    ```
+
+2. 유클리드 호제법
+
+    ```
+    두 양의 정수 a, b (a > b)에 대해 a = b * q + r (0 <= r < b)라 하면,
+    a, b의 최대 공약수는 b와 r의 최대 공약수와 같다.
+    즉, GCD(a, b) = GCD(b, r)
+    ```
+
+    위 성질을 반복해서 적용하면 두 수의 최대 공약수를 구할 수 있다.
+
+    ```
+    a = b * q1 + r1
+    b = r1 * q2 + r2
+    r1 = r2 * q3 + r3
+    ...
+    rn-1 = rn * qn+1
+    GCD(a, b) = rn
+    ```
+
+    위와 같이 나머지가 0이 될 때까지 반복하면 된다.
+
+## [카탈란 수열](#목차)
 
 # [Brute Force](#목차) [(완전 탐색)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/BruteForce.md)
 
@@ -493,7 +569,8 @@
 ## [Binary Search](#목차) [(이분 탐색)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/BinarySearch.md)
 
 1. 자료의 가운데에 있는 항목의 키 값과 비교하여 다음 검색의 위치를 결정하고 검색을 계속 진행하는 방식
-2. `자료가 정렬된 상태에서만 가능`
+2. `자료가 정렬된 상태에서만 가능`.  
+   입력 자체가 정렬되어 들어오는 경우 이분 탐색을 생각해보면 좋다.
 3. 이진 탐색 도중에 다른 작업을 수행하지 않고, 특정 값이 위치할 Index를 찾으려고 한다면 Arrays.binarySearch() 메서드를 사용해도 된다.
     1. Arrays.binarySearch()에서 목표 값을 못 찾는 경우 해당 값이 위치해야 할 Index를 음수로 만든 후 -1을 더한다. (2번 인덱스에 있어야 했다면 -3을 반환)
     2. Arrays.binarySearch(배열, fromIndex, toIndex, key)로 범위 지정도 가능
