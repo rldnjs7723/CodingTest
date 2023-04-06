@@ -246,6 +246,8 @@
        다음과 같은 수식을 통해 구하고자 하는 이항 계수 값을 작은 여러 개의 이항 계수의 곱으로 표현할 수 있다.
 
 $$
+(1)
+\,
 \begin{pmatrix}
 n \\
 r \\
@@ -261,7 +263,8 @@ p
 $$
 
 $$
-이 때,
+(2)
+\,
 n_i \lt r_i 라면
 \begin{pmatrix}
 n_i \\
@@ -273,6 +276,8 @@ n \\
 r \\
 \end{pmatrix}
 = 0
+
+
 $$
 
 ## [Intermediate Value Theorem (중간값 정리)](#목차)
@@ -281,7 +286,7 @@ $$
 
 ## [Matrix Exponentiation (행렬 멱법)](#목차)
 
-1. 선형 재귀 점화식이 주어질 때 이를 행렬 곱을 통해 계산하는 방법.  
+1. 선형 재귀 점화식이 주어질 때 이를 행렬 곱을 통해 계산하는 방법.
    단순 다이나믹 프로그래밍으로는 시간이 부족할 경우, 분할 정복을 이용하여 최적화 할 때 사용된다.
 
 2. 항이 3개인 점화식에 대한 행렬 멱법
@@ -293,10 +298,11 @@ $$
     을 만족할 때,
 
 $$
+
 \begin{pmatrix}
-F_{n} \\
-F_{n-1} \\
-F_{n-2} \\
+F*{n} \\
+F*{n-1} \\
+F*{n-2} \\
 \end{pmatrix}
 =
 \begin{pmatrix}
@@ -306,17 +312,20 @@ a & b & c \\
 \end{pmatrix}
 \times
 \begin{pmatrix}
-F_{n-1} \\
-F_{n-2} \\
-F_{n-3} \\
+F*{n-1} \\
+F*{n-2} \\
+F*{n-3} \\
 \end{pmatrix}
+
+
 $$
 
 $$
+
 \begin{pmatrix}
-F_{n} \\
-F_{n-1} \\
-F_{n-2} \\
+F*{n} \\
+F*{n-1} \\
+F*{n-2} \\
 \end{pmatrix}
 =
 \begin{pmatrix}
@@ -327,15 +336,18 @@ a & b & c \\
 ^{n-2}
 \times
 \begin{pmatrix}
-F_{2} \\
-F_{1} \\
-F_{0} \\
+F*{2} \\
+F*{1} \\
+F*{0} \\
 \end{pmatrix}
+
+
 $$
 
 3. 피보나치 수 행렬 멱법
 
 $$
+
 \begin{pmatrix}
 1 & 1 \\
 1 & 0 \\
@@ -343,9 +355,11 @@ $$
 ^n
 =
 \begin{pmatrix}
-F_{n+1} & F_{n} \\
-F_{n} & F_{n-1} \\
+F*{n+1} & F*{n} \\
+F*{n} & F*{n-1} \\
 \end{pmatrix}
+
+
 $$
 
 ## [GCD, LCM (최대 공약수, 최소 공배수)](#목차)
@@ -529,7 +543,7 @@ $$
 2. equals와 hashCode 메서드를 override하지 않으면 객체의 주소값을 기준으로 중복을 판단.
 3. 자바에서는 대표적으로 HashSet과 TreeSet을 많이 사용
     1. HashSet: O(1) 시간으로 참조하고 싶을 때 사용. 일반적으로 가장 많이 활용
-    2. TreeSet: O(log N) 시간 복잡도를 가지지만, Set 내부의 값을 정렬된 상태로 유지하고 싶을 때 사용.  
+    2. TreeSet: O(log N) 시간 복잡도를 가지지만, Set 내부의 값을 정렬된 상태로 유지하고 싶을 때 사용.
        Comparable 인터페이스를 통해 compareTo 메서드를 Override 하면 사용자가 정의한 기준으로 정렬을 수행 [(5644)](https://github.com/rldnjs7723/CodingTest/blob/main/SWEA/5000/Solution_5644.java)
 4. 알면 유용한 메서드
     1. 부분집합: .containsAll(집합) => 부분집합이라면 true
@@ -631,7 +645,7 @@ $$
     }
     ```
 
-    3. 곱하기 연산의 수행 횟수를 K라고 했을 때, K보다 작은 가장 큰 지수를 찾아 해당 지수의 거듭 제곱 결과를 곱한다. 이는 TreeSet의 floor 메서드를 통해 빠르게 찾을 수 있다.  
+    3. 곱하기 연산의 수행 횟수를 K라고 했을 때, K보다 작은 가장 큰 지수를 찾아 해당 지수의 거듭 제곱 결과를 곱한다. 이는 TreeSet의 floor 메서드를 통해 빠르게 찾을 수 있다.
        이후 거듭 제곱의 지수만큼 횟수를 차감한 뒤 연산을 반복한다.
 
     ```java
@@ -650,7 +664,7 @@ $$
 ## [Binary Search](#목차) [(이분 탐색)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/BinarySearch.md)
 
 1. 자료의 가운데에 있는 항목의 키 값과 비교하여 다음 검색의 위치를 결정하고 검색을 계속 진행하는 방식
-2. `자료가 정렬된 상태에서만 가능`.  
+2. `자료가 정렬된 상태에서만 가능`.
    입력 자체가 정렬되어 들어오는 경우 이분 탐색을 생각해보면 좋다.
 3. 이진 탐색 도중에 다른 작업을 수행하지 않고, 특정 값이 위치할 Index를 찾으려고 한다면 Arrays.binarySearch() 메서드를 사용해도 된다.
     1. Arrays.binarySearch()에서 목표 값을 못 찾는 경우 해당 값이 위치해야 할 Index를 음수로 만든 후 -1을 더한다. (2번 인덱스에 있어야 했다면 -3을 반환)
@@ -665,8 +679,7 @@ $$
     ```
     start + (end - start) / 2
     ```
-    처럼 계산하는 것이 좋다.  
-    3. 중간값 별 다음 탐색 범위 설정
+    처럼 계산하는 것이 좋다. 3. 중간값 별 다음 탐색 범위 설정
     ```
     start + (end - start) / 2
     left의 end = mid
@@ -685,7 +698,7 @@ $$
     ```
     x1 < x2 일 때, f(x1) = true라면 f(x2)도 true인 경우
     ```
-    이러한 조건을 만족하면 이분 탐색을 수행하는 것처럼 함수 값을 비교하면서 O(log N)으로 비교 횟수를 줄일 수 있다.  
+    이러한 조건을 만족하면 이분 탐색을 수행하는 것처럼 함수 값을 비교하면서 O(log N)으로 비교 횟수를 줄일 수 있다.
     즉, `이분 탐색 내부에서 함수를 적용하여 다음 분기를 결정하는 문제는 파라미터 탐색 방식으로 해결할 수 있다.`
 
 ## [Longest Increasing Subsequence (LIS, 최장 증가 부분 수열)](#목차) [(참고)](https://chanhuiseok.github.io/posts/algo-49/)
@@ -868,7 +881,7 @@ $$
 2. 구현 시 주의할 점
     1. 이 문제는 최적의 Hamiltonian Cycle을 찾는 문제이므로 어떤 정점에서 출발하더라도 항상 최적해는 같게 나온다.
     2. 다만, 현재 도시와 방문한 도시의 비트마스크에 따라 최적 거리가 다르게 나오기 때문에 각 도시별로 비트마스크를 따로 저장해줘야 한다.
-    3. 만약 모든 도시를 방문한 이후, 출발점으로 돌아갈 수 없는 경우에는 초기값으로 설정해준 INF 값과, 출발점으로 돌아갈 수 없다는 것을 나타내는 INVALID 값을 서로 다르게 설정해줘야 한다.  
+    3. 만약 모든 도시를 방문한 이후, 출발점으로 돌아갈 수 없는 경우에는 초기값으로 설정해준 INF 값과, 출발점으로 돌아갈 수 없다는 것을 나타내는 INVALID 값을 서로 다르게 설정해줘야 한다.
        그렇지 않다면 이후 출발점으로 돌아갈 수 없다는 것을 탐색했던 도시에서 INF 값이 저장되어 있는 것을 보고 반복적으로 탐색을 수행하기 때문에 시간 초과가 발생한다. [(참고)](https://chb2005.tistory.com/86)
     4. 앞서 INVALID를 INF와 분리할 때는 Math.min으로 최솟값을 갱신했기 때문에 INVALID가 제대로 저장되도록 INF보다 작은 값으로 설정해줘야 한다. 다만 전체 비용보다는 반드시 커야 한다.
 3. 알고리즘 [(2098)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/2000/Main_2098.java)
@@ -1213,7 +1226,7 @@ $$
 4. 진출, 진입 간선 삭제를 반대로 하면 Topological Order의 역순 형태로 나타낼 수 있다. [(1005)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/1000/Main_1005.java)
 5. 알고리즘
 
-    1. Incoming Edge (진입 간선): Vertex로 들어오는 Edge  
+    1. Incoming Edge (진입 간선): Vertex로 들어오는 Edge
        Outgoing Edge (진출 간선): Vertex에서 나가는 Edge
     2. 시작 정점은 Incoming Edge가 없는 정점을 선택
     3. 정점의 Outgoing Edge를 전부 삭제한 후 다음 정점을 선택
@@ -1460,59 +1473,61 @@ $$
 
 ## [Merge Sort (병합 정렬)](#목차)
 
-1. 분할 정복을 통해 배열을 정렬하는 방식. 시간 복잡도는 O(N log N)
-2. 알고리즘
+1.  분할 정복을 통해 배열을 정렬하는 방식. 시간 복잡도는 O(N log N)
+2.  알고리즘
 
-    1. 배열의 범위를 절반씩 나누면서 왼쪽, 오른쪽 배열을 재귀적으로 정렬
-    2. 양쪽의 배열을 정렬한 이후 두 배열을 합치면서 정렬
+        1. 배열의 범위를 절반씩 나누면서 왼쪽, 오른쪽 배열을 재귀적으로 정렬
+        2. 양쪽의 배열을 정렬한 이후 두 배열을 합치면서 정렬
 
-    ```java
-    // 병합 정렬
-    public static long mergeSort(int start, int end, int[] arr) {
-       if(start == end) return 0;
+        ```java
+        // 병합 정렬
+        public static long mergeSort(int start, int end, int[] arr) {
+           if(start == end) return 0;
 
-       int mid = start + (end - start) / 2;
+           int mid = start + (end - start) / 2;
 
-       // 왼쪽 배열
-       mergeSort(start, mid, arr);
-       // 오른쪽 배열
-       mergeSort(mid + 1, end, arr);
+           // 왼쪽 배열
+           mergeSort(start, mid, arr);
+           // 오른쪽 배열
+           mergeSort(mid + 1, end, arr);
 
-       // 배열 합치기
-       merge(start, end, arr);
-    }
-    ```
+           // 배열 합치기
+           merge(start, end, arr);
+        }
+        ```
 
-    3. 배열을 합칠 때는 왼쪽 배열과 오른쪽 배열의 Index에 위치한 값을 비교하며 더 작은 값을 결과 배열에 추가한 뒤 Index++을 수행한다.
+        3. 배열을 합칠 때는 왼쪽 배열과 오른쪽 배열의 Index에 위치한 값을 비교하며 더 작은 값을 결과 배열에 추가한 뒤 Index++을 수행한다.
 
-    ```java
-    public static void merge(int start, int end, int[] arr) {
-    	// 병합 정렬한 결과 저장할 배열
-    	int[] result = new int[end - start + 1];
-    	int mid = start + (end - start) / 2;
+        ```java
+        public static void merge(int start, int end, int[] arr) {
+        	// 병합 정렬한 결과 저장할 배열
+        	int[] result = new int[end - start + 1];
+        	int mid = start + (end - start) / 2;
 
-    	// 병합
-    	int i = 0, j = 0;
-    	while(i + start <= mid && j + mid + 1 <= end) {
-    		if(arr[i + start] >= arr[j + mid + 1]) {
-    			result[i + j] = arr[j++ + mid + 1];
-    		} else {
-    			result[i + j] = arr[i++ + start];
-    		}
-    	}
+        	// 병합
+        	int i = 0, j = 0;
+        	while(i + start <= mid && j + mid + 1 <= end) {
+        		if(arr[i + start] >= arr[j + mid + 1]) {
+        			result[i + j] = arr[j++ + mid + 1];
+        		} else {
+        			result[i + j] = arr[i++ + start];
+        		}
+        	}
 
-    	// 남은 부분 정렬
-    	while(i + start <= mid) {
-    		result[i + j] = arr[i++ + start];
-    	}
-    	while(j + mid + 1 <= end) {
-    		result[i + j] = arr[j++ + mid + 1];
-    	}
+        	// 남은 부분 정렬
+        	while(i + start <= mid) {
+        		result[i + j] = arr[i++ + start];
+        	}
+        	while(j + mid + 1 <= end) {
+        		result[i + j] = arr[j++ + mid + 1];
+        	}
 
-    	// 병합 정렬한 결과 배열에 반영
-    	int len = end - start + 1;
-    	for(int k = 0; k < len; k++) {
-    		arr[start + k] = result[k];
-    	}
-    }
-    ```
+        	// 병합 정렬한 결과 배열에 반영
+        	int len = end - start + 1;
+        	for(int k = 0; k < len; k++) {
+        		arr[start + k] = result[k];
+        	}
+        }
+        ```
+
+    $$
