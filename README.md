@@ -246,35 +246,33 @@
        다음과 같은 수식을 통해 구하고자 하는 이항 계수 값을 작은 여러 개의 이항 계수의 곱으로 표현할 수 있다.
 
 $$
-\begin{pmatrix}
-n \\
-r \\
-\end{pmatrix}
-=
-\prod_{i=0}^m
-\begin{pmatrix}
-n_i \\
-r_i \\
-\end{pmatrix}
-\bmod
-p
+   \begin{pmatrix}
+   n \\
+   r \\
+   \end{pmatrix}
+   =
+   \prod_{i=0}^m
+   \begin{pmatrix}
+   n_i \\
+   r_i \\
+   \end{pmatrix}
+   \bmod
+   p
 
-\\
+   \\
 
-이\,때,
-n_i \lt r_i 라면
-\begin{pmatrix}
-n_i \\
-r_i \\
-\end{pmatrix}
-= 0 이므로
-\begin{pmatrix}
-n \\
-r \\
-\end{pmatrix}
-= 0
-
-
+   이\,때,
+   n_i \lt r_i 라면
+   \begin{pmatrix}
+   n_i \\
+   r_i \\
+   \end{pmatrix}
+   = 0 이므로
+   \begin{pmatrix}
+   n \\
+   r \\
+   \end{pmatrix}
+   = 0
 $$
 
 ## [Intermediate Value Theorem (중간값 정리)](#목차)
