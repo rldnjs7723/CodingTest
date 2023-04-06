@@ -245,35 +245,35 @@
        위와 같이 n과 r을 각각 p진법 전개식으로 나타낼 수 있으며,  
        다음과 같은 수식을 통해 구하고자 하는 이항 계수 값을 작은 여러 개의 이항 계수의 곱으로 표현할 수 있다.
 
-        $$
-           \begin{pmatrix}
-           n \\
-           r \\
-           \end{pmatrix}
-           =
-           \prod_{i=0}^m
-           \begin{pmatrix}
-           n_i \\
-           r_i \\
-           \end{pmatrix}
-           \bmod
-           p
+$$
+   \begin{pmatrix}
+   n \\
+   r \\
+   \end{pmatrix}
+   =
+   \prod_{i=0}^m
+   \begin{pmatrix}
+   n_i \\
+   r_i \\
+   \end{pmatrix}
+   \bmod
+   p
 
-                 \\
+   \\
 
-                 이\,때,
-           n_i \lt r_i 라면
-           \begin{pmatrix}
-           n_i \\
-           r_i \\
-           \end{pmatrix}
-           = 0 이므로
-           \begin{pmatrix}
-           n \\
-           r \\
-           \end{pmatrix}
-           = 0
-        $$
+   이\,때,
+   n_i \lt r_i 라면
+   \begin{pmatrix}
+   n_i \\
+   r_i \\
+   \end{pmatrix}
+   = 0 이므로
+   \begin{pmatrix}
+   n \\
+   r \\
+   \end{pmatrix}
+   = 0
+$$
 
 ## [Intermediate Value Theorem (중간값 정리)](#목차)
 
@@ -294,47 +294,47 @@
 
 $$
 
-\begin{pmatrix}
-F*{n} \\
-F*{n-1} \\
-F*{n-2} \\
-\end{pmatrix}
-=
-\begin{pmatrix}
-a & b & c \\
-a & b & c \\
-a & b & c \\
-\end{pmatrix}
-\times
-\begin{pmatrix}
-F*{n-1} \\
-F*{n-2} \\
-F*{n-3} \\
-\end{pmatrix}
+   \begin{pmatrix}
+   F*{n} \\
+   F*{n-1} \\
+   F*{n-2} \\
+   \end{pmatrix}
+   =
+   \begin{pmatrix}
+   a & b & c \\
+   a & b & c \\
+   a & b & c \\
+   \end{pmatrix}
+   \times
+   \begin{pmatrix}
+   F*{n-1} \\
+   F*{n-2} \\
+   F*{n-3} \\
+   \end{pmatrix}
 
 
 $$
 
 $$
 
-\begin{pmatrix}
-F*{n} \\
-F*{n-1} \\
-F*{n-2} \\
-\end{pmatrix}
-=
-\begin{pmatrix}
-a & b & c \\
-a & b & c \\
-a & b & c \\
-\end{pmatrix}
-^{n-2}
-\times
-\begin{pmatrix}
-F*{2} \\
-F*{1} \\
-F*{0} \\
-\end{pmatrix}
+   \begin{pmatrix}
+   F*{n} \\
+   F*{n-1} \\
+   F*{n-2} \\
+   \end{pmatrix}
+   =
+   \begin{pmatrix}
+   a & b & c \\
+   a & b & c \\
+   a & b & c \\
+   \end{pmatrix}
+   ^{n-2}
+   \times
+   \begin{pmatrix}
+   F*{2} \\
+   F*{1} \\
+   F*{0} \\
+   \end{pmatrix}
 
 
 $$
@@ -343,16 +343,16 @@ $$
 
 $$
 
-\begin{pmatrix}
-1 & 1 \\
-1 & 0 \\
-\end{pmatrix}
-^n
-=
-\begin{pmatrix}
-F*{n+1} & F*{n} \\
-F*{n} & F*{n-1} \\
-\end{pmatrix}
+   \begin{pmatrix}
+   1 & 1 \\
+   1 & 0 \\
+   \end{pmatrix}
+   ^n
+   =
+   \begin{pmatrix}
+   F*{n+1} & F*{n} \\
+   F*{n} & F*{n-1} \\
+   \end{pmatrix}
 
 
 $$
