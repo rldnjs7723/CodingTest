@@ -246,7 +246,7 @@
        다음과 같은 수식을 통해 구하고자 하는 이항 계수 값을 작은 여러 개의 이항 계수의 곱으로 표현할 수 있다.
 
 $$
-   \begin{pmatrix}
+\begin{pmatrix}
    n \\
    r \\
    \end{pmatrix}
