@@ -286,7 +286,7 @@
 
 2. 항이 3개인 점화식에 대한 행렬 멱법
 
-    F<sub>n</sub> = a × F<sub>n-1</sub> + b × F<sub>n-2</sub> + c × F<sub>n-3</sub>
+    F<sub>n</sub> = a × F<sub>n-1</sub> + b × F<sub>n-2</sub> + c × F<sub>n-3</sub>  
     을 만족할 때,
 
 ```math
