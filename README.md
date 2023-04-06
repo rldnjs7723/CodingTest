@@ -286,17 +286,14 @@
 
 2. 항이 3개인 점화식에 대한 행렬 멱법
 
-    ```
-    F(n) = a × F(n-1) + b × F(n-2) + c × F(n-3)
-    ```
-
+    F<sub>n</sub> = a × F<sub>n-1</sub> + b × F<sub>n-2</sub> + c × F<sub>n-3</sub>
     을 만족할 때,
 
 ```math
    \begin{pmatrix}
-   F*{n} \\
-   F*{n-1} \\
-   F*{n-2}
+   F_{n} \\
+   F_{n-1} \\
+   F_{n-2}
    \end{pmatrix}
    =
    \begin{pmatrix}
@@ -306,17 +303,17 @@
    \end{pmatrix}
    \times
    \begin{pmatrix}
-   F*{n-1} \\
-   F*{n-2} \\
-   F*{n-3}
+   F_{n-1} \\
+   F_{n-2} \\
+   F_{n-3}
    \end{pmatrix}
 ```
 
 ```math
    \begin{pmatrix}
-   F*{n} \\
-   F*{n-1} \\
-   F*{n-2}
+   F_{n} \\
+   F_{n-1} \\
+   F_{n-2}
    \end{pmatrix}
    =
    \begin{pmatrix}
@@ -327,9 +324,9 @@
    ^{n-2}
    \times
    \begin{pmatrix}
-   F*{2} \\
-   F*{1} \\
-   F*{0}
+   F_{2} \\
+   F_{1} \\
+   F_{0}
    \end{pmatrix}
 ```
 
@@ -343,8 +340,8 @@
    ^n
    =
    \begin{pmatrix}
-   F*{n+1} & F*{n} \\
-   F*{n} & F*{n-1}
+   F_{n+1} & F_{n} \\
+   F_{n} & F_{n-1}
    \end{pmatrix}
 ```
 
