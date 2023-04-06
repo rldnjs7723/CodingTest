@@ -220,9 +220,9 @@
    $\frac{a}{b}$ mod X = (a × b<sup>-1</sup>) mod X  
    b<sup>X - 1</sup> = 1 mod X  
    b<sup>X - 2</sup> = b<sup>-1</sup> mod X
-3. 이항 계수 [(11401)](https://www.acmicpc.net/problem/11401)
+3. 이항 계수 [(참고)](https://velog.io/@kasterra/%ED%81%B0-%EC%88%98%EC%9D%98-%EC%9D%B4%ED%95%AD-%EA%B3%84%EC%88%98-mod-K-%EA%B5%AC%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95)
 
-    1. 다이나믹 프로그래밍을 이용한 계산 [(1010)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/1000/Main_1010.java)  
+    1. 다이나믹 프로그래밍을 이용한 계산 (파스칼의 삼각형) [(1010)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/1000/Main_1010.java)  
        r이 0이나 n일 때 <sub>n</sub>C<sub>r</sub> = 1  
        나머지의 경우 <sub>n</sub>C<sub>r</sub> = <sub>n-1</sub>C<sub>r-1</sub> + <sub>n-1</sub>C<sub>r</sub>  
        이러한 특성에 분배 법칙을 적용하여 계산할 수도 있다.  
@@ -240,14 +240,41 @@
        페르마의 소정리를 이용하는 경우, 기본적으로 n!을 계산할 수 있어야 사용할 수 있는 방법이다.  
        이 때, n 값이 너무 큰 경우(10<sup>18</sup>) 시간, 공간 복잡도 측면에서 수용할 수 없는 범위이므로 계산할 수 없다.  
        뤼카의 정리는 <sub>n</sub>C<sub>r</sub> mod p를 계산하고자 할 때,  
-       n = n<sub>m</sub>p<sup>m</sup> + n<sub>m-1</sub>p<sup>m-1</sup> + ... + n<sub>1</sub>p + n<sub>0</sub>  
-       r = r<sub>m</sub>p<sup>m</sup> + r<sub>m-1</sub>p<sup>m-1</sup> + ... + r<sub>1</sub>p + r<sub>0</sub>  
-       위와 같이 n과 r을 각각 p진법 전개식으로 나타낼 수 있으며,  
-       $\begin{pmatrix}n\\r \end{pmatrix}=$
-       $\prod_{i=0}^m$
-       $\begin{pmatrix}n_i\\r_i \end{pmatrix} \,\bmod\, p$  
-       위와 같은 수식을 통해 구하고자 하는 이항 계수 값을 작은 여러 개의 이항 계수의 곱으로 표현할 수 있다.  
-       이 때, $n_i \lt r_i$라면 $\begin{pmatrix}n_i\\r_i \end{pmatrix}=0$ 이므로 $\begin{pmatrix}n\\r \end{pmatrix}=0$이 된다.
+       n = n<sub>m</sub>p<sup>m</sup> + n<sub>m-1</sub>p<sup>m-1</sup> + $\cdots$ + n<sub>1</sub>p + n<sub>0</sub>  
+       r = r<sub>m</sub>p<sup>m</sup> + r<sub>m-1</sub>p<sup>m-1</sup> + $\cdots$ + r<sub>1</sub>p + r<sub>0</sub>  
+       위와 같이 n과 r을 각각 p진법 전개식으로 나타낼 수 있으며,
+
+        $$
+         \begin{pmatrix}
+         n \\
+         r \\
+         \end{pmatrix}
+         =
+         \prod_{i=0}^m
+         \begin{pmatrix}
+         n_i \\
+         r_i \\
+         \end{pmatrix}
+         \bmod
+         p
+        $$
+
+        위와 같은 수식을 통해 구하고자 하는 이항 계수 값을 작은 여러 개의 이항 계수의 곱으로 표현할 수 있다.
+
+        $$
+         이 때,
+         n_i \lt r_i 라면
+         \begin{pmatrix}
+         n_i \\
+         r_i \\
+         \end{pmatrix}
+         = 0 이므로
+         \begin{pmatrix}
+         n \\
+         r \\
+         \end{pmatrix}
+         = 0
+        $$
 
 ## [Intermediate Value Theorem (중간값 정리)](#목차)
 
@@ -266,17 +293,61 @@
 
     을 만족할 때,
 
-    $\begin{pmatrix}F_{n}\\F_{n-1}\\F_{n-2} \end{pmatrix}=$
-    $\begin{pmatrix}a&b&c\\a&b&c\\a&b&c \end{pmatrix}\times$
-    $\begin{pmatrix}F_{n-1}\\F_{n-2}\\F_{n-3} \end{pmatrix}$
+    $$
+    \begin{pmatrix}
+    F_{n} \\
+    F_{n-1} \\
+    F_{n-2} \\
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+    a & b & c \\
+    a & b & c \\
+    a & b & c \\
+    \end{pmatrix}
+    \times
+    \begin{pmatrix}
+    F_{n-1} \\
+    F_{n-2} \\
+    F_{n-3} \\
+    \end{pmatrix}
+    $$
 
-    $\begin{pmatrix}F_{n}\\F_{n-1}\\F_{n-2} \end{pmatrix}=$
-    $\begin{pmatrix}a&b&c\\a&b&c\\a&b&c \end{pmatrix}^{n-2}\times$
-    $\begin{pmatrix}F_{2}\\F_{1}\\F_{0} \end{pmatrix}$
+    $$
+    \begin{pmatrix}
+    F_{n} \\
+    F_{n-1} \\
+    F_{n-2} \\
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+    a & b & c \\
+    a & b & c \\
+    a & b & c \\
+    \end{pmatrix}
+    ^{n-2}
+    \times
+    \begin{pmatrix}
+    F_{2} \\
+    F_{1} \\
+    F_{0} \\
+    \end{pmatrix}
+    $$
 
-3. 피보나치 수 행렬 멱법  
-   $\begin{pmatrix}1&1\\1&0 \end{pmatrix}^n=$
-   $\begin{pmatrix}F_{n+1}&F_{n}\\F_{n}&F_{n-1} \end{pmatrix}$
+3. 피보나치 수 행렬 멱법
+
+    $$
+     \begin{pmatrix}
+     1 & 1 \\
+     1 & 0 \\
+     \end{pmatrix}
+     ^n
+     =
+     \begin{pmatrix}
+     F_{n+1} & F_{n} \\
+     F_{n} & F_{n-1} \\
+     \end{pmatrix}
+    $$
 
 ## [GCD, LCM (최대 공약수, 최소 공배수)](#목차)
 
