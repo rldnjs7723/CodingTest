@@ -247,13 +247,13 @@
         ```math
          \begin{pmatrix}
          n \\
-         r \\
+         r
          \end{pmatrix}
          =
          \prod_{i=0}^m
          \begin{pmatrix}
          n_i \\
-         r_i \\
+         r_i
          \end{pmatrix}
          \bmod
          p
@@ -264,12 +264,12 @@
          n_i \lt r_i 라면
          \begin{pmatrix}
          n_i \\
-         r_i \\
+         r_i
          \end{pmatrix}
          = 0 이므로
          \begin{pmatrix}
          n \\
-         r \\
+         r
          \end{pmatrix}
          = 0
         ```
@@ -297,19 +297,19 @@
        \begin{pmatrix}
        F*{n} \\
        F*{n-1} \\
-       F*{n-2} \\
+       F*{n-2}
        \end{pmatrix}
        =
        \begin{pmatrix}
        a & b & c \\
        a & b & c \\
-       a & b & c \\
+       a & b & c
        \end{pmatrix}
        \times
        \begin{pmatrix}
        F*{n-1} \\
        F*{n-2} \\
-       F*{n-3} \\
+       F*{n-3}
        \end{pmatrix}
     ```
 
@@ -317,20 +317,20 @@
        \begin{pmatrix}
        F*{n} \\
        F*{n-1} \\
-       F*{n-2} \\
+       F*{n-2}
        \end{pmatrix}
        =
        \begin{pmatrix}
        a & b & c \\
        a & b & c \\
-       a & b & c \\
+       a & b & c
        \end{pmatrix}
        ^{n-2}
        \times
        \begin{pmatrix}
        F*{2} \\
        F*{1} \\
-       F*{0} \\
+       F*{0}
        \end{pmatrix}
     ```
 
@@ -339,13 +339,13 @@
     ```math
        \begin{pmatrix}
        1 & 1 \\
-       1 & 0 \\
+       1 & 0
        \end{pmatrix}
        ^n
        =
        \begin{pmatrix}
        F*{n+1} & F*{n} \\
-       F*{n} & F*{n-1} \\
+       F*{n} & F*{n-1}
        \end{pmatrix}
     ```
 
