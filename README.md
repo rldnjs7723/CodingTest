@@ -242,7 +242,8 @@
        뤼카의 정리는 <sub>n</sub>C<sub>r</sub> mod p를 계산하고자 할 때,  
        n = n<sub>m</sub>p<sup>m</sup> + n<sub>m-1</sub>p<sup>m-1</sup> + $\cdots$ + n<sub>1</sub>p + n<sub>0</sub>  
        r = r<sub>m</sub>p<sup>m</sup> + r<sub>m-1</sub>p<sup>m-1</sup> + $\cdots$ + r<sub>1</sub>p + r<sub>0</sub>  
-       위와 같이 n과 r을 각각 p진법 전개식으로 나타낼 수 있으며,
+       위와 같이 n과 r을 각각 p진법 전개식으로 나타낼 수 있으며,  
+       다음과 같은 수식을 통해 구하고자 하는 이항 계수 값을 작은 여러 개의 이항 계수의 곱으로 표현할 수 있다.
 
 ```math
    \begin{pmatrix}
@@ -274,8 +275,6 @@
    = 0
 ```
 
-        위와 같은 수식을 통해 구하고자 하는 이항 계수 값을 작은 여러 개의 이항 계수의 곱으로 표현할 수 있다.
-
 ## [Intermediate Value Theorem (중간값 정리)](#목차)
 
 함수 f가 연속 함수이고, f(a) \* f(b) < 0을 만족한다면 (a, b) 사이에 근을 적어도 하나 가진다.
@@ -293,61 +292,61 @@
 
     을 만족할 때,
 
-    ```math
-       \begin{pmatrix}
-       F*{n} \\
-       F*{n-1} \\
-       F*{n-2}
-       \end{pmatrix}
-       =
-       \begin{pmatrix}
-       a & b & c \\
-       a & b & c \\
-       a & b & c
-       \end{pmatrix}
-       \times
-       \begin{pmatrix}
-       F*{n-1} \\
-       F*{n-2} \\
-       F*{n-3}
-       \end{pmatrix}
-    ```
+```math
+   \begin{pmatrix}
+   F*{n} \\
+   F*{n-1} \\
+   F*{n-2}
+   \end{pmatrix}
+   =
+   \begin{pmatrix}
+   a & b & c \\
+   a & b & c \\
+   a & b & c
+   \end{pmatrix}
+   \times
+   \begin{pmatrix}
+   F*{n-1} \\
+   F*{n-2} \\
+   F*{n-3}
+   \end{pmatrix}
+```
 
-    ```math
-       \begin{pmatrix}
-       F*{n} \\
-       F*{n-1} \\
-       F*{n-2}
-       \end{pmatrix}
-       =
-       \begin{pmatrix}
-       a & b & c \\
-       a & b & c \\
-       a & b & c
-       \end{pmatrix}
-       ^{n-2}
-       \times
-       \begin{pmatrix}
-       F*{2} \\
-       F*{1} \\
-       F*{0}
-       \end{pmatrix}
-    ```
+```math
+   \begin{pmatrix}
+   F*{n} \\
+   F*{n-1} \\
+   F*{n-2}
+   \end{pmatrix}
+   =
+   \begin{pmatrix}
+   a & b & c \\
+   a & b & c \\
+   a & b & c
+   \end{pmatrix}
+   ^{n-2}
+   \times
+   \begin{pmatrix}
+   F*{2} \\
+   F*{1} \\
+   F*{0}
+   \end{pmatrix}
+```
 
 3. 피보나치 수 행렬 멱법
 
-    ```math
-       \begin{pmatrix}
-       1 & 1 \\
-       1 & 0
-       \end{pmatrix}
-       ^n
-       =
-       \begin{pmatrix}
-       F*{n+1} & F*{n} \\
-       F*{n} & F*{n-1}
-       \end{pmatrix}
-    ```
+```math
+   \begin{pmatrix}
+   1 & 1 \\
+   1 & 0
+   \end{pmatrix}
+   ^n
+   =
+   \begin{pmatrix}
+   F*{n+1} & F*{n} \\
+   F*{n} & F*{n-1}
+   \end{pmatrix}
+```
 
 ## [GCD, LCM (최대 공약수, 최소 공배수)](#목차)
 
