@@ -244,7 +244,8 @@
        r = r<sub>m</sub>p<sup>m</sup> + r<sub>m-1</sub>p<sup>m-1</sup> + $\cdots$ + r<sub>1</sub>p + r<sub>0</sub>  
        위와 같이 n과 r을 각각 p진법 전개식으로 나타낼 수 있으며,
 
-        $$ \begin{pmatrix}
+        $$
+         \begin{pmatrix}
          n \\
          r \\
          \end{pmatrix}
@@ -256,9 +257,9 @@
          \end{pmatrix}
          \bmod
          p
+        $$
 
-         \\
-
+        $$
          이\,때,
          n_i \lt r_i 라면
          \begin{pmatrix}
@@ -270,7 +271,8 @@
          n \\
          r \\
          \end{pmatrix}
-         = 0 $$
+         = 0
+        $$
 
         위와 같은 수식을 통해 구하고자 하는 이항 계수 값을 작은 여러 개의 이항 계수의 곱으로 표현할 수 있다.
 
@@ -291,70 +293,61 @@
 
     을 만족할 때,
 
-$$
+    $$
+       \begin{pmatrix}
+       F*{n} \\
+       F*{n-1} \\
+       F*{n-2} \\
+       \end{pmatrix}
+       =
+       \begin{pmatrix}
+       a & b & c \\
+       a & b & c \\
+       a & b & c \\
+       \end{pmatrix}
+       \times
+       \begin{pmatrix}
+       F*{n-1} \\
+       F*{n-2} \\
+       F*{n-3} \\
+       \end{pmatrix}
+    $$
 
-   \begin{pmatrix}
-   F*{n} \\
-   F*{n-1} \\
-   F*{n-2} \\
-   \end{pmatrix}
-   =
-   \begin{pmatrix}
-   a & b & c \\
-   a & b & c \\
-   a & b & c \\
-   \end{pmatrix}
-   \times
-   \begin{pmatrix}
-   F*{n-1} \\
-   F*{n-2} \\
-   F*{n-3} \\
-   \end{pmatrix}
-
-
-$$
-
-$$
-
-   \begin{pmatrix}
-   F*{n} \\
-   F*{n-1} \\
-   F*{n-2} \\
-   \end{pmatrix}
-   =
-   \begin{pmatrix}
-   a & b & c \\
-   a & b & c \\
-   a & b & c \\
-   \end{pmatrix}
-   ^{n-2}
-   \times
-   \begin{pmatrix}
-   F*{2} \\
-   F*{1} \\
-   F*{0} \\
-   \end{pmatrix}
-
-
-$$
+    $$
+       \begin{pmatrix}
+       F*{n} \\
+       F*{n-1} \\
+       F*{n-2} \\
+       \end{pmatrix}
+       =
+       \begin{pmatrix}
+       a & b & c \\
+       a & b & c \\
+       a & b & c \\
+       \end{pmatrix}
+       ^{n-2}
+       \times
+       \begin{pmatrix}
+       F*{2} \\
+       F*{1} \\
+       F*{0} \\
+       \end{pmatrix}
+    $$
 
 3. 피보나치 수 행렬 멱법
 
-$$
-
-   \begin{pmatrix}
-   1 & 1 \\
-   1 & 0 \\
-   \end{pmatrix}
-   ^n
-   =
-   \begin{pmatrix}
-   F*{n+1} & F*{n} \\
-   F*{n} & F*{n-1} \\
-   \end{pmatrix}
-
-
-$$
+    $$
+       \begin{pmatrix}
+       1 & 1 \\
+       1 & 0 \\
+       \end{pmatrix}
+       ^n
+       =
+       \begin{pmatrix}
+       F*{n+1} & F*{n} \\
+       F*{n} & F*{n-1} \\
+       \end{pmatrix}
+    $$
 
 ## [GCD, LCM (최대 공약수, 최소 공배수)](#목차)
 
