@@ -244,35 +244,35 @@
        r = r<sub>m</sub>p<sup>m</sup> + r<sub>m-1</sub>p<sup>m-1</sup> + $\cdots$ + r<sub>1</sub>p + r<sub>0</sub>  
        위와 같이 n과 r을 각각 p진법 전개식으로 나타낼 수 있으며,
 
-        ```math
-         \begin{pmatrix}
-         n \\
-         r
-         \end{pmatrix}
-         =
-         \prod_{i=0}^m
-         \begin{pmatrix}
-         n_i \\
-         r_i
-         \end{pmatrix}
-         \bmod
-         p
-        ```
+```math
+   \begin{pmatrix}
+   n \\
+   r
+   \end{pmatrix}
+   =
+   \prod_{i=0}^m
+   \begin{pmatrix}
+   n_i \\
+   r_i
+   \end{pmatrix}
+   \bmod
+   p
+```
 
-        ```math
-         이\,때,
-         n_i \lt r_i 라면
-         \begin{pmatrix}
-         n_i \\
-         r_i
-         \end{pmatrix}
-         = 0 이므로
-         \begin{pmatrix}
-         n \\
-         r
-         \end{pmatrix}
-         = 0
-        ```
+```math
+   이\,때,
+   n_i \lt r_i 라면
+   \begin{pmatrix}
+   n_i \\
+   r_i
+   \end{pmatrix}
+   = 0 이므로
+   \begin{pmatrix}
+   n \\
+   r
+   \end{pmatrix}
+   = 0
+```
 
         위와 같은 수식을 통해 구하고자 하는 이항 계수 값을 작은 여러 개의 이항 계수의 곱으로 표현할 수 있다.
 
