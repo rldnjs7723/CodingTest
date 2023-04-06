@@ -4,6 +4,9 @@
 
 1. [BOJ_9527 1의 개수 세기](#1-boj_9527-1의-개수-세기-백준-링크-소스-코드)
 2. [BOJ_2571 색종이 - 3](#2-boj_2571-색종이-3-백준-링크-소스-코드)
+3. [BOJ_1010 다리 놓기](#3-boj_1010-다리-놓기-백준-링크-소스-코드)
+4. [BOJ_11401 이항 계수 3](#4-boj_11401-이항-계수-3-백준-링크-소스-코드)
+5. [BOJ_11402 이항 계수 4](#5-boj_11402-이항-계수-4-백준-링크-소스-코드)
 
 ## 1. BOJ_9527 1의 개수 세기 [(백준 링크)](https://www.acmicpc.net/problem/9527) [(소스 코드)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/9000/Main_9527.java)
 
@@ -52,3 +55,33 @@ Answer : 400
 ```
 
 더 짧은 너비를 만날 경우 현재까지의 넓이를 계산한 뒤, 짧은 너비의 직사각형에 대해 넓이를 새로 계산하도록 구현하였다.
+
+## 3. BOJ_1010 다리 놓기 [(백준 링크)](https://www.acmicpc.net/problem/1010) [(소스 코드)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/1000/Main_1010.java)
+
+### 문제 요약
+
+$0 \lt N \leq M \lt 30$ 일 때 M개의 다리 중에서, N개를 선택 하는 경우의 수 $_MC_N$를 계산하는 문제.
+
+### 풀이 아이디어
+
+입력의 크기가 30으로 작기 때문에, 시간 복잡도가 $O(N^2)$인 [다이나믹 프로그래밍 풀이](https://github.com/rldnjs7723/CodingTest#modulo-나머지-연산)로 해결 가능하다.
+
+## 4. BOJ_11401 이항 계수 3 [(백준 링크)](https://www.acmicpc.net/problem/11401) [(소스 코드)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/11000/Main_11401.java)
+
+### 문제 요약
+
+$1 \leq N \leq 4,000,000$ 일 때 이항 계수 $\begin{pmatrix}N\\K \end{pmatrix}$를 구하는 문제
+
+### 풀이 아이디어
+
+입력의 크기가 400만이므로 시간 복잡도가 $O(N^2)$인 다이나믹 프로그래밍 풀이로는 해결이 불가능하기 때문에 [페르마의 소정리를 이용한 풀이](https://github.com/rldnjs7723/CodingTest#modulo-나머지-연산)로 해결 가능하다.
+
+## 5. BOJ_11402 이항 계수 4 [(백준 링크)](https://www.acmicpc.net/problem/11402) [(소스 코드)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/11000/Main_11402.java)
+
+### 문제 요약
+
+$1 \lt N \lt 10^{18}$ 일 때 이항 계수 $\begin{pmatrix}N\\K \end{pmatrix}$를 구하는 문제
+
+### 풀이 아이디어
+
+입력의 크기가 long 범위까지 증가하여 n!을 계산해야지 풀 수 있는 페르마의 소정리를 이용한 풀이로는 불가능하다. [뤼카의 정리](https://github.com/rldnjs7723/CodingTest#modulo-나머지-연산)를 적용하여 여러 개의 작은 이항 계수를 페르마의 소정리를 통해 계산한 뒤 곱하여 계산하는 방법으로 해결 가능하다.

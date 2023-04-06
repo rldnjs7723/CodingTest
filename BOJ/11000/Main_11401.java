@@ -4,20 +4,19 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 /**
- * SWEA 5607번 조합
+ * 백준 11401번 이항 계수 3
  * 문제 분류: 수학 (페르마의 소정리), 분할 정복을 이용한 거듭제곱
  * @author Giwon
  */
-public class Solution_5607 {
-	public static final long DIV = 1234567891;
-	public static final int MAX = 31, N_MAX = 1000000;
+public class Main_11401 {
+	public static final long DIV = 1000000007;
+	public static final int MAX = 31, N_MAX = 4000000;
 	public static long[] twoPow = new long[MAX];
 	public static long[] factorial = new long[N_MAX + 1];
 	
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st;
-		
+
 		// 2^i = twoPow[i]
 		twoPow[0] = 1;
 		for(int i = 1; i < MAX; i++) {
@@ -31,15 +30,12 @@ public class Solution_5607 {
 			factorial[i] %= DIV;
 		}
 		
-		final int T = Integer.parseInt(br.readLine().trim());
-		int N, R;
-		for(int test_case = 1; test_case <= T; test_case++) {
-			st = new StringTokenizer(br.readLine());
-			N = Integer.parseInt(st.nextToken());
-			R = Integer.parseInt(st.nextToken());
-			
-			System.out.println("#" + test_case + " " + combination(N, R));
-		}
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		int N = Integer.parseInt(st.nextToken());
+		int R = Integer.parseInt(st.nextToken());
+
+		// 이항 계수 계산
+		System.out.println(combination(N, R));
 		br.close();
 	}
 	
@@ -84,4 +80,3 @@ public class Solution_5607 {
 		return result;
 	}
 }
-

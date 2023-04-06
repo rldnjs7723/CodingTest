@@ -222,17 +222,32 @@
    b<sup>X - 2</sup> = b<sup>-1</sup> mod X
 3. 이항 계수 [(11401)](https://www.acmicpc.net/problem/11401)
 
-    1. 페르마의 소정리를 이용한 계산  
+    1. 다이나믹 프로그래밍을 이용한 계산 [(1010)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/1000/Main_1010.java)  
+       r이 0이나 n일 때 <sub>n</sub>C<sub>r</sub> = 1  
+       나머지의 경우 <sub>n</sub>C<sub>r</sub> = <sub>n-1</sub>C<sub>r-1</sub> + <sub>n-1</sub>C<sub>r</sub>  
+       이러한 특성에 분배 법칙을 적용하여 계산할 수도 있다.  
+       시간 복잡도 O(n<sup>2</sup>)
+
+    2. 페르마의 소정리를 이용한 계산 [(11401)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/11000/Main_11401.java)  
        <sub>n</sub>C<sub>r</sub> = $\frac{n!}{r! × (n - r)!}$  
        이항 계수의 나머지를 계산할 때, 나누기에 대해서는 분배 법칙이 성립하지 않기 때문에  
        페르마의 소정리를 통해 (r! × (n - r)!)<sup>-1</sup>의 나머지를 계산하여  
-       ((n!) % X + (r! × (n - r)!)<sup>-1</sup> % X) % X를 계산하면  
-       <sub>n</sub>C<sub>r</sub>를 X로 나눈 나머지를 계산할 수 있다.
+       ((n!) % X × (r! × (n - r)!)<sup>-1</sup> % X) % X를 계산하면  
+       <sub>n</sub>C<sub>r</sub>를 X로 나눈 나머지를 계산할 수 있다.  
+       시간 복잡도 O(log N)
 
-    2. 다이나믹 프로그래밍을 이용한 계산 [(1010)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/1000/Main_1010.java)  
-       r이 0이나 n일 때 <sub>n</sub>C<sub>r</sub> = 1  
-       나머지의 경우 <sub>n</sub>C<sub>r</sub> = <sub>n-1</sub>C<sub>r-1</sub> + <sub>n-1</sub>C<sub>r</sub>  
-       이러한 특성에 분배 법칙을 적용하여 계산할 수도 있다.
+    3. 뤼카의 정리를 이용한 계산 [(11402)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/11000/Main_11402.java) [(참고)](https://bowbowbow.tistory.com/2)  
+       페르마의 소정리를 이용하는 경우, 기본적으로 n!을 계산할 수 있어야 사용할 수 있는 방법이다.  
+       이 때, n 값이 너무 큰 경우(10<sup>18</sup>) 시간, 공간 복잡도 측면에서 수용할 수 없는 범위이므로 계산할 수 없다.  
+       뤼카의 정리는 <sub>n</sub>C<sub>r</sub> mod p를 계산하고자 할 때,  
+       n = n<sub>m</sub>p<sup>m</sup> + n<sub>m-1</sub>p<sup>m-1</sup> + ... + n<sub>1</sub>p + n<sub>0</sub>  
+       r = r<sub>m</sub>p<sup>m</sup> + r<sub>m-1</sub>p<sup>m-1</sup> + ... + r<sub>1</sub>p + r<sub>0</sub>  
+       위와 같이 n과 r을 각각 p진법 전개식으로 나타낼 수 있으며,  
+       $\begin{pmatrix}n\\r \end{pmatrix}=$
+       $\prod_{i=0}^m$
+       $\begin{pmatrix}n_i\\r_i \end{pmatrix} \,\bmod\, p$  
+       위와 같은 수식을 통해 구하고자 하는 이항 계수 값을 작은 여러 개의 이항 계수의 곱으로 표현할 수 있다.  
+       이 때, $n_i \lt r_i$라면 $\begin{pmatrix}n_i\\r_i \end{pmatrix}=0$ 이므로 $\begin{pmatrix}n\\r \end{pmatrix}=0$이 된다.
 
 ## [Intermediate Value Theorem (중간값 정리)](#목차)
 
@@ -246,47 +261,43 @@
 2. 항이 3개인 점화식에 대한 행렬 멱법
 
     ```
-    F(n) = a * F(n-1) + b * F(n-2) + c * F(n-3)
+    F(n) = a × F(n-1) + b × F(n-2) + c × F(n-3)
     ```
 
     을 만족할 때,
 
-    ```
-    F(n)     (a b c)   F(n-1)
-    F(n-1) = (a b c) * F(n-2)
-    F(n-2)   (a b c)   F(n-3)
-    ```
+    $\begin{pmatrix}F_{n}\\F_{n-1}\\F_{n-2} \end{pmatrix}=$
+    $\begin{pmatrix}a&b&c\\a&b&c\\a&b&c \end{pmatrix}\times$
+    $\begin{pmatrix}F_{n-1}\\F_{n-2}\\F_{n-3} \end{pmatrix}$
 
-    ```
-    F(n)     (a b c)n-2   F(2)
-    F(n-1) = (a b c)    * F(1)
-    F(n-2)   (a b c)      F(0)
-    ```
+    $\begin{pmatrix}F_{n}\\F_{n-1}\\F_{n-2} \end{pmatrix}=$
+    $\begin{pmatrix}a&b&c\\a&b&c\\a&b&c \end{pmatrix}^{n-2}\times$
+    $\begin{pmatrix}F_{2}\\F_{1}\\F_{0} \end{pmatrix}$
 
 3. 피보나치 수 행렬 멱법  
-   ( 1 1 ) <sup>n</sup> = ( F<sub>n+1</sub> F<sub>n</sub> )  
-   ( 1 0 )  ( F<sub>n</sub> F<sub>n-1</sub> )
+   $\begin{pmatrix}1&1\\1&0 \end{pmatrix}^n=$
+   $\begin{pmatrix}F_{n+1}&F_{n}\\F_{n}&F_{n-1} \end{pmatrix}$
 
 ## [GCD, LCM (최대 공약수, 최소 공배수)](#목차)
 
 1. 최대 공약수, 최소 공배수 성질
 
     ```
-    A = GCD * a
-    B = GCD * b
+    A = GCD × a
+    B = GCD × b
     ```
 
     를 만족할 때,
 
     ```
-    LCM = GCD * a * b
-    A * B = GCD * LCM
+    LCM = GCD × a × b
+    A × B = GCD × LCM
     ```
 
 2. 유클리드 호제법
 
     ```
-    두 양의 정수 a, b (a > b)에 대해 a = b * q + r (0 <= r < b)라 하면,
+    두 양의 정수 a, b (a > b)에 대해 a = b × q + r (0 ≤ r < b)라 하면,
     a, b의 최대 공약수는 b와 r의 최대 공약수와 같다.
     즉, GCD(a, b) = GCD(b, r)
     ```
@@ -294,11 +305,11 @@
     위 성질을 반복해서 적용하면 두 수의 최대 공약수를 구할 수 있다.
 
     ```
-    a = b * q1 + r1
-    b = r1 * q2 + r2
-    r1 = r2 * q3 + r3
+    a = b × q1 + r1
+    b = r1 × q2 + r2
+    r1 = r2 × q3 + r3
     ...
-    rn-1 = rn * qn+1
+    rn-1 = rn × qn+1
     GCD(a, b) = rn
     ```
 
