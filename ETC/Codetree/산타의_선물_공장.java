@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -29,6 +30,7 @@ public class 산타의_선물_공장 {
 	
 	public static void main(String[] args) throws IOException {
 		System.setIn(new FileInputStream("res/input.txt"));
+//		System.setOut(new PrintStream("res/output.txt"));
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -38,44 +40,18 @@ public class 산타의_선물_공장 {
 			parser(br.readLine());
 		}
 		
-		find(51060488);
-		
-		Box temp = belts[1].head;
-		StringBuilder sb = new StringBuilder();
-		StringBuilder sb2 = new StringBuilder();
-		StringBuilder sb3 = new StringBuilder();
-		StringBuilder sb4 = new StringBuilder();
-		
-		sb.append("Debug: ");
-		while(temp.next != null) {
-			sb.append(temp.id + " ");
-			sb2.append(temp.b_num + " ");
-			sb3.append(temp.next.id + " ");
-			temp = temp.next;
-		}
-		sb.append(temp.id + " ");
-		sb2.append(temp.b_num + " ");
-		bw.write(sb.toString() + "\n");
-		bw.write(sb2.toString() + "\n");
-		bw.write(sb3.toString() + "\n");
-		
-		while(temp.prev != null) {
-			sb4.append(temp.id + " ");
-			temp = temp.prev;
-		}
-		sb4.append(temp.id + " ");
-		bw.write(sb4.toString() + "\n");
-		
 		bw.close();
 		br.close();
 	}
 	
 	public static void parser(String input) throws IOException {
+		System.out.println(input);
 		StringTokenizer st = new StringTokenizer(input);
 		int type = Integer.parseInt(st.nextToken());
 		
 		int n, m, w_max, r_id, f_id, b_num;
 		int[] idArr, wArr;
+		long result;
 		switch (type) {
 			case 100:
 				n = Integer.parseInt(st.nextToken());
@@ -95,40 +71,52 @@ public class 산타의_선물_공장 {
 			case 200: 
 				w_max = Integer.parseInt(st.nextToken());
 				
-				bw.write(unload(w_max) + "\n");
+				if(w_max == 510015537) {
+//					System.out.println("breakpoint");
+//					System.out.println(boxMap.get(772655668));
+//					Box temp = boxMap.get(772655668);
+//					while(temp != null) {
+//						System.out.print(temp.id + " ");
+//						temp = temp.next;
+//					}
+				}
+				
+				result = unload(w_max);
+				bw.write(result + "\n");
 				break;
 				
 			case 300:
 				r_id = Integer.parseInt(st.nextToken());
 				
-				bw.write(remove(r_id) + "\n");
+				result = remove(r_id);
+				bw.write(result + "\n");
 				break;
 			
 			case 400:
 				f_id = Integer.parseInt(st.nextToken());
 				
-//				bw.write(find(f_id) + "\n");
+				result = find(f_id);
+				bw.write(result + "\n");
 				break;
 				
 			case 500:
 				b_num = Integer.parseInt(st.nextToken());
 				
-				bw.write(malfunction(b_num) + "\n");
+				result = malfunction(b_num);
+				bw.write(result + "\n");
 				break;
 			default:
 				break;
 		}
+		
+		if(belts[1] != null && belts[1].head.next.id == 772655668) {
+			System.out.println("breakpoint");
+			
+			Box temp = boxMap.get(289702182);
+			System.out.println(temp.prev.id);
+			System.out.println(temp.next.id);
+		}
 	}
-	
-//	public static void getBug() {
-//		if(boxMap == null) return;
-//		
-//		for(Box box: boxMap.values()) {
-//			if(box.prev == null || box.next == null) {
-//				System.out.println("BUG");
-//			}
-//		}
-//	}
 	
 	// 1. 공장 설립
 	public static void init(int n, int m, int[] idArr, int[] wArr) {
@@ -163,9 +151,9 @@ public class 산타의_선물_공장 {
 		Box first;
 		Belt belt;
 		for(int i = 1; i <= beltNum; i++) {
+			belt = belts[i];
 			// 고장난 벨트인 경우 생략
 			if(brokenBelt.contains(i)) continue;
-			belt = belts[i];
 			
 			first = belt.poll();
 			// 물건이 없는 벨트는 생략
@@ -209,25 +197,25 @@ public class 산타의_선물_공장 {
 		// 물건이 위치한 벨트 탐색
 		Box first = boxMap.get(f_id);
 		Belt belt = belts[first.b_num];
+		Box head = belt.head;
+		Box tail = belt.tail;
 		Box last = belt.tail.prev;
 		
 		// 벨트 앞에 전부 다 이동
-		belt.head.next = first;
-		first.prev = belt.head;
-		belt.tail.prev = first.prev;
-		first.prev.next = belt.tail;
+		Box prevFirst = belt.head.next;
+		Box prevLast = first.prev;
 		
-//		// 연결 해제
-//		Box last = belt.tail.prev;
-//		Box prevFirst = belt.head.next;
-//		target.prev.next = belt.tail;
-//		belt.tail.prev = target.prev;
-//
-//		// 벨트 앞에 전부 다 이동
-//		belt.head.next = target;
-//		prevFirst.prev = last;
-//		target.prev = belt.head;
-//		last.next = prevFirst;
+		// 맨 앞에 위치한 경우가 아닐 때만 이동
+		if(prevFirst.id != first.id) {
+			head.next = first;
+			first.prev = head;
+			
+			last.next = prevFirst;
+			prevFirst.prev = last;
+			
+			prevLast.next = tail;
+			tail.prev = prevLast;
+		}
 		
 		return belt.id;
 	}
@@ -269,7 +257,7 @@ public class 산타의_선물_공장 {
 		
 		// 현재 벨트로의 모든 매핑을 대체할 벨트로 변경
 		for(int i = 1; i <= beltNum; i++) {
-			if(belts[i] == src) belts[i] = dest;
+			if(belts[i].id == src.id) belts[i] = dest;
 		}
 		
 		// 고장난 벨트에 추가
@@ -284,7 +272,7 @@ public class 산타의_선물_공장 {
 		// 벨트 번호
 		int b_num;
 		// 물건 무게
-		int w;
+		long w;
 		// 이전 노드, 다음 노드
 		Box prev, next;
 		
@@ -294,6 +282,11 @@ public class 산타의_선물_공장 {
 			this.b_num = b_num;
 			this.prev = null;
 			this.next = null;
+		}
+
+		@Override
+		public String toString() {
+			return "Box [id=" + id + "]";
 		}
 	}
 	
@@ -323,7 +316,7 @@ public class 산타의_선물_공장 {
 		// 맨 앞에 위치한 물건 리턴
 		public Box poll() {
 			// 상자가 없다면 null 리턴
-			if(head.next == tail) return null;
+			if(head.next.id == -1) return null;
 			
 			// 맨 앞에 위치한 물건 연결 해제
 			Box first = head.next;
