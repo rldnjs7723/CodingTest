@@ -1,6 +1,8 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
@@ -17,20 +19,24 @@ public class 산타의_선물_공장_2 {
 	public static Map<Integer, Present> presentMap;
 	// 벨트 Index로 접근
 	public static Belt[] conveyorBelt;
+	// 출력용
+	public static BufferedWriter bw;
 	
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		
 		final int q = Integer.parseInt(br.readLine().trim());
 		for(int i = 0; i < q; i++) {
 			parser(br.readLine());
 		}
 		
+		bw.close();
 		br.close();
 	}
 	
 	// 입력 파싱
-	public static void parser(String input) {
+	public static void parser(String input) throws IOException {
 		StringTokenizer st = new StringTokenizer(input);
 		
 		int type = Integer.parseInt(st.nextToken());
@@ -52,29 +58,29 @@ public class 산타의_선물_공장_2 {
 				m_src = Integer.parseInt(st.nextToken());
 				m_dst = Integer.parseInt(st.nextToken());
 				
-				System.out.println(moveAll(m_src, m_dst));
+				bw.write(moveAll(m_src, m_dst) + "\n");
 				break;
 			case 300:
 				m_src = Integer.parseInt(st.nextToken());
 				m_dst = Integer.parseInt(st.nextToken());
 				
-				System.out.println(swapFirst(m_src, m_dst));
+				bw.write(swapFirst(m_src, m_dst) + "\n");
 				break;
 			case 400:
 				m_src = Integer.parseInt(st.nextToken());
 				m_dst = Integer.parseInt(st.nextToken());
 				
-				System.out.println(divideHalf(m_src, m_dst));
+				bw.write(divideHalf(m_src, m_dst) + "\n");
 				break;
 			case 500:
 				p_num = Integer.parseInt(st.nextToken());
 				
-				System.out.println(getPresentInfo(p_num));
+				bw.write(getPresentInfo(p_num) + "\n");
 				break;
 			case 600:
 				b_num = Integer.parseInt(st.nextToken());
 				
-				System.out.println(getBeltInfo(b_num));
+				bw.write(getBeltInfo(b_num) + "\n");
 				break;
 			default:
 				break;
