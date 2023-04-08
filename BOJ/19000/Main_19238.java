@@ -7,7 +7,7 @@ import java.util.Queue;
 import java.util.StringTokenizer;
 
 /**
- * 백준 19238번 스타트 택
+ * 백준 19238번 스타트 택시
  * 문제 분류: 구현, 시뮬레이션, BFS, 자료구조(우선순위 큐)
  * @author Giwon
  */
