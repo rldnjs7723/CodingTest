@@ -115,11 +115,7 @@
 
     6. [Next Permutation (다음 순열)](#next-permutation-다음-순열)
 
-3. [Two Pointers (투포인터 알고리즘)](#two-pointers-투포인터-알고리즘)
-
-    1. [Sliding Window (슬라이딩 윈도우)](#sliding-window-슬라이딩-윈도우)
-
-4. [Data Structure (자료 구조)](#data-structure-자료-구조)
+3. [Data Structure (자료 구조)](#data-structure-자료-구조)
 
     1. [Stack (스택)](#stack-스택)
     2. [Queue (큐)](#queue-큐)
@@ -128,25 +124,24 @@
     5. [Set (집합)](#set-집합)
     6. [LinkedList (연결 리스트)](#linkedlist-연결-리스트)
 
-5. [Bitmasking (비트마스킹)](#bitmasking-비트마스킹)
-6. [Greedy Algorithm (그리디 알고리즘)](#greedy-algorithm-그리디-알고리즘)
-7. [Divide and Conquer (분할 정복)](#divide-and-conquer-분할-정복)
+4. [Greedy Algorithm (그리디 알고리즘)](#greedy-algorithm-그리디-알고리즘)
+5. [Divide and Conquer (분할 정복)](#divide-and-conquer-분할-정복)
 
     1. [Binary Search (이분 탐색)](#binary-search-이분-탐색)
     2. [Parametric Search (매개 변수 탐색)](#parametric-search-매개-변수-탐색)
     3. [Longest Increasing Subsequence (LIS, 최장 증가 부분 수열)](#longest-increasing-subsequence-lis-최장-증가-부분-수열-참고)
 
-8. [Backtracking (백트래킹)](#backtracking-백트래킹)
-9. [Recursive (재귀)](#recursive-재귀)
-10. [Dynamic Programming (다이나믹 프로그래밍)](#dynamic-programming-다이나믹-프로그래밍)
+6. [Backtracking (백트래킹)](#backtracking-백트래킹)
+
+7. [Dynamic Programming (다이나믹 프로그래밍)](#dynamic-programming-다이나믹-프로그래밍)
 
     1. [Longest Common Subsequence (LCS)](#longest-common-subsequence-lcs-9252)
     2. [Lowest Common Ancestor (LCA) 알고리즘](#lowest-common-ancestor-lca-알고리즘)
     3. [Traveling Salesman Problem (TSP, 외판원 문제)](#traveling-salesman-problem-tsp-외판원-문제)
 
-11. [Union Find (Disjoint Set)](#union-find-disjoint-set)
+8. [Union Find (Disjoint Set)](#union-find-disjoint-set)
     1. [Flood Fill 알고리즘](#flood-fill-알고리즘)
-12. [Graph (그래프 탐색 알고리즘)](#graph-그래프-탐색-알고리즘)
+9. [Graph (그래프 탐색 알고리즘)](#graph-그래프-탐색-알고리즘)
 
     1. [Dijkstra (다익스트라 알고리즘)](#dijkstra-다익스트라-알고리즘)
     2. [Bellman-Ford (밸만-포드 알고리즘)](#bellman-ford-밸만-포드-알고리즘)
@@ -160,18 +155,26 @@
 
     6. [Strongly Connected Component (강한 결합 요소)](#strongly-connected-component-강한-결합-요소)
 
-13. [Segment Tree (세그먼트 트리)](#segment-tree-세그먼트-트리)
+10. [Segment Tree (세그먼트 트리)](#segment-tree-세그먼트-트리)
 
-14. [String (문자열)](#string-문자열)
+11. [String (문자열)](#string-문자열)
 
     1. [Knuth-Morris-Pratt (KMP) Pattern Matching](#knuth-morris-pratt-kmp-pattern-matching)
     2. [Rabin-Karp Algorithm (라빈-카프 알고리즘)](#rabin-karp-algorithm-라빈-카프-알고리즘)
     3. [Boyer-Moore Algorithm (보이어-무어 알고리즘)](#boyer-moore-algorithm-보이어-무어-알고리즘)
     4. [Trie (트라이)](#trie-트라이)
 
-15. [Sweeping (스위핑 알고리즘)](#sweeping-스위핑-알고리즘)
-16. [Sorting (정렬 알고리즘)](#sorting-정렬-알고리즘)
+12. [Sorting (정렬 알고리즘)](#sorting-정렬-알고리즘)
+
     1. [Merge Sort (병합 정렬)](#merge-sort-병합-정렬)
+
+13. [ETC. (기타 기법)](#etc-기타-기법)
+
+    1. [Two Pointers (투포인터 알고리즘)](#two-pointers-투포인터-알고리즘)
+    2. [Sliding Window (슬라이딩 윈도우)](#sliding-window-슬라이딩-윈도우)
+    3. [Bitmasking (비트마스킹)](#bitmasking-비트마스킹)
+    4. [Recursive (재귀)](#recursive-재귀)
+    5. [Sweeping (스위핑 알고리즘)](#sweeping-스위핑-알고리즘)
 
 # [Math](#목차) [(수학)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/Math.md)
 
@@ -409,6 +412,8 @@
     ```
 4. 방향에 따라 달라지는 값이 있다면 해당 값을 2번과 같이 미리 정의해두고 사용하면 시간도 적게 걸리고 덜 혼동 된다. [(15683)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/15000/Main_15683.java)
 
+5. BFS를 수행할 때 행, 열의 값이 작은 것을 먼저 선택해야 한다면 위 -> 왼쪽 -> 오른쪽 -> 아래 순서로 탐색을 수행하는 것이 좋다. [(코드트리 빵)](https://github.com/rldnjs7723/CodingTest/blob/main/ETC/Codetree/코드트리_빵.java) 다만 이 경우는 벽이 존재하지 않기 때문에 벽이 존재하는 경우에는 우선순위 큐를 통해 정렬을 하는 것이 좋다.
+
 ## [Depth First Search (깊이 우선 탐색)](#목차)
 
 1. [트리 구조](#tree-트리)에서 루트 노드부터 더 이상 자식 노드가 없을 때까지 한 방향으로(왼쪽 자식) 탐색하고, 이후에는 마지막에 만난 갈림길에서 다른 방향으로 탐색을 수행하는 방식
@@ -469,15 +474,6 @@
     	return true;
     }
     ```
-
-# [Two Pointers](#목차) [(투포인터 알고리즘)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/TwoPointers.md)
-
-1.  index 값을 가지는 i, j를 사용하여, 일정 조건에 따라 `i와 j를 증감 연산자로` 이동시켜 불필요한 경우의 수를 제거하는 알고리즘. [(16472)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/16000/Main_16472.java)
-2.  슬라이딩 윈도우와 비슷하지만, 구간의 너비가 가변적이라는 차이점이 존재. [(Two Pointers)](https://butter-shower.tistory.com/226)
-
-## [Sliding Window (슬라이딩 윈도우)](#목차)
-
-1.  고정 사이즈의 윈도우가 이동하면서 윈도우 내에 있는 데이터로 문제를 푸는 방식
 
 # [Data Structure](#목차) [(자료 구조)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/DataStructure.md)
 
@@ -547,22 +543,6 @@
     3. LinkedList: 동적, 조회 O(N), 삽입/삭제 O(1)
 2. 기본적으로 A형 알고리즘 문제를 풀 때는 ArrayList를 사용하는 것이 메모리, 시간적인 측면에서 더 좋은 결과를 가져옴.
 3. 리스트에 삽입, 삭제 연산을 여러 번 수행해야 할 경우 뒤 인덱스부터 수행하면 불필요한 처리 작업을 수행하지 않아도 된다.
-
-# [Bitmasking](#목차) [(비트마스킹)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/Bitmasking.md)
-
-1. 각각의 비트를 하나의 플래그로 사용하여 상태를 표현할 때 사용
-2. 여러 개의 데이터를 압축하여 하나의 정수 자료형으로 나타낼 때 사용
-3. 비트 연산자
-
-    1. 비트 추가할 때: | 연산자
-    2. 비트 체크할 때: & 연산자
-    3. 비트 제거할 때: - 연산자
-    4. 비트 반전시킬 때: ~ 연산자
-    5. 비트 가득 찬 상태와 비교할 때 XOR 연산자 ^도 가끔 사용
-
-4. 팁
-    1. 비트 선언할 때 0b1111과 같이 `이진수로 숫자를 입력할 수 있다.` [(2615)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/2000/Main_2615.java)
-    2. Integer.toBinaryString()으로 정수 자료형을 이진수로 출력할 수 있다.
 
 # [Greedy Algorithm](#목차) [(그리디 알고리즘)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/Greedy.md)
 
@@ -731,13 +711,6 @@
 1. 해를 찾는 도중, 해가 아니라서 막히면 되돌아가서 다시 해를 찾아가는 기법
 2. 되돌아 갈 때 이전 상태를 반복하지 않도록 하는 장치와 현재 선택했던 상태를 지우는 방법을 구현해주어야 한다. [(1799)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/1000/Main_1799.java) [(2239)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/2000/Main_2239.java)
 3. DFS를 수행하면서 유망하지 않은 노드가 어떤 것인지 확실하게 판별해야 함. 완전탐색을 수행하면서 '시간 초과'나 '메모리 초과'가 아닌 '틀렸습니다'가 발생하는 경우 지금까지 당연히 맞다고 생각했던 조건을 다시 생각해볼 필요가 있음 [(6987)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/6000/Main_6987.java)
-
-# [Recursive (재귀)](#목차)
-
-1. 자신의 정의하는 내용 안에 자신을 포함하는 형태의 함수
-2. 주어진 문제의 해를 구하기 위해 `동일하면서 더 작은 문제(최적 부분 구조)`의 해를 이용하는 방법
-3. 점화식 / 수열의 귀납적 정의에 자주 이용 [(9527)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/9000/Main_9527.java)
-4. [DFS](#depth-first-search-깊이-우선-탐색) 탐색을 수행할 때 Stack을 사용하는 경우보다 빠름. `재귀 깊이가 너무 깊지 않은 경우 재귀로 구현하는 것이 좋음` [(3234)](https://github.com/rldnjs7723/CodingTest/blob/main/SWEA/3000/Solution_3234.java)
 
 # [Dynamic Programming](#목차) [(다이나믹 프로그래밍)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/DynamicProgramming.md)
 
@@ -1378,6 +1351,62 @@
     }
     ```
 
+## [Fenwick Tree](#목차) [(Binary Indexed Tree, BIT)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/SegmentTree.md)
+
+1. 세그먼트 트리의 메모리를 절약하기 위한 목적으로 고안. 구간 합 대신 부분 합만을 빠르게 계산할 수 있는 자료구조를 만들어도 구간 합을 빠르게 계산할 수 있다. [(참고)](https://www.crocus.co.kr/666)
+2. 세그먼트 트리는 수열의 길이가 N일 때 4N 정도의 배열을 선언한 뒤 트리를 구현했지만, 펜윅 트리는 N 크기의 배열만 선언해도 된다.
+3. 알고리즘
+
+    1. 기본적인 아이디어는 2의 보수를 이용하여 맨 뒤에 위치한 1의 위치를 파악하는 것으로 시작된다.
+
+    ```
+    i & -i
+    ```
+
+    2. 수열을 입력 받을 때는 펜윅 트리를 구성하기 편하게 Index가 1부터 시작하도록 하는 것이 좋다.
+    3. 특정 원소 값 수정하기
+
+    ```java
+    public void update(int i, int diff) {
+      // 수를 담당하는 구간 전부 갱신
+      while(i <= N) {
+         tree[i] += diff;
+         // 마지막 1의 값을 더하는 방식으로 수행
+         i += i & -i;
+      }
+    }
+    ```
+
+    세그먼트 트리와 달리 수열을 한 번에 받아 트리를 구성하는 과정이 없고, 수열의 각 Index를 하나씩 업데이트 하는 과정으로 대체할 수 있다.
+
+    ```java
+    for(int i = 1; i <= N; i++) {
+      update(i, sequence[i]);
+    }
+    ```
+
+    4. 구간 합 구하기
+
+    ```java
+    // 1 ~ i까지의 합 계산
+    public int sum(int i) {
+      int result = 0;
+      while(i > 0) {
+         result += tree[i];
+         // 마지막 1의 값을 빼는 방식으로 수행
+         i -= i & -i;
+      }
+
+      return result;
+    }
+    ```
+
+    i ~ j의 구간 합을 구하고 싶다면 위의 Index 1부터의 합을 계산하는 함수를 통해 1 ~ j 까지의 합과 1 ~ i - 1 까지의 합을 빼서 계산하면 된다.
+
+    ```
+    sum(j) - sum(i - 1)
+    ```
+
 # [String](#목차) [(문자열)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/String.md)
 
 ## [Knuth-Morris-Pratt (KMP) Pattern Matching](#목차)
@@ -1450,8 +1479,6 @@
 
 ## [Trie (트라이)](#목차)
 
-# [Sweeping (스위핑 알고리즘)](#목차)
-
 # [Sorting (정렬 알고리즘)](#목차)
 
 ## [Merge Sort (병합 정렬)](#목차)
@@ -1513,4 +1540,47 @@
         }
         ```
 
-    $$
+# [ETC. (기타 기법)](#목차)
+
+## [Two Pointers](#목차) [(투포인터 알고리즘)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/TwoPointers.md)
+
+1.  index 값을 가지는 i, j를 사용하여, 일정 조건에 따라 `i와 j를 증감 연산자로` 이동시켜 불필요한 경우의 수를 제거하는 알고리즘. [(16472)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/16000/Main_16472.java)
+2.  슬라이딩 윈도우와 비슷하지만, 구간의 너비가 가변적이라는 차이점이 존재. [(Two Pointers)](https://butter-shower.tistory.com/226)
+
+## [Sliding Window (슬라이딩 윈도우)](#목차)
+
+1.  고정 사이즈의 윈도우가 이동하면서 윈도우 내에 있는 데이터로 문제를 푸는 방식
+
+## [Bitmasking](#목차) [(비트마스킹)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/Bitmasking.md)
+
+1. 각각의 비트를 하나의 플래그로 사용하여 상태를 표현할 때 사용
+2. 여러 개의 데이터를 압축하여 하나의 정수 자료형으로 나타낼 때 사용
+3. 비트 연산자
+
+    1. 비트 추가할 때: | 연산자
+    2. 비트 체크할 때: & 연산자
+    3. 비트 제거할 때: - 연산자
+    4. 비트 반전시킬 때: ~ 연산자
+    5. 비트 가득 찬 상태와 비교할 때 XOR 연산자 ^도 가끔 사용
+
+4. 팁
+    1. 비트 선언할 때 0b1111과 같이 `이진수로 숫자를 입력할 수 있다.` [(2615)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/2000/Main_2615.java)
+    2. Integer.toBinaryString()으로 정수 자료형을 이진수로 출력할 수 있다.
+
+## [Recursive (재귀)](#목차)
+
+1. 자신의 정의하는 내용 안에 자신을 포함하는 형태의 함수
+2. 주어진 문제의 해를 구하기 위해 `동일하면서 더 작은 문제(최적 부분 구조)`의 해를 이용하는 방법
+3. 점화식 / 수열의 귀납적 정의에 자주 이용 [(9527)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/9000/Main_9527.java)
+4. [DFS](#depth-first-search-깊이-우선-탐색) 탐색을 수행할 때 Stack을 사용하는 경우보다 빠름. `재귀 깊이가 너무 깊지 않은 경우 재귀로 구현하는 것이 좋음` [(3234)](https://github.com/rldnjs7723/CodingTest/blob/main/SWEA/3000/Solution_3234.java)
+
+## [Sweeping (스위핑 알고리즘)](#목차)
+
+## [Prefix Sum (누적 합)](#목차)
+
+1. 앞선 Index에 대한 정보를 뒤의 Index가 저장하고 있다는 특성을 이용하여 문제를 해결하는 방법
+
+## [Ad Hoc (애드 혹)](#목차)
+
+1. 해당 문제를 풀기 위해 잘 알려진 알고리즘을 적용하지 않고 해결할 수 있는 유형의 문제
+2. 구현, 수학, 그리디 관련이 포함되는 경우가 있고, 문제의 규칙을 파악해야 하는 문제도 있다. [(16919)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/16000/Main_16919.java)
