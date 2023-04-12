@@ -3,6 +3,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 /**
@@ -22,10 +23,18 @@ public class Main_10868 {
 		final int M = Integer.parseInt(st.nextToken());
 		
 		FenwickTree fenwickTree = new FenwickTree(N);
-		for(int i = 1; i <= M; i++) {
+		for(int i = 1; i <= N; i++) {
 			fenwickTree.updateMinVal(i, Integer.parseInt(br.readLine().trim()));
 		}
 		
+		int a, b;
+		for(int i = 0; i < M; i++) {
+			st = new StringTokenizer(br.readLine());
+			a = Integer.parseInt(st.nextToken());
+			b = Integer.parseInt(st.nextToken());
+			
+			bw.write(fenwickTree.getMinValue(a, b) + "\n");
+		}
 		
 		bw.close();
 		br.close();
@@ -49,10 +58,8 @@ public class Main_10868 {
 			this.tree2 = new int[N + 1];
 			
 			// 값 초기화
-			for(int i = 0; i <= N; i++) {
-				this.tree[i] = Integer.MAX_VALUE;
-				this.tree2[i] = Integer.MAX_VALUE;
-			}
+			Arrays.fill(this.tree, Integer.MAX_VALUE);
+			Arrays.fill(this.tree2, Integer.MAX_VALUE);
 		}
 		
 		// a, b 사이의 최솟값 리턴
@@ -98,7 +105,7 @@ public class Main_10868 {
 		// 역방향 펜윅 트리 업데이트
 		public void update2(int i, int val) {
 			while(i > 0) {
-				tree[i] = Math.min(tree[i], val);
+				tree2[i] = Math.min(tree2[i], val);
 				i -= i & -i;
 			}
 		}

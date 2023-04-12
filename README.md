@@ -1409,6 +1409,63 @@
     sum(j) - sum(i - 1)
     ```
 
+4. 펜윅 트리로 최솟값 구하기 [(참고)](https://tkql.tistory.com/69)
+
+    [1, K]에서의 최솟값을 구하는 경우에는 일반적인 펜윅 트리로도 최솟값을 구할 수 있으나, 값이 갱신되거나 임의의 구간 [a, b]에서의 최솟값을 구하는 경우 불필요한 값이 포함되어 있기 때문에 사용할 수 없다.  
+    이 경우 펜윅 트리를 하나는 정방향, 다른 하나는 역방향으로 구성하여 첫 번째 트리에서는 b부터 a까지의 최솟값을, 두 번째 트리에서는 a부터 b까지의 최솟값을 비교하여 찾을 수 있다.
+
+    ```java
+    // 값 갱신 (정방향, 역방향 한 번씩)
+    public void updateMinVal(int i, int val) {
+       sequence[i] = val;
+       update(i, val);
+       update2(i, val);
+    }
+
+    // 일반적인 펜윅 트리 업데이트
+    public void update(int i, int val) {
+       while(i <= N) {
+          tree[i] = Math.min(tree[i], val);
+          i += i & -i;
+       }
+    }
+
+    // 역방향 펜윅 트리 업데이트
+    public void update2(int i, int val) {
+       while(i > 0) {
+          tree2[i] = Math.min(tree2[i], val);
+          i -= i & -i;
+       }
+    }
+    ```
+
+    ```java
+    // a, b 사이의 최솟값 리턴
+    public int getMinValue(int a, int b) {
+      int min = Integer.MAX_VALUE;
+
+      int prev, curr;
+      prev = a;
+      curr = prev + (prev & - prev);
+      while(curr <= b) {
+         min = Math.min(min, tree2[prev]);
+         prev = curr;
+         curr = prev + (prev & - prev);
+      }
+      min = Math.min(min, sequence[prev]);
+
+      prev = b;
+      curr = prev - (prev & -prev);
+      while(curr >= a) {
+         min = Math.min(min, tree[prev]);
+         prev = curr;
+         curr = prev - (prev & -prev);
+      }
+
+      return min;
+    }
+    ```
+
 # [String](#목차) [(문자열)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/String.md)
 
 ## [Knuth-Morris-Pratt (KMP) Pattern Matching](#목차)
