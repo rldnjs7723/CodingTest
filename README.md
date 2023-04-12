@@ -157,6 +157,8 @@
 
 10. [Segment Tree (세그먼트 트리)](#segment-tree-세그먼트-트리)
 
+    1. [Fenwick Tree (Binary Indexed Tree, BIT)](#fenwick-tree-binary-indexed-tree-bit)
+
 11. [String (문자열)](#string-문자열)
 
     1. [Knuth-Morris-Pratt (KMP) Pattern Matching](#knuth-morris-pratt-kmp-pattern-matching)
