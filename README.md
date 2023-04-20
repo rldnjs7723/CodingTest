@@ -165,6 +165,7 @@
     2. [Rabin-Karp Algorithm (라빈-카프 알고리즘)](#rabin-karp-algorithm-라빈-카프-알고리즘)
     3. [Boyer-Moore Algorithm (보이어-무어 알고리즘)](#boyer-moore-algorithm-보이어-무어-알고리즘)
     4. [Trie (트라이)](#trie-트라이)
+    5. [Aho-Corasick (아호-코라식-알고리즘)](#aho-corasick-아호-코라식-알고리즘)
 
 12. [Sorting (정렬 알고리즘)](#sorting-정렬-알고리즘)
 
@@ -177,6 +178,9 @@
     3. [Bitmasking (비트마스킹)](#bitmasking-비트마스킹)
     4. [Recursive (재귀)](#recursive-재귀)
     5. [Sweeping (스위핑 알고리즘)](#sweeping-스위핑-알고리즘)
+    6. [Prefix Sum (누적 합)](#prefix-sum-누적-합)
+    7. [Ad Hoc (애드 혹)](#ad-hoc-애드-혹)
+    8. [Sparse Table (희소 배열)](#sparse-table-희소-배열)
 
 # [Math](#목차) [(수학)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/Math.md)
 
@@ -1516,6 +1520,9 @@
    }
    ```
 
+4. 오토마타 방식으로 구현하기
+   ![오토마타](https://user-images.githubusercontent.com/20474034/233273807-83bbd053-4604-493f-9728-683fa9072017.PNG)
+
 ## [Rabin-Karp Algorithm (라빈-카프 알고리즘)](#목차)
 
 1. 문자열을 해싱한 뒤 해시 값으로 비교하는 알고리즘
@@ -1605,6 +1612,72 @@
    ```
 
 ## [Aho-Corasick](#목차) [(아호-코라식 알고리즘)](https://github.com/rldnjs7723/CodingTest/blob/main/Ideas/Trie.md)
+
+1. 일대다 문자열 패턴 매칭 알고리즘. 일치하는지 판단할 패턴 문자열이 여러 개인 경우 패턴을 통해서 트라이를 구성한 뒤, 트라이 내부에서 BFS를 통해 Fail이 발생했을 때 이동할 노드를 탐색한다. [(그림 출처)](https://ansohxxn.github.io/algorithm/ahocorasick/)
+
+![아호코라식](https://user-images.githubusercontent.com/20474034/233271722-a5ce6378-6780-4493-a7f3-58f3aeb55dae.PNG)
+
+2. 알고리즘 [(10538)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/10000/Main_10538.java)
+
+   1. 트라이 구성 이후 Fail 시 이동할 노드 탐색  
+      1-1. 현재 자신을 Fail 노드로 가리키는 경우 또 Fail이 발생했을 때 이동할 위치를 탐색하는 것이기 때문에 루트 노드의 자식 노드는 루트 노드를 가리키도록 설정
+
+   ```java
+   // BFS를 통해 트라이 노드의 Fail 노드 구성
+   public void findFail() {
+      Queue<Node> bfsQueue = new ArrayDeque<>();
+      // 루트 노드에서 fail 하면 루트 노드로 이동
+      root.fail = root;
+      bfsQueue.offer(root);
+
+      Node curr = null, next, fail;
+      while(!bfsQueue.isEmpty()) {
+         curr = bfsQueue.poll();
+
+         // 리프 노드인 경우 중단
+         if(curr.isLeaf()) break;
+
+         // 이진 트라이
+         for(int idx = 0; idx < 2; idx++) {
+            next = curr.child[idx];
+            // Fail인 경우 생략
+            if(next == null) continue;
+
+            // 루트 노드의 자식이 실패한 경우 반드시 루트로 이동
+            if(curr == root) next.fail = root;
+            else {
+               // Fail 노드 탐색
+               fail = curr.fail;
+               // 현재 노드에서 실패했을 때 이동하는 노드에서 다음 위치가 존재할 때까지 올라가기
+               while(fail != root && fail.child[idx] == null) {
+                  fail = fail.fail;
+               }
+               if(fail.child[idx] != null) fail = fail.child[idx];
+
+               next.fail = fail;
+            }
+
+            // 자식 노드 Queue에 넣기
+            bfsQueue.offer(next);
+         }
+      }
+   }
+   ```
+
+   2. Fail이 발생한 경우 KMP와 동일하게 재귀적으로 다음 문자가 존재할 때까지 (Fail이 아닐 때까지) 루트 노드까지 이동
+
+   ```java
+   // 현재 위치에서 Index와 맞는 다음 노드 반환
+   public static Node nextNode(Node curr, int idx) {
+      // KMP 처럼 다음 Index 맞는 부분 탐색
+      while(curr.val != ROOT && curr.child[idx] == null) {
+         curr = curr.fail;
+      }
+      if(curr.child[idx] != null) curr = curr.child[idx];
+
+      return curr;
+   }
+   ```
 
 # [Sorting (정렬 알고리즘)](#목차)
 
@@ -1703,6 +1776,8 @@
 
 ## [Sweeping (스위핑 알고리즘)](#목차)
 
+1. 전체 공간에 대해 같은 방향으로 이동하면서 마주치는 모든 원소에 대해 한 번씩만 작업을 수행해주며 진행하는 알고리즘
+
 ## [Prefix Sum (누적 합)](#목차)
 
 1. 앞선 Index에 대한 정보를 뒤의 Index가 저장하고 있다는 특성을 이용하여 문제를 해결하는 방법
@@ -1711,3 +1786,8 @@
 
 1. 해당 문제를 풀기 위해 잘 알려진 알고리즘을 적용하지 않고 해결할 수 있는 유형의 문제
 2. 구현, 수학, 그리디 관련이 포함되는 경우가 있고, 문제의 규칙을 파악해야 하는 문제도 있다. [(16919)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/16000/Main_16919.java)
+
+## [Sparse Table (희소 배열)](#목차)
+
+1. 배열 원소의 개수가 무조건 배열의 length 값보다 작은 배열
+2. LCA와 같이 자신의 조상 노드의 정보를 저장할 때 깊이 차이가 2의 제곱수가 되는 조상만 저장하도록 하는 경우를 생각할 수 있다.
