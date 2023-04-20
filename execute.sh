@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ -z $1 ]; then
-    echo "사이트 종류를 입력해주세요. (BOJ: B, SWEA: S, Programmer: P)"
+    echo "사이트 종류를 입력해주세요. (BOJ: B, SWEA: S)"
 else
     if [ $1 == "B" ]; then
         echo "선택된 사이트: 백준"
@@ -9,9 +9,6 @@ else
     elif [ $1 == "S" ]; then
         echo "선택된 사이트: SWEA"
         directory="./SWEA"
-    elif [ $1 == "P" ]; then
-        echo "선택된 사이트: Programmers"
-        directory="./Programmers"
     else 
         echo "B, S, P 중 하나를 입력해주세요."
     fi
@@ -33,10 +30,8 @@ else
         file+=$2
         executeFile=$file
         file+=.java
-    elif [ $1 == "P" ]; then
-        echo "선택된 사이트: Programmers, 미구현"
     else 
-        echo "B, S, P 중 하나를 입력해주세요."
+        echo "B, S 중 하나를 입력해주세요."
     fi
 
     cd $directory

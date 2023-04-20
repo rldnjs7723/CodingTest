@@ -3,7 +3,7 @@
 ## 목차
 
 1. [BOJ_9252 LCS 2](#1-boj_9252-lcs-2-백준-링크-소스-코드)
-1. [BOJ_1786 찾기](#2-boj_1786-찾기-백준-링크-소스-코드)
+2. [BOJ_1786 찾기](#2-boj_1786-찾기-백준-링크-소스-코드)
 
 ## 1. BOJ_9252 LCS 2 [(백준 링크)](https://www.acmicpc.net/problem/9252) [(소스 코드)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/9000/Main_9252.java)
 

@@ -7,93 +7,89 @@ import java.util.Queue;
 import java.util.StringTokenizer;
 
 /**
- * SWEA 7091번 은기의 아주 큰 그림
+ * 백준 10538번 빅 픽쳐
  * 문제 분류: 트라이, 해싱, KMP, 아호-코라식, 오토마타
  * @author Giwon
  */
-public class Solution_7091 {
+public class Main_10538 {
 	public static final int O = 0, X = 1, NOTMATCH = 0, ROOT = -1;
 	public static int idx = 1;
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
-		final int T = Integer.parseInt(br.readLine().trim());
-		for(int test_case = 1; test_case <= T; test_case++) {
-			
-			StringTokenizer st = new StringTokenizer(br.readLine());
-			// 그림 높이
-			final int hp = Integer.parseInt(st.nextToken());
-			// 그림 너비
-			final int wp = Integer.parseInt(st.nextToken());
-			// 걸작 높이
-			final int hm = Integer.parseInt(st.nextToken());
-			// 걸작 너비
-			final int wm = Integer.parseInt(st.nextToken());
-			
-			// 그림으로 트라이 구성
-			Aho_Corasick ahoCorasick = new Aho_Corasick(wp);
-			int[] hashPicture = new int[hp];
-			String input;
-			for(int row = 0; row < hp; row++) {
-				input = br.readLine().trim();
-				// 그림 해시 배열로 변경
-				hashPicture[row] = ahoCorasick.putString(input);
-			}
-			
-//			System.out.println(Arrays.toString(hashPicture));
-			
-			// 아호-코라식 Fail 노드 탐색
-			ahoCorasick.findFail();
-			
-			// KMP 테이블 구성
-			int[] table = makeTable(hashPicture);
-			
-//			System.out.println(Arrays.toString(table));
-			
-			// 걸작 입력
-			Node curr;
-			int idx;
-			int[][] hashMasterpiece = new int[hm][wm];
-			for(int row = 0; row < hm; row++) {
-				
-				curr = ahoCorasick.root;
-				input = br.readLine().trim();
-				for(int col = 0; col < wm; col++) {
-					idx = input.charAt(col) == 'o' ? O : X;
-					curr = Aho_Corasick.nextNode(curr, idx);
-					// 걸작 해시 배열로 변경
-					hashMasterpiece[row][col] = curr.hash; 
-				}
-			}
-			
-//			for(int[] inner: hashMasterpiece) {
-//				System.out.println(Arrays.toString(inner));
-//			}
-			
-			// KMP로 열 탐색
-			int count = 0;
-			for(int col = 0; col < wm; col++) {
-				// 매 열마다 새로 탐색
-				int j = 0;
-				for(int row = 0; row < hm; row++) {
-					// 일치하는 부분까지 돌아가기
-					while(j > 0 && hashMasterpiece[row][col] != hashPicture[j]) {
-						j = table[j - 1];
-					}
-					
-					if(hashMasterpiece[row][col] == hashPicture[j]) {
-						j++;
-						if (j == hp) {
-							j = table[j - 1];
-							count++;
-						}
-					}
-				}
-			}
-			
-			System.out.println("#" + test_case + " " + count);
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		// 그림 높이
+		final int hp = Integer.parseInt(st.nextToken());
+		// 그림 너비
+		final int wp = Integer.parseInt(st.nextToken());
+		// 걸작 높이
+		final int hm = Integer.parseInt(st.nextToken());
+		// 걸작 너비
+		final int wm = Integer.parseInt(st.nextToken());
+		
+		// 그림으로 트라이 구성
+		Aho_Corasick ahoCorasick = new Aho_Corasick(wp);
+		int[] hashPicture = new int[hp];
+		String input;
+		for(int row = 0; row < hp; row++) {
+			input = br.readLine().trim();
+			// 그림 해시 배열로 변경
+			hashPicture[row] = ahoCorasick.putString(input);
 		}
+		
+//		System.out.println(Arrays.toString(hashPicture));
+		
+		// 아호-코라식 Fail 노드 탐색
+		ahoCorasick.findFail();
+		
+		// KMP 테이블 구성
+		int[] table = makeTable(hashPicture);
+		
+//		System.out.println(Arrays.toString(table));
+		
+		// 걸작 입력
+		Node curr;
+		int idx;
+		int[][] hashMasterpiece = new int[hm][wm];
+		for(int row = 0; row < hm; row++) {
+			
+			curr = ahoCorasick.root;
+			input = br.readLine().trim();
+			for(int col = 0; col < wm; col++) {
+				idx = input.charAt(col) == 'o' ? O : X;
+				curr = Aho_Corasick.nextNode(curr, idx);
+				// 걸작 해시 배열로 변경
+				hashMasterpiece[row][col] = curr.hash; 
+			}
+		}
+		
+//		for(int[] inner: hashMasterpiece) {
+//			System.out.println(Arrays.toString(inner));
+//		}
+		
+		// KMP로 열 탐색
+		int count = 0;
+		for(int col = 0; col < wm; col++) {
+			// 매 열마다 새로 탐색
+			int j = 0;
+			for(int row = 0; row < hm; row++) {
+				// 일치하는 부분까지 돌아가기
+				while(j > 0 && hashMasterpiece[row][col] != hashPicture[j]) {
+					j = table[j - 1];
+				}
+				
+				if(hashMasterpiece[row][col] == hashPicture[j]) {
+					j++;
+					if (j == hp) {
+						j = table[j - 1];
+						count++;
+					}
+				}
+			}
+		}
+		
+		System.out.println(count);
 		br.close();
 	}
 	

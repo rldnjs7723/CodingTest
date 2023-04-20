@@ -1,15 +1,11 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.HashSet;
-import java.util.PriorityQueue;
-import java.util.Queue;
-import java.util.Set;
 import java.util.StringTokenizer;
 
 /**
  * 백준 16901번 XOR MST
- * 문제 분류: 트라이, MST
+ * 문제 분류: 트라이, MST, 분할 정복
  * @author Giwon
  */
 public class Main_16901 {
@@ -31,94 +27,111 @@ public class Main_16901 {
 			trie.putInteger(vertices[i]);
 		}
 		
-		// MST를 구성하는 정점
-		Set<Integer> mst = new HashSet<>();
-		long mstCost = 0L;
-		// 시작점 초기화
-		int start = vertices[0];
-		mst.add(start);
-		trie.removeInteger(start);
-		
-		// 우선 순위 큐로 가장 비용이 작은 간선 탐색
-		Queue<Edge> minCostEdge = new PriorityQueue<>();
-		Edge curr = trie.getMinimum(start);
-		minCostEdge.offer(curr);
-		// N - 1개의 간선을 연결할 때까지 다른 정점과 연결
-		int edgeCount = 0;
-		while(edgeCount < N - 1) {
-			while(mst.contains(minCostEdge.peek().end)) {
-				curr = minCostEdge.poll();
-				minCostEdge.offer(trie.getMinimum(curr.start));
-			}
-			
-			// 현재 연결되지 않은 정점으로 향하는 가장 비용이 적은 간선
-			curr = minCostEdge.poll();
-			// 정점 연결
-			mstCost += curr.cost;
-			mst.add(curr.end);
-			// trie에서 정점 제거
-			trie.removeInteger(curr.end);
-			// 간선 개수 갱신
-			edgeCount++;
-			if(edgeCount == N - 1) break;
-			// 현재 시작점에서의 최소 비용 간선 다시 탐색
-			minCostEdge.offer(trie.getMinimum(curr.start));
-			// 현재 종점에서의 최소 비용 간선 다시 탐색
-			minCostEdge.offer(trie.getMinimum(curr.end));
-		}
-		
-		System.out.println(mstCost);
+		System.out.println(trie.getMSTCost());
 		br.close();
 	}
 	
-	public static class Edge implements Comparable<Edge>{
-		int start, end;
-		long cost;
-		
-		public Edge(int start, int end, long cost) {
-			this.start = start;
-			this.end = end;
-			this.cost = cost;
-		}
-
-		// 비용이 작은 순서대로 정렬
-		@Override
-		public int compareTo(Edge o) {
-			return Long.compare(this.cost, o.cost);
-		}
-
-		@Override
-		public String toString() {
-			return "Edge [start=" + start + ", end=" + end + ", cost=" + cost + "]";
-		}
-	}
-	
 	public static class Node {
+		// 현재 노드의 이진수 값
+		int val;
+		// 이진수로 나타낸 경우 현재 노드의 위치
+		int binaryIdx;
 		// 현재 노드까지 도달한 문자열의 개수
 		int count;
+		// 자식 노드
 		Node[] child;
 		
-		public Node() {
+		public Node(int binaryIdx, int val) {
+			this.binaryIdx = binaryIdx;
+			this.val = val;
 			this.count = 0;
 			this.child = new Node[2];
 		}
 		
 		public Node getChild(int i) {
-			if(child[i] == null) child[i] = new Node();
+			if(child[i] == null) child[i] = new Node(binaryIdx - 1, i);
 			
 			return child[i];
 		}
+		
+		// 현재 노드의 왼쪽 노드와 오른쪽 노드를 연결한 비용을 리턴
+		public long connect() {
+			long result = 0L;
+			
+			// 리프 노드는 연결 비용 0
+			if(binaryIdx == 0) return 0L;
+			
+			// 왼쪽 자식 노드가 없다면 오른쪽 자식 노드 비용 리턴
+			if(child[0] == null) return child[1].connect();
+			// 오른쪽 자식 노드가 없다면 왼쪽 자식 노드 비용 리턴
+			if(child[1] == null) return child[0].connect();
+			
+			// 왼쪽 노드 연결 비용 계산
+			result += child[0].connect();
+			// 오른쪽 노드 연결 비용 계산
+			result += child[1].connect();
+			
+			// 왼쪽 노드와 오른쪽 노드를 각각 루트로 하는 트라이 비교하여 xor 최솟값 계산
+			long minCost = 1 << (binaryIdx - 1);
+			minCost += compareTrie(child[0], child[1]);
+			
+			return result + minCost;
+		}
+		
+		// 왼쪽 노드와 오른쪽 노드의 Trie 비교. xor 값 리턴
+		public static long compareTrie(Node left, Node right) {
+			int binaryIdx = left.binaryIdx;
+			if(binaryIdx == 0) return 0;
+			
+			// 왼쪽 노드와 오른쪽 노드의 자식 노드 수 카운트
+			int leftCount = 0;
+			int rightCount = 0;
+			
+			if(left.child[0] != null) leftCount++;
+			if(left.child[1] != null) leftCount++;
+			if(right.child[0] != null) rightCount++;
+			if(right.child[1] != null) rightCount++;
+			
+			// 둘 다 자식 노드가 1개인 경우
+			int leftIdx, rightIdx;
+			if(leftCount == 1 && rightCount == 1) {
+				leftIdx = left.child[0] == null ? 1 : 0;
+				rightIdx = right.child[0] == null ? 1 : 0;
+				
+				if(leftIdx == rightIdx) {
+					// 값이 같다면 그대로 리턴
+					return compareTrie(left.child[leftIdx], right.child[rightIdx]);
+				} else {
+					// 값이 다르다면 XOR 값 추가
+					return (1L << (binaryIdx - 1)) + compareTrie(left.child[leftIdx], right.child[rightIdx]);
+				}
+			}
+			
+			// 왼쪽 자식 노드만 1개인 경우
+			if(leftCount == 1) {
+				leftIdx = left.child[0] == null ? 1 : 0;
+				return compareTrie(left.child[leftIdx], right.child[leftIdx]);
+			}
+			
+			// 오른쪽 자식 노드만 1개인 경우
+			if(rightCount == 1) {
+				rightIdx = right.child[0] == null ? 1 : 0;
+				return compareTrie(left.child[rightIdx], right.child[rightIdx]);
+			}
+			
+			// 둘 다 자식 노드가 있는 경우
+			// 양쪽 비교 후 최솟값 리턴
+			return Math.min(compareTrie(left.child[0], right.child[0]), compareTrie(left.child[1], right.child[1]));
+		}
+		
 	}
 	
 	public static class Trie {
-		// MST 비용
-		long cost;
 		// 트라이 루트 노드
 		Node root;
 		
 		public Trie() {
-			this.root = new Node();
-			this.cost = 0L;
+			this.root = new Node(MAX_SIZE, -1);
 		}
 		
 		public static String toBinaryString(int val) {
@@ -137,15 +150,6 @@ public class Main_16901 {
 			return sb.toString();
 		}
 		
-		public static int toNumber(String binary) {
-			int result = 0;
-			for(int i = 0; i < MAX_SIZE; i++) {
-				if(binary.charAt(MAX_SIZE - 1 - i) == '1') result += (1 << i);
-			}
-			
-			return result;
-		}
-		
 		// 입력 받은 정수 Trie에 추가
 		public void putInteger(int val) {
 			String binary = toBinaryString(val);
@@ -158,41 +162,9 @@ public class Main_16901 {
 			}
 		}
 		
-		// 입력 받은 정수 Trie에서 제거
-		public void removeInteger(int val) {
-			String binary = toBinaryString(val);
-			
-			Node curr = root;
-			for(int i = 0; i < MAX_SIZE; i++) {
-				curr = curr.getChild(binary.charAt(i) - '0');
-				// 개수 감소
-				curr.count--;
-			}
-		}
-		
-		// 현재 입력 받은 정수와 연결하는 간선 가중치 최솟값 계산
-		public Edge getMinimum(int val) {
-			String binary = toBinaryString(val);
-			
-			StringBuilder sb = new StringBuilder();
-			long xor = 0L;
-			int bin;
-			Node curr = root;
-			for(int i = MAX_SIZE - 1; i >= 0; i--) {
-				// 이진수로 표현한 수 중 현재 Index에서의 값
-				bin = binary.charAt(MAX_SIZE - 1 - i) - '0';
-				// 값이 다른 경우 XOR 값에 추가
-				if(curr.child[bin] == null || curr.child[bin].count == 0) {
-					xor += (1 << i);
-					sb.append(bin == 0 ? 1 : 0);
-					curr = curr.child[bin == 0 ? 1 : 0];
-				} else {
-					sb.append(bin);
-					curr = curr.child[bin];
-				}
-			}
-			
-			return new Edge(val, toNumber(sb.toString()), xor);
+		// MST 구성 비용 계산
+		public long getMSTCost() {
+			return root.connect();
 		}
 	}
 	
