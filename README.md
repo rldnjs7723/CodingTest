@@ -188,6 +188,8 @@
 
       2. [Tarjan's Algorithm (타잔 알고리즘)](#2-tarjans-algorithm-타잔-알고리즘)
 
+      3. [2-SAT](#3-2-sat)
+
 10. [Segment Tree (세그먼트 트리)](#segment-tree-세그먼트-트리)
 
     1. [Fenwick Tree (Binary Indexed Tree, BIT)](#fenwick-tree-binary-indexed-tree-bit)
