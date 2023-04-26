@@ -1,21 +1,25 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Stack;
 import java.util.StringTokenizer;
 
 /**
- * 백준 11280번 2-SAT - 3
+ * 백준 11281번 2-SAT - 4
  * 문제 분류: 2-SAT, SCC (타잔 알고리즘), Union Find
  * @author Giwon
  */
-public class Main_11280 {
+public class Main_11281 {
 	public static int totalOrder = 0;
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		
 		StringTokenizer st = new StringTokenizer(br.readLine().trim());
 		// 변수의 개수
@@ -37,7 +41,12 @@ public class Main_11280 {
 		// SCC 구성
 		cnf.findSCC();
 		
-		System.out.println(cnf.canMakeTrue());
+		int available = cnf.canMakeTrue();
+		bw.write(available + "\n");
+		if(available == 1) {
+			
+		}	
+		bw.close();
 		br.close();
 	}
 
@@ -202,6 +211,20 @@ public class Main_11280 {
 			// 존재하지 않으면 참을 만들 수 있는 CNF
 			return 1;
 		}
+		
+//		public int[] solveSAT() {
+//			int[] boolVar = new int[N];
+//			Arrays.fill(boolVar, -1);
+//			
+//			// 모든 SCC의 Root 모으기
+//			Set<Vertex> scc = new HashSet<>();
+//			Vertex curr;
+//			for(int i = 1; i <= N; i++) {
+//				curr = getVar(i).getRoot();
+//				if(curr.depth > 1) scc.add(curr);
+////				getVar(-i).dfs(null, visited);
+//			}
+//		}
 	}
 	
 }
