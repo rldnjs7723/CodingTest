@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayDeque;
+import java.util.Arrays;
 import java.util.Deque;
 import java.util.Iterator;
 import java.util.StringTokenizer;
@@ -78,7 +79,7 @@ class Solution_14611 {
     public static void main(String[] args) throws Exception {
         int T, MARK;
 
-        // System.setIn(new java.io.FileInputStream("res/sample_input.txt"));
+         System.setIn(new java.io.FileInputStream("res/sample_input.txt"));
         br = new BufferedReader(new InputStreamReader(System.in));
 
         StringTokenizer stinit = new StringTokenizer(br.readLine(), " ");
@@ -124,10 +125,15 @@ class Solution_14611 {
 				sum %= DIV;
 			}
     		
-    		public void put(int val) {
+    		public void put(int val, int joker) {
     			this.cards[idx++] = val;
-    			sum += val;
+    			sum += val == JOKER ? joker : val;
     			sum %= DIV;
+    		}
+    		
+    		@Override
+    		public String toString() {
+    			return Arrays.toString(cards);
     		}
     	}
     	
@@ -195,7 +201,7 @@ class Solution_14611 {
     		
     		@Override
     		public Integer pollLast() {
-    			if(this.peekFirst() == JOKER) jokerCount--;
+    			if(this.peekLast() == JOKER) jokerCount--;
     			return super.pollLast();
     		}
     		
@@ -211,7 +217,7 @@ class Solution_14611 {
     					
     					Iterator<Integer> iter = this.iterator();
     					while(iter.hasNext()) {
-    						cards.put(iter.next());
+    						cards.put(iter.next(), -1);
     					}
     					
     					for(int val = 0; val < DIV; val++) {
@@ -221,14 +227,12 @@ class Solution_14611 {
     				// 조커가 하나라도 있는 경우
     				else {
     					// 조커 값 0 ~ 19일 때를 각각 계산하여 Table에 저장
-        				int temp;
         				for(int val = 0; val < DIV; val++) {
         					CardSet cards = new CardSet();
         					
         					Iterator<Integer> iter = this.iterator();
         					while(iter.hasNext()) {
-        						temp = iter.next();
-        						cards.put(temp == JOKER ? val : temp);
+        						cards.put(iter.next(), val);
         					}
         					
         					table[val].deques[cards.sum].offerFirst(cards);
@@ -246,7 +250,7 @@ class Solution_14611 {
     					
     					Iterator<Integer> iter = this.iterator();
     					while(iter.hasNext()) {
-    						cards.put(iter.next());
+    						cards.put(iter.next(), -1);
     					}
     					
     					for(int val = 0; val < DIV; val++) {
@@ -256,14 +260,12 @@ class Solution_14611 {
     				// 조커가 하나라도 있는 경우
     				else {
     					// 조커 값 0 ~ 19일 때를 각각 계산하여 Table에 저장
-        				int temp;
         				for(int val = 0; val < DIV; val++) {
         					CardSet cards = new CardSet();
         					
         					Iterator<Integer> iter = this.iterator();
         					while(iter.hasNext()) {
-        						temp = iter.next();
-        						cards.put(temp == JOKER ? val : temp);
+        						cards.put(iter.next(), val);
         					}
         					
         					table[val].deques[cards.sum].offerLast(cards);
@@ -273,6 +275,10 @@ class Solution_14611 {
     			}
     		}
     		
+    		@Override
+    		public String toString() {
+    			return super.toString() + " " + jokerCount;
+    		}
     	}
     	
     	// 조커 값에 따라 사용할 테이블 클래스
@@ -295,7 +301,7 @@ class Solution_14611 {
         		endQueue[i] = new EndQueue();
         	}
         	
-        	for(int i = 0; i < 4; i++) {
+        	for(int i = 3; i >= 0; i--) {
         		endQueue[LEFT].offerFirst(mNumbers[i]);
         	}
         	
@@ -308,10 +314,28 @@ class Solution_14611 {
         }
 
         void putCards(int mDir, int mNumbers[]) {
+        	if(mDir == LEFT) {
+        		for(int i = 4; i >= 0; i--) {
+            		endQueue[mDir].put(mNumbers[i], mDir);
+            	}
+        	} else if(mDir == RIGHT) {
+        		for(int i = 0; i < 5; i++) {
+            		endQueue[mDir].put(mNumbers[i], mDir);
+            	}
+        	}
+        	
+        	
         }
 
         int findNumber(int mNum, int mNth, int ret[]) {
-            return -1;
+        	CardSet result = table[jokerValue].deques[mNum].get(mNth);
+        	if(result == null) return 0;
+        	
+        	for(int i = 0; i < CARD_SIZE; i++) {
+        		ret[i] = result.cards[i];
+        	}
+        	
+            return 1;
         }
         
         void changeJoker(int mValue) {
