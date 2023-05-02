@@ -57,8 +57,10 @@ public class Main_9318 {
 
 	// 10 x 10 영역
 	public static class Region {
-		
-		// 현재 영역의 넓이
+		// 현재 영역의 크기
+		int size;
+		// 하위 영역 10 x 10
+		Region[][] inner;
 		
 	}
 	
