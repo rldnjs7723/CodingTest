@@ -6,6 +6,7 @@
 2. [BOJ_7432 디스크 트리](#2-boj_7432-디스크-트리-백준-링크-소스-코드)
 3. [BOJ_16901 XOR MST](#3-boj_16901-xor-mst-백준-링크-소스-코드)
 4. [BOJ_10538 빅 픽쳐](#4-boj_10538-빅-픽쳐-백준-링크-소스-코드)
+5. [SWEA_13461 이미지 검색하기](#5-swea_13461-이미지-검색하기-소스-코드)
 
 ## 1. BOJ_27652 AB [(백준 링크)](https://www.acmicpc.net/problem/27652) [(소스 코드)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/27000/Main_27652.java)
 
@@ -55,3 +56,13 @@ o, x로 구성된 걸작이 주어지고, 패턴으로 사용할 그림이 주�
 2차원 정수 배열로 변환한 문자열을 이번에는 열을 기준으로 하나의 문자열로 인식하여 [KMP 알고리즘](https://github.com/rldnjs7723/CodingTest#knuth-morris-pratt-kmp-pattern-matching)를 정수 배열에 적용하는 방식으로 패턴 매칭을 수행하였고, 이를 통해 패턴 그림과 일치하는 부분 문자열 배열의 개수를 셀 수 있었다.
 
 ![빅픽쳐](https://user-images.githubusercontent.com/20474034/233145976-1d02a3e4-e167-4a41-bd94-b52813357b2d.png)
+
+## 5. SWEA_13461 이미지 검색하기 [(소스 코드)](https://github.com/rldnjs7723/CodingTest/blob/main/SWEA/13000/Solution_13461.java)
+
+### 문제 요약
+
+N개의 이미지가 주어져있고, 이후에 하나의 이미지가 주어졌을 때 해당 이미지와 가장 비슷한 이미지의 ID를 출력하는 문제
+
+### 풀이 아이디어
+
+처음 N개의 이미지가 주어질 때 모든 이미지를 하나의 Tree에 이진 트리 형식으로 저장하고, 이후 하나의 이미지와 가장 비슷한 이미지를 찾을 때는 백트래킹을 통해 탐색에 걸리는 시간 복잡도를 줄였다.
