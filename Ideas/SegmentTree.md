@@ -8,6 +8,7 @@
 4. [BOJ_10999 구간 합 구하기 2](#4-boj_10999-구간-합-구하기-2-백준-링크-소스-코드)
 5. [BOJ_17353 하늘에서 떨어지는 1, 2, ..., R-L+1개의 별](#5-boj_17353-하늘에서-떨어지는-1-2--r-l1개의-별-백준-링크-소스-코드)
 6. [BOJ_11658 구간 합 구하기 3](#6-boj_11658-구간-합-구하기-3-백준-링크-소스-코드)
+7. [BOJ_1395 스위치](#7-boj_1395-스위치-백준-링크-소스-코드)
 
 ## 1. BOJ_2042 구간 합 구하기 [(백준 링크)](https://www.acmicpc.net/problem/2042) [(소스 코드)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/2000/Main_2042.java)
 
@@ -74,3 +75,18 @@ lazy 값 이외에 lazyCount라는 해당 자식 노드에서 갱신할 쿼리�
 
 [다차원 세그먼트 트리](https://github.com/rldnjs7723/CodingTest#multidimensional-segment-tree-다차원-세그먼트-트리)를 사용하는 대표적인 문제.  
 단순히 세그먼트 트리 안에 세그먼트 트리를 넣는 작업으로 생각하면 자칫 값을 갱신하는 과정이 $O(N log N)$으로 수행될 수 있기 때문에 조심해야 한다.
+
+## 7. BOJ_1395 스위치 [(백준 링크)](https://www.acmicpc.net/problem/1395) [(소스 코드)](https://github.com/rldnjs7723/CodingTest/blob/main/BOJ/1000/Main_1395.java)
+
+### 문제 요약
+
+1번부터 N번까지 번호가 부여된 스위치가 있을 때,
+
+1. 일정 범위의 스위치 상태를 반전시키기
+2. 일정 범위에 켜져 있는 스위치 개수 세기
+
+두 가지 쿼리를 수행하는 문제
+
+### 풀이 아이디어
+
+[느리게 갱신되는 세그먼트 트리](https://github.com/rldnjs7723/CodingTest#segment-tree-with-lazy-propagation-느리게-갱신되는-세그먼트-트리)를 이용하여 해결할 수 있는 문제.

@@ -86,20 +86,6 @@ public class Main_19585 {
 			// 리프 노드로 체크
 			curr.isLeaf = true;
 		}
-		
-		// 역순으로 입력
-		public void putReverse(String input) {
-			int len = input.length();
-			Node curr = root;
-			int index;
-			for(int i = 0; i < len; i++) {
-				index = len - 1 - i;
-				curr = curr.putChar(input.charAt(index));
-			}
-			
-			// 리프 노드로 체크
-			curr.isLeaf = true;
-		}
 	}
 	
 	public static class Checker {
@@ -117,9 +103,7 @@ public class Main_19585 {
 		
 		public void putNickname(String nickname) {
 			nicknameSet.add(nickname);
-			
 		}
-		
 		
 		public String searchName(String teamname) {
 			// 현재 팀 이름이 존재하는지 탐색
